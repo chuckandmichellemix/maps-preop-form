@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anesthesia Pre-Op Assessment | MAPS Clinical Forms</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/preop.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anesthesia Pre-Op Assessment | MAPS Clinical Forms">
+<meta property="og:description" content="Internal review draft — MAPS Mobile Anesthesia point-of-care Pre-Op assessment.">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="#" class="brand" aria-label="MAPS Mobile Anesthesia home">
+      <img class="brand__mark" src="assets/maps-icon-badge.png" alt="MAPS Mobile Anesthesia logo" width="34" height="34">
+      <span class="brand__text">
+        <span class="brand__name">MAPS Clinical Forms</span>
+        <span class="brand__tag">In the Mix Anesthesia</span>
+      </span>
+    </a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="notice" style="margin-bottom: var(--space-6);">
+    <strong>Internal review draft — layout &amp; function check.</strong> This is a working copy of the digitized Anesthesia Pre-Op form for team review before anything is connected to Monday. Everything runs locally in your browser — nothing is transmitted anywhere. Fill it out, use Save/Print to generate a PDF, and flag anything you'd add, remove, or reword.
+  </div>
+
+  <div class="intro">
+    <span class="intro__eyebrow">Anesthesia Pre-Op</span>
+    <h1 class="intro__title">Anesthesia Pre-Op Assessment</h1>
+    <p class="intro__desc">Point-of-care clinical assessment completed by the anesthesia provider prior to the procedure. Height/weight auto-convert and calculate BMI/BSA; diagnosis and CPT codes support multiple entries and will populate from your final code list.</p>
+  </div>
+
+  <form data-local-form novalidate id="preop-form">
+
+    <!-- ============ Patient / Encounter ============ -->
+    <div class="section">
+      <h2 class="section__title">Patient &amp; Encounter</h2>
+      <p class="section__subtitle">Basic demographics, classification, and vitals at time of assessment.</p>
+
+      <div class="encounter-grid">
+        <div class="field">
+          <label class="field__label" for="age">Age</label>
+          <input class="input" type="number" min="0" id="age" name="age" placeholder="e.g., 7">
+        </div>
+        <div class="field">
+          <label class="field__label" for="height-in">Height (in)</label>
+          <input class="input" type="number" min="0" step="0.1" id="height-in" name="height_in" placeholder="e.g., 48">
+        </div>
+        <div class="field">
+          <label class="field__label" for="weight-lb">Weight (lb)</label>
+          <input class="input" type="number" min="0" step="0.1" id="weight-lb" name="weight_lb" placeholder="e.g., 55">
+        </div>
+        <div class="field">
+          <label class="field__label" for="procedure-date">Date</label>
+          <input class="input" type="date" id="procedure-date" name="procedure_date">
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-box">
+          <div class="calc-box__label">Height</div>
+          <div class="calc-box__value is-empty" id="calc-cm">—</div>
+        </div>
+        <div class="calc-box">
+          <div class="calc-box__label">Weight</div>
+          <div class="calc-box__value is-empty" id="calc-kg">—</div>
+        </div>
+        <div class="calc-box">
+          <div class="calc-box__label">BMI</div>
+          <div class="calc-box__value is-empty" id="calc-bmi">—</div>
+        </div>
+        <div class="calc-box">
+          <div class="calc-box__label">BSA (Mosteller)</div>
+          <div class="calc-box__value is-empty" id="calc-bsa">—</div>
+        </div>
+      </div>
+
+      <div class="asa-row" style="margin-top: var(--space-6);">
+        <div class="field">
+          <label class="field__label" for="asa-class">ASA Class</label>
+          <select class="input" id="asa-class" name="asa_class">
+            <option value="">Select…</option>
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+            <option value="V">V</option>
+            <option value="VI">VI</option>
+          </select>
+        </div>
+        <div class="asa-e-toggle">
+          <label class="option"><input type="checkbox" id="asa-e" name="asa_e" value="E"> E (Emergency)</label>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top: var(--space-6);">
+        <label class="field__label">Vitals</label>
+        <div class="vitals-grid">
+          <div class="mini-field">
+            <span class="mini-field__label">SpO2 %</span>
+            <input class="input" type="text" name="vital_spo2" placeholder="—">
+          </div>
+          <div class="mini-field">
+            <span class="mini-field__label">BP</span>
+            <input class="input" type="text" name="vital_bp" placeholder="120/80">
+          </div>
+          <div class="mini-field">
+            <span class="mini-field__label">HR</span>
+            <input class="input" type="text" name="vital_hr" placeholder="—">
+          </div>
+          <div class="mini-field">
+            <span class="mini-field__label">RR</span>
+            <input class="input" type="text" name="vital_rr" placeholder="—">
+          </div>
+          <div class="mini-field">
+            <span class="mini-field__label">Temp</span>
+            <input class="input" type="text" name="vital_temp" placeholder="—">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Diagnosis & Billing Codes ============ -->
+    <div class="section">
+      <h2 class="section__title">Diagnosis &amp; Billing Codes</h2>
+      <p class="section__subtitle">Multiple ICD-10 diagnosis codes and CPT procedure codes can be added. Suggestions will populate once the final Kansas dental-disability-anesthesia code list is provided — you can still type and add any code now.</p>
+
+      <div class="field">
+        <label class="field__label" for="dx-input">Diagnosis (ICD-10)</label>
+        <div class="chip-field" data-chip-field data-chip-name="dx_codes" data-chip-source="ICD10_CODES">
+          <div class="chip-field__chips"></div>
+          <div class="chip-field__input-row">
+            <input class="chip-field__input" id="dx-input" type="text" placeholder="Type a code or description, press Enter to add…">
+            <button type="button" class="chip-field__add">Add</button>
+          </div>
+          <div class="chip-field__suggestions"></div>
+        </div>
+        <p class="chip-field__empty-hint">No code list loaded yet — every code you type is added as-is.</p>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="cpt-input">CPT Codes</label>
+        <div class="chip-field" data-chip-field data-chip-name="cpt_codes" data-chip-source="CPT_CODES">
+          <div class="chip-field__chips"></div>
+          <div class="chip-field__input-row">
+            <input class="chip-field__input" id="cpt-input" type="text" placeholder="Type a code or description, press Enter to add…">
+            <button type="button" class="chip-field__add">Add</button>
+          </div>
+          <div class="chip-field__suggestions"></div>
+        </div>
+        <p class="chip-field__empty-hint">No code list loaded yet — every code you type is added as-is.</p>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="dx-notes">Additional diagnosis notes (optional)</label>
+        <textarea class="textarea" id="dx-notes" name="dx_notes" placeholder="Any nuance not captured by the codes above"></textarea>
+      </div>
+    </div>
+
+    <!-- ============ Procedure ============ -->
+    <div class="section">
+      <h2 class="section__title">Procedure</h2>
+      <div class="field">
+        <label class="field__label" for="procedure">Procedure description</label>
+        <input class="input" type="text" id="procedure" name="procedure" placeholder="e.g., Full mouth dental rehabilitation">
+      </div>
+    </div>
+
+    <!-- ============ Medications ============ -->
+    <div class="section">
+      <h2 class="section__title">Medications</h2>
+      <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
+        <input type="checkbox" name="meds_see_mar" value="See MAR for list and doses"> See MAR for list and doses
+      </label>
+      <div class="field">
+        <label class="field__label" for="meds-notes">Notes</label>
+        <textarea class="textarea" id="meds-notes" name="meds_notes" placeholder="Additional medication notes"></textarea>
+      </div>
+    </div>
+
+    <!-- ============ Allergies ============ -->
+    <div class="section">
+      <h2 class="section__title">Allergies</h2>
+      <div class="field" data-checklist>
+        <div class="option-group">
+          <label class="option"><input type="checkbox" data-none-option name="allergies_none" value="None"> None</label>
+          <label class="option"><input type="checkbox" name="allergies_latex" value="Latex"> Latex</label>
+        </div>
+      </div>
+      <div class="field" style="margin-top: var(--space-4);">
+        <label class="field__label" for="allergies-other">Other known allergies</label>
+        <input class="input" type="text" id="allergies-other" name="allergies_other" placeholder="e.g., Penicillin, Sulfa">
+      </div>
+    </div>
+
+    <!-- ============ Surgical History ============ -->
+    <div class="section">
+      <h2 class="section__title">Surgical History</h2>
+      <label class="option" style="margin-bottom: var(--space-5); display: inline-flex;">
+        <input type="checkbox" name="surghx_none" value="None"> None
+      </label>
+
+      <div class="field">
+        <label class="field__label">Prior anesthesia complications?</label>
+        <div class="option-group" data-radio-group="prior_anes_complications">
+          <label class="option"><input type="radio" name="prior_anes_complications" value="Yes"> Yes</label>
+          <label class="option"><input type="radio" name="prior_anes_complications" value="No"> No</label>
+        </div>
+        <div class="conditional" id="prior-anes-detail" hidden>
+          <label class="field__label" for="prior-anes-detail-text">Please describe</label>
+          <textarea class="textarea" id="prior-anes-detail-text" name="prior_anes_complications_detail" data-conditional-required="true"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label">Family history of anesthesia complications?</label>
+        <div class="option-group" data-radio-group="family_anes_complications">
+          <label class="option"><input type="radio" name="family_anes_complications" value="Yes"> Yes</label>
+          <label class="option"><input type="radio" name="family_anes_complications" value="No"> No</label>
+        </div>
+        <div class="conditional" id="family-anes-detail" hidden>
+          <label class="field__label" for="family-anes-detail-text">Please describe</label>
+          <textarea class="textarea" id="family-anes-detail-text" name="family_anes_complications_detail" data-conditional-required="true"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Labs ============ -->
+    <div class="section">
+      <h2 class="section__title">Labs</h2>
+
+      <div class="labs-group">
+        <span class="labs-group__title">CBC</span>
+        <div class="labs-grid">
+          <div class="mini-field"><span class="mini-field__label">Hgb</span><input class="input" type="text" name="lab_hgb"></div>
+          <div class="mini-field"><span class="mini-field__label">WBC</span><input class="input" type="text" name="lab_wbc"></div>
+          <div class="mini-field"><span class="mini-field__label">Hct</span><input class="input" type="text" name="lab_hct"></div>
+          <div class="mini-field"><span class="mini-field__label">Plt</span><input class="input" type="text" name="lab_plt"></div>
+        </div>
+      </div>
+
+      <div class="labs-group">
+        <span class="labs-group__title">Coags</span>
+        <div class="labs-grid">
+          <div class="mini-field"><span class="mini-field__label">INR</span><input class="input" type="text" name="lab_inr"></div>
+          <div class="mini-field"><span class="mini-field__label">PT</span><input class="input" type="text" name="lab_pt"></div>
+          <div class="mini-field"><span class="mini-field__label">PTT</span><input class="input" type="text" name="lab_ptt"></div>
+        </div>
+      </div>
+
+      <div class="labs-group">
+        <span class="labs-group__title">BMP</span>
+        <div class="labs-grid">
+          <div class="mini-field"><span class="mini-field__label">Na</span><input class="input" type="text" name="lab_na"></div>
+          <div class="mini-field"><span class="mini-field__label">K</span><input class="input" type="text" name="lab_k"></div>
+          <div class="mini-field"><span class="mini-field__label">Cl</span><input class="input" type="text" name="lab_cl"></div>
+          <div class="mini-field"><span class="mini-field__label">CO2</span><input class="input" type="text" name="lab_co2"></div>
+          <div class="mini-field"><span class="mini-field__label">BUN</span><input class="input" type="text" name="lab_bun"></div>
+          <div class="mini-field"><span class="mini-field__label">Cr</span><input class="input" type="text" name="lab_cr"></div>
+          <div class="mini-field"><span class="mini-field__label">Gluc</span><input class="input" type="text" name="lab_gluc"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label">HcG</label>
+        <div class="option-group" data-radio-group="hcg">
+          <label class="option"><input type="radio" name="hcg" value="Pos"> Pos</label>
+          <label class="option"><input type="radio" name="hcg" value="Neg"> Neg</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Body Systems Review ============ -->
+    <div class="section">
+      <h2 class="section__title">Body Systems Review</h2>
+      <p class="section__subtitle">Select "No" under WNL to reveal specific findings for that system.</p>
+
+    <div class="system-card" data-system="airway">
+      <div class="system-card__header">
+        <span class="system-card__title">Airway</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="airway_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="airway_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="airway-findings" hidden>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Mallampati Class</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="airway_mp" value="1"> 1</label>
+            <label class="option"><input type="radio" name="airway_mp" value="2"> 2</label>
+            <label class="option"><input type="radio" name="airway_mp" value="3"> 3</label>
+            <label class="option"><input type="radio" name="airway_mp" value="4"> 4</label>
+          </div>
+        </div>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Teeth</span>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="airway_teeth_0">
+        <input type="checkbox" id="airway_teeth_0" name="airway_teeth[]" value="Multiple missing">
+        <span>Multiple missing</span>
+      </label>
+      <label class="checklist-item" for="airway_teeth_1">
+        <input type="checkbox" id="airway_teeth_1" name="airway_teeth[]" value="Dent Full / Partial">
+        <span>Dent Full / Partial</span>
+      </label>
+      <label class="checklist-item" for="airway_teeth_2">
+        <input type="checkbox" id="airway_teeth_2" name="airway_teeth[]" value="Upper / Lower">
+        <span>Upper / Lower</span>
+      </label>
+      <label class="checklist-item" for="airway_teeth_3">
+        <input type="checkbox" id="airway_teeth_3" name="airway_teeth[]" value="Loose/Chipped">
+        <span>Loose/Chipped</span>
+      </label>
+    </div>
+        </div>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Neck ROM</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="airway_neck_rom" value="Normal"> Normal</label>
+            <label class="option"><input type="radio" name="airway_neck_rom" value="Limited"> Limited</label>
+          </div>
+        </div>
+        <div class="system-card__subgroup">
+          <label class="checklist-item" for="airway_difficult">
+            <input type="checkbox" id="airway_difficult" name="airway_difficult" value="History of difficult airway">
+            <span>History of difficult airway</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="ent">
+      <div class="system-card__header">
+        <span class="system-card__title">ENT</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="ent_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="ent_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="ent-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="ent_0">
+        <input type="checkbox" id="ent_0" name="ent[]" value="Otitis Media">
+        <span>Otitis Media</span>
+      </label>
+      <label class="checklist-item" for="ent_1">
+        <input type="checkbox" id="ent_1" name="ent[]" value="Dental">
+        <span>Dental</span>
+      </label>
+      <label class="checklist-item" for="ent_2">
+        <input type="checkbox" id="ent_2" name="ent[]" value="Chronic Tonsillitis">
+        <span>Chronic Tonsillitis</span>
+      </label>
+      <label class="checklist-item" for="ent_3">
+        <input type="checkbox" id="ent_3" name="ent[]" value="Glaucoma">
+        <span>Glaucoma</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="cardiac">
+      <div class="system-card__header">
+        <span class="system-card__title">Cardiac</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="cardiac_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="cardiac_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="cardiac-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="cardiac_0">
+        <input type="checkbox" id="cardiac_0" name="cardiac[]" value="RRR">
+        <span>RRR</span>
+      </label>
+      <label class="checklist-item" for="cardiac_1">
+        <input type="checkbox" id="cardiac_1" name="cardiac[]" value="HTN">
+        <span>HTN</span>
+      </label>
+      <label class="checklist-item" for="cardiac_2">
+        <input type="checkbox" id="cardiac_2" name="cardiac[]" value="Cath">
+        <span>Cath</span>
+      </label>
+      <label class="checklist-item" for="cardiac_3">
+        <input type="checkbox" id="cardiac_3" name="cardiac[]" value="Stents">
+        <span>Stents</span>
+      </label>
+      <label class="checklist-item" for="cardiac_4">
+        <input type="checkbox" id="cardiac_4" name="cardiac[]" value="Abnormal EKG">
+        <span>Abnormal EKG</span>
+      </label>
+      <label class="checklist-item" for="cardiac_5">
+        <input type="checkbox" id="cardiac_5" name="cardiac[]" value="Murmurs">
+        <span>Murmurs</span>
+      </label>
+      <label class="checklist-item" for="cardiac_6">
+        <input type="checkbox" id="cardiac_6" name="cardiac[]" value="Stress test">
+        <span>Stress test</span>
+      </label>
+      <label class="checklist-item" for="cardiac_7">
+        <input type="checkbox" id="cardiac_7" name="cardiac[]" value="CAD">
+        <span>CAD</span>
+      </label>
+      <label class="checklist-item" for="cardiac_8">
+        <input type="checkbox" id="cardiac_8" name="cardiac[]" value="Pacemaker">
+        <span>Pacemaker</span>
+      </label>
+      <label class="checklist-item" for="cardiac_9">
+        <input type="checkbox" id="cardiac_9" name="cardiac[]" value="AICD">
+        <span>AICD</span>
+      </label>
+      <label class="checklist-item" for="cardiac_10">
+        <input type="checkbox" id="cardiac_10" name="cardiac[]" value="EKG">
+        <span>EKG</span>
+      </label>
+      <label class="checklist-item" for="cardiac_11">
+        <input type="checkbox" id="cardiac_11" name="cardiac[]" value="Hyperlipidemia">
+        <span>Hyperlipidemia</span>
+      </label>
+      <label class="checklist-item" for="cardiac_12">
+        <input type="checkbox" id="cardiac_12" name="cardiac[]" value="A Fib">
+        <span>A Fib</span>
+      </label>
+      <label class="checklist-item" for="cardiac_13">
+        <input type="checkbox" id="cardiac_13" name="cardiac[]" value="Echo">
+        <span>Echo</span>
+      </label>
+      <label class="checklist-item" for="cardiac_14">
+        <input type="checkbox" id="cardiac_14" name="cardiac[]" value="MI">
+        <span>MI</span>
+      </label>
+      <label class="checklist-item" for="cardiac_15">
+        <input type="checkbox" id="cardiac_15" name="cardiac[]" value="CHF">
+        <span>CHF</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="pulmonary">
+      <div class="system-card__header">
+        <span class="system-card__title">Pulmonary</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="pulmonary_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="pulmonary_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="pulmonary-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="pulmonary_0">
+        <input type="checkbox" id="pulmonary_0" name="pulmonary[]" value="Clear bilateral">
+        <span>Clear bilateral</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_1">
+        <input type="checkbox" id="pulmonary_1" name="pulmonary[]" value="Asthma">
+        <span>Asthma</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_2">
+        <input type="checkbox" id="pulmonary_2" name="pulmonary[]" value="Tobacco use">
+        <span>Tobacco use</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_3">
+        <input type="checkbox" id="pulmonary_3" name="pulmonary[]" value="Equal bilateral">
+        <span>Equal bilateral</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_4">
+        <input type="checkbox" id="pulmonary_4" name="pulmonary[]" value="CPAP">
+        <span>CPAP</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_5">
+        <input type="checkbox" id="pulmonary_5" name="pulmonary[]" value="SOB">
+        <span>SOB</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_6">
+        <input type="checkbox" id="pulmonary_6" name="pulmonary[]" value="COPD">
+        <span>COPD</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_7">
+        <input type="checkbox" id="pulmonary_7" name="pulmonary[]" value="Sleep apnea">
+        <span>Sleep apnea</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_8">
+        <input type="checkbox" id="pulmonary_8" name="pulmonary[]" value="CXR">
+        <span>CXR</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="hepatic_gi">
+      <div class="system-card__header">
+        <span class="system-card__title">Hepatic / GI</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="hepatic_gi_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="hepatic_gi_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="hepatic_gi-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="hepatic_gi_0">
+        <input type="checkbox" id="hepatic_gi_0" name="hepatic_gi[]" value="Hepatitis A">
+        <span>Hepatitis A</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_1">
+        <input type="checkbox" id="hepatic_gi_1" name="hepatic_gi[]" value="Hepatitis B">
+        <span>Hepatitis B</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_2">
+        <input type="checkbox" id="hepatic_gi_2" name="hepatic_gi[]" value="Hepatitis C">
+        <span>Hepatitis C</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_3">
+        <input type="checkbox" id="hepatic_gi_3" name="hepatic_gi[]" value="Recreational drug use">
+        <span>Recreational drug use</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_4">
+        <input type="checkbox" id="hepatic_gi_4" name="hepatic_gi[]" value="PONV risk">
+        <span>PONV risk</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_5">
+        <input type="checkbox" id="hepatic_gi_5" name="hepatic_gi[]" value="EtOH use">
+        <span>EtOH use</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_6">
+        <input type="checkbox" id="hepatic_gi_6" name="hepatic_gi[]" value="GERD">
+        <span>GERD</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="neuro">
+      <div class="system-card__header">
+        <span class="system-card__title">Neuro</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="neuro_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="neuro_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="neuro-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="neuro_0">
+        <input type="checkbox" id="neuro_0" name="neuro[]" value="Seizures">
+        <span>Seizures</span>
+      </label>
+      <label class="checklist-item" for="neuro_1">
+        <input type="checkbox" id="neuro_1" name="neuro[]" value="Migraines">
+        <span>Migraines</span>
+      </label>
+      <label class="checklist-item" for="neuro_2">
+        <input type="checkbox" id="neuro_2" name="neuro[]" value="Chronic pain">
+        <span>Chronic pain</span>
+      </label>
+      <label class="checklist-item" for="neuro_3">
+        <input type="checkbox" id="neuro_3" name="neuro[]" value="CVA/TIA">
+        <span>CVA/TIA</span>
+      </label>
+      <label class="checklist-item" for="neuro_4">
+        <input type="checkbox" id="neuro_4" name="neuro[]" value="Neuropathy">
+        <span>Neuropathy</span>
+      </label>
+      <label class="checklist-item" for="neuro_5">
+        <input type="checkbox" id="neuro_5" name="neuro[]" value="MS / MG / ALS">
+        <span>MS / MG / ALS</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="renal_gu">
+      <div class="system-card__header">
+        <span class="system-card__title">Renal / GU</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="renal_gu_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="renal_gu_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="renal_gu-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="renal_gu_0">
+        <input type="checkbox" id="renal_gu_0" name="renal_gu[]" value="ARF">
+        <span>ARF</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_1">
+        <input type="checkbox" id="renal_gu_1" name="renal_gu[]" value="CKD">
+        <span>CKD</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_2">
+        <input type="checkbox" id="renal_gu_2" name="renal_gu[]" value="Hemodialysis">
+        <span>Hemodialysis</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_3">
+        <input type="checkbox" id="renal_gu_3" name="renal_gu[]" value="Peritoneal dialysis">
+        <span>Peritoneal dialysis</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="endocrine">
+      <div class="system-card__header">
+        <span class="system-card__title">Endocrine</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="endocrine_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="endocrine_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="endocrine-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="endocrine_0">
+        <input type="checkbox" id="endocrine_0" name="endocrine[]" value="DM">
+        <span>DM</span>
+      </label>
+      <label class="checklist-item" for="endocrine_1">
+        <input type="checkbox" id="endocrine_1" name="endocrine[]" value="Thyroid disease">
+        <span>Thyroid disease</span>
+      </label>
+    </div>
+        <div class="field" style="margin-top: var(--space-3); max-width: 220px;">
+          <label class="field__label" for="endocrine_glucose">Glucose (if DM)</label>
+          <input class="input" type="text" id="endocrine_glucose" name="endocrine_glucose" placeholder="e.g., 110 mg/dL">
+        </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="heme_oncology">
+      <div class="system-card__header">
+        <span class="system-card__title">Heme / Oncology</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="heme_oncology_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="heme_oncology_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="heme_oncology-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="heme_onc_0">
+        <input type="checkbox" id="heme_onc_0" name="heme_onc[]" value="Anemia">
+        <span>Anemia</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_1">
+        <input type="checkbox" id="heme_onc_1" name="heme_onc[]" value="Sickle cell">
+        <span>Sickle cell</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_2">
+        <input type="checkbox" id="heme_onc_2" name="heme_onc[]" value="Bleeding disorder">
+        <span>Bleeding disorder</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_3">
+        <input type="checkbox" id="heme_onc_3" name="heme_onc[]" value="DVT">
+        <span>DVT</span>
+      </label>
+    </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="heme_cancer">Cancer (type, if applicable)</label>
+          <input class="input" type="text" id="heme_cancer" name="heme_cancer" placeholder="e.g., ALL, in remission">
+        </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="musculoskeletal">
+      <div class="system-card__header">
+        <span class="system-card__title">Musculoskeletal</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="musculoskeletal_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="musculoskeletal_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="musculoskeletal-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="musculoskeletal_0">
+        <input type="checkbox" id="musculoskeletal_0" name="musculoskeletal[]" value="Obese">
+        <span>Obese</span>
+      </label>
+      <label class="checklist-item" for="musculoskeletal_1">
+        <input type="checkbox" id="musculoskeletal_1" name="musculoskeletal[]" value="Arthritis">
+        <span>Arthritis</span>
+      </label>
+      <label class="checklist-item" for="musculoskeletal_2">
+        <input type="checkbox" id="musculoskeletal_2" name="musculoskeletal[]" value="RA">
+        <span>RA</span>
+      </label>
+      <label class="checklist-item" for="musculoskeletal_3">
+        <input type="checkbox" id="musculoskeletal_3" name="musculoskeletal[]" value="Hypotonia">
+        <span>Hypotonia</span>
+      </label>
+      <label class="checklist-item" for="musculoskeletal_4">
+        <input type="checkbox" id="musculoskeletal_4" name="musculoskeletal[]" value="Fibromyalgia">
+        <span>Fibromyalgia</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    <div class="system-card" data-system="psychosocial">
+      <div class="system-card__header">
+        <span class="system-card__title">Psychosocial</span>
+        <div class="system-card__wnl">
+          <span class="system-card__wnl-label">WNL</span>
+          <div class="option-group option-group--sm">
+            <label class="option"><input type="radio" name="psychosocial_wnl" value="Yes" checked> Yes</label>
+            <label class="option"><input type="radio" name="psychosocial_wnl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+      <div class="system-card__findings" id="psychosocial-findings" hidden>
+<div class="checklist" data-checklist>
+      <label class="checklist-item" for="psychosocial_0">
+        <input type="checkbox" id="psychosocial_0" name="psychosocial[]" value="Bipolar">
+        <span>Bipolar</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_1">
+        <input type="checkbox" id="psychosocial_1" name="psychosocial[]" value="Anxiety">
+        <span>Anxiety</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_2">
+        <input type="checkbox" id="psychosocial_2" name="psychosocial[]" value="Depression">
+        <span>Depression</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_3">
+        <input type="checkbox" id="psychosocial_3" name="psychosocial[]" value="Schizophrenia">
+        <span>Schizophrenia</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_4">
+        <input type="checkbox" id="psychosocial_4" name="psychosocial[]" value="ADD/ADHD">
+        <span>ADD/ADHD</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_5">
+        <input type="checkbox" id="psychosocial_5" name="psychosocial[]" value="Panic Disorder">
+        <span>Panic Disorder</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_6">
+        <input type="checkbox" id="psychosocial_6" name="psychosocial[]" value="PTSD">
+        <span>PTSD</span>
+      </label>
+    </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- ============ NPO ============ -->
+    <div class="section">
+      <h2 class="section__title">NPO Status</h2>
+      <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
+        <input type="checkbox" name="npo_standard" value="Solids 8hrs, Clears 2hrs"> NPO: Solids 8hrs, Clears 2 hrs
+      </label>
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="npo-pca">If pregnant, PCA (weeks)</label>
+          <input class="input" type="number" min="0" id="npo-pca" name="npo_pca_weeks" placeholder="—">
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Anesthetic Plan ============ -->
+    <div class="section">
+      <h2 class="section__title">Anesthetic Plan</h2>
+      <div class="checklist">
+        <label class="checklist-item" for="plan_general"><input type="checkbox" id="plan_general" name="anes_plan[]" value="General"><span>General</span></label>
+        <label class="checklist-item" for="plan_mac"><input type="checkbox" id="plan_mac" name="anes_plan[]" value="MAC"><span>MAC</span></label>
+        <label class="checklist-item" for="plan_regional"><input type="checkbox" id="plan_regional" name="anes_plan[]" value="Regional"><span>Regional</span></label>
+        <label class="checklist-item" for="plan_spinal"><input type="checkbox" id="plan_spinal" name="anes_plan[]" value="Spinal"><span>Spinal</span></label>
+        <label class="checklist-item" for="plan_epidural"><input type="checkbox" id="plan_epidural" name="anes_plan[]" value="Epidural"><span>Epidural</span></label>
+        <label class="checklist-item" for="plan_labor_epidural"><input type="checkbox" id="plan_labor_epidural" name="anes_plan[]" value="Labor Epidural"><span>Labor Epidural</span></label>
+      </div>
+    </div>
+
+    <!-- ============ Consent & Attestation ============ -->
+    <div class="section section--readonly">
+      <h2 class="section__title">Consent &amp; Attestation</h2>
+      <p>I have explained the anesthetic plan, options, and pertinent complications including when appropriate: death, severe neurologic impairment and blindness. The patient and/or legal guardian has communicated to me an understanding of both the anesthetic plan and inherent risks. Patient history reviewed by anesthesiologist.</p>
+    </div>
+
+    <!-- ============ Signature ============ -->
+    <div class="section">
+      <h2 class="section__title">Signature</h2>
+      <div class="field">
+        <label class="field__label" for="signature-canvas">Signature <span class="req">*</span></label>
+        <div class="sig-wrap">
+          <canvas id="signature-canvas" class="sig-canvas" data-sig-required="true"></canvas>
+          <div class="sig-actions">
+            <span class="sig-hint">Draw your signature above using your mouse or finger</span>
+            <button type="button" class="sig-clear" data-sig-clear="signature-canvas">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="sig-date">Date</label>
+          <input class="input" type="date" id="sig-date" name="sig_date">
+        </div>
+        <div class="field">
+          <label class="field__label" for="sig-time">Time</label>
+          <input class="input" type="time" id="sig-time" name="sig_time">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn--ghost" data-start-over>New Patient (Clear Form)</button>
+      <button type="button" class="btn btn--primary" data-print-form>Save / Print as PDF</button>
+    </div>
+
+  </form>
+</main>
+
+<footer class="site-footer">
+  Maps Healthcare Logistics, LLC — Anesthesia Pre-Op Assessment. Licensed under Creative Commons Attribution-NoDerivatives 4.0 International. Local-only tool: no data is transmitted from this page.
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/preop.js"></script>
+</body>
+</html>
