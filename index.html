@@ -53,8 +53,9 @@
           <input class="input" type="number" min="0" id="age" name="age" placeholder="e.g., 7">
         </div>
         <div class="field">
-          <label class="field__label" for="height-in">Height (in)</label>
-          <input class="input" type="number" min="0" step="0.1" id="height-in" name="height_in" placeholder="e.g., 48">
+          <label class="field__label" for="height-in">Height</label>
+          <input class="input" type="text" inputmode="decimal" id="height-in" name="height_in" placeholder="e.g., 5'5", 65, or 65in" autocomplete="off">
+          <span class="field__hint" id="height-hint">Accepts 5'5", 5' 5, 65, or 65in</span>
         </div>
         <div class="field">
           <label class="field__label" for="weight-lb">Weight (lb)</label>

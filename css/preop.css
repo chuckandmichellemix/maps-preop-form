@@ -184,6 +184,8 @@
   margin-top: var(--space-2);
 }
 
+.field__hint--error { color: #b3261e; font-style: normal; }
+
 /* ---------- Print polish for the point-of-care layout ---------- */
 @media print {
   .system-card { background: #fff; break-inside: avoid; }

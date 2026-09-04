@@ -22,17 +22,50 @@
     el.classList.toggle('is-empty', !!empty);
   }
 
+  /* Accepts: 5'5", 5' 5, 5ft5in, 5 feet 5, 65, 65", 65in — returns inches or null. */
+  function parseHeightToInches(raw) {
+    const str = (raw || '').trim().toLowerCase();
+    if (!str) return null;
+
+    const feetInches = str.match(/^(\d+(?:\.\d+)?)\s*(?:'|ft|feet)\s*(\d+(?:\.\d+)?)?\s*(?:"|''|in|inch(?:es)?)?\s*$/);
+    if (feetInches) {
+      const feet = parseFloat(feetInches[1]);
+      const inches = feetInches[2] ? parseFloat(feetInches[2]) : 0;
+      if (Number.isFinite(feet)) return feet * 12 + (Number.isFinite(inches) ? inches : 0);
+    }
+
+    const inchesOnly = str.match(/^(\d+(?:\.\d+)?)\s*(?:"|''|in|inch(?:es)?)?\s*$/);
+    if (inchesOnly) {
+      const val = parseFloat(inchesOnly[1]);
+      if (Number.isFinite(val)) return val;
+    }
+
+    return null;
+  }
+
   function compute() {
-    const inches = parseFloat(heightIn.value);
+    const inches = parseHeightToInches(heightIn.value);
     const lbs = parseFloat(weightLb.value);
     const hasH = Number.isFinite(inches) && inches > 0;
     const hasW = Number.isFinite(lbs) && lbs > 0;
 
+    const heightHint = document.getElementById('height-hint');
+    const rawHeight = heightIn.value.trim();
+    const heightUnrecognized = rawHeight.length > 0 && inches === null;
+
     if (hasH) {
       const cm = inches * 2.54;
-      setBox(outCm, cm.toFixed(1) + ' cm', false);
+      const ft = Math.floor(inches / 12);
+      const rem = Math.round((inches - ft * 12) * 10) / 10;
+      setBox(outCm, cm.toFixed(1) + ' cm \u00b7 ' + ft + "'" + rem + '"', false);
     } else {
       setBox(outCm, '—', true);
+    }
+    if (heightHint) {
+      heightHint.textContent = heightUnrecognized
+        ? "Couldn't read that \u2014 try 5'5\", 65, or 65in"
+        : "Accepts 5'5\", 5' 5, 65, or 65in";
+      heightHint.classList.toggle('field__hint--error', heightUnrecognized);
     }
 
     if (hasW) {
