@@ -540,14 +540,25 @@
         </div>
         <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Mouth Opening Distance / TMD</span>
+          <p class="field__hint" style="margin: 0 0 var(--space-2);">Measured in finger breadths (FB). Greater than 3 FB is considered normal.</p>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="airway_mouth_opening">Mouth Opening Distance (cm)</label>
-              <input class="input" type="text" id="airway_mouth_opening" name="airway_mouth_opening" placeholder="e.g., 4">
+              <label class="field__label">Mouth Opening Distance</label>
+              <div class="option-group option-group--sm">
+                <label class="option"><input type="radio" name="airway_mouth_opening" value="1 FB"> 1 FB</label>
+                <label class="option"><input type="radio" name="airway_mouth_opening" value="2 FB"> 2 FB</label>
+                <label class="option"><input type="radio" name="airway_mouth_opening" value="3 FB"> 3 FB</label>
+                <label class="option"><input type="radio" name="airway_mouth_opening" value=">3 FB">&gt;3 FB (Normal)</label>
+              </div>
             </div>
             <div class="field">
-              <label class="field__label" for="airway_tmd">TMD — Thyromental Distance (cm)</label>
-              <input class="input" type="text" id="airway_tmd" name="airway_tmd" placeholder="e.g., 6">
+              <label class="field__label">TMD — Thyromental Distance</label>
+              <div class="option-group option-group--sm">
+                <label class="option"><input type="radio" name="airway_tmd" value="1 FB"> 1 FB</label>
+                <label class="option"><input type="radio" name="airway_tmd" value="2 FB"> 2 FB</label>
+                <label class="option"><input type="radio" name="airway_tmd" value="3 FB"> 3 FB</label>
+                <label class="option"><input type="radio" name="airway_tmd" value=">3 FB">&gt;3 FB (Normal)</label>
+              </div>
             </div>
           </div>
         </div>
@@ -657,14 +668,6 @@
         <input type="checkbox" id="cardiac_1" name="cardiac[]" value="HTN">
         <span>HTN</span>
       </label>
-      <label class="checklist-item" for="cardiac_2">
-        <input type="checkbox" id="cardiac_2" name="cardiac[]" value="Cath">
-        <span>Cath</span>
-      </label>
-      <label class="checklist-item" for="cardiac_3">
-        <input type="checkbox" id="cardiac_3" name="cardiac[]" value="Stents">
-        <span>Stents</span>
-      </label>
       <label class="checklist-item" for="cardiac_4">
         <input type="checkbox" id="cardiac_4" name="cardiac[]" value="Abnormal EKG">
         <span>Abnormal EKG</span>
@@ -682,28 +685,20 @@
         <span>CAD</span>
       </label>
       <label class="checklist-item" for="cardiac_8">
-        <input type="checkbox" id="cardiac_8" name="cardiac[]" value="Pacemaker">
+        <input type="checkbox" id="cardiac_8" name="cardiac[]" value="Pacemaker" data-test-link="pacemaker">
         <span>Pacemaker</span>
       </label>
       <label class="checklist-item" for="cardiac_9">
-        <input type="checkbox" id="cardiac_9" name="cardiac[]" value="AICD">
+        <input type="checkbox" id="cardiac_9" name="cardiac[]" value="AICD" data-test-link="pacemaker">
         <span>AICD</span>
       </label>
       <label class="checklist-item" for="cardiac_10">
-        <input type="checkbox" id="cardiac_10" name="cardiac[]" value="EKG">
-        <span>EKG</span>
+        <input type="checkbox" id="cardiac_10" name="cardiac[]" value="Arrhythmias" data-test-link="ekg">
+        <span>Arrhythmias</span>
       </label>
       <label class="checklist-item" for="cardiac_11">
         <input type="checkbox" id="cardiac_11" name="cardiac[]" value="Hyperlipidemia">
         <span>Hyperlipidemia</span>
-      </label>
-      <label class="checklist-item" for="cardiac_12">
-        <input type="checkbox" id="cardiac_12" name="cardiac[]" value="A Fib">
-        <span>A Fib</span>
-      </label>
-      <label class="checklist-item" for="cardiac_13">
-        <input type="checkbox" id="cardiac_13" name="cardiac[]" value="Echo">
-        <span>Echo</span>
       </label>
       <label class="checklist-item" for="cardiac_14">
         <input type="checkbox" id="cardiac_14" name="cardiac[]" value="MI">
@@ -718,7 +713,7 @@
           <span class="system-card__subgroup-label">Cardiac Workup — click a test to add details</span>
           <div class="cardiac-tests" data-cardiac-tests>
 
-            <div class="cardiac-test" data-cardiac-test>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="ekg">
               <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
                 <span class="cardiac-test__name">EKG</span>
                 <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
@@ -781,30 +776,19 @@
               </div>
             </div>
 
-            <div class="cardiac-test" data-cardiac-test>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="pacemaker">
               <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
                 <span class="cardiac-test__name">Pacemaker/Defibrillator Check</span>
                 <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
               </button>
               <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <p class="field__hint" style="margin: 0 0 var(--space-2);">Devices should be interrogated within 12 months prior to surgery.</p>
                 <div class="field-row">
                   <div class="field"><label class="field__label" for="cardiac_pacer_date">Date of last check</label><input class="input" type="date" id="cardiac_pacer_date" name="cardiac_pacer_date"></div>
                   <div class="field"><label class="field__label" for="cardiac_pacer_type">Device type</label><input class="input" type="text" id="cardiac_pacer_type" name="cardiac_pacer_type" placeholder="Pacemaker, AICD, or both"></div>
                 </div>
                 <div class="field"><label class="field__label" for="cardiac_pacer_findings">Findings/Notes</label><input class="input" type="text" id="cardiac_pacer_findings" name="cardiac_pacer_findings"></div>
-              </div>
-            </div>
-
-            <div class="cardiac-test" data-cardiac-test>
-              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
-                <span class="cardiac-test__name">Chest X-Ray</span>
-                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
-              </button>
-              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
-                <div class="field-row">
-                  <div class="field"><label class="field__label" for="cardiac_cxr_date">Date</label><input class="input" type="date" id="cardiac_cxr_date" name="cardiac_cxr_date"></div>
-                  <div class="field"><label class="field__label" for="cardiac_cxr_findings">Findings</label><input class="input" type="text" id="cardiac_cxr_findings" name="cardiac_cxr_findings"></div>
-                </div>
+                <p class="field__hint field__hint--error" data-pacer-interrogation-warning hidden>&#9888; Last check was more than 12 months before the procedure date — reinterrogation is recommended.</p>
               </div>
             </div>
 
@@ -859,10 +843,27 @@
         <span>Sleep apnea</span>
       </label>
       <label class="checklist-item" for="pulmonary_8">
-        <input type="checkbox" id="pulmonary_8" name="pulmonary[]" value="CXR">
+        <input type="checkbox" id="pulmonary_8" name="pulmonary[]" value="CXR" data-test-link="cxr">
         <span>CXR</span>
       </label>
     </div>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Chest X-Ray — click to add details</span>
+          <div class="cardiac-tests" data-cardiac-tests>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="cxr">
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Chest X-Ray</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="pulmonary_cxr_date">Date</label><input class="input" type="date" id="pulmonary_cxr_date" name="pulmonary_cxr_date"></div>
+                  <div class="field"><label class="field__label" for="pulmonary_cxr_findings">Findings</label><input class="input" type="text" id="pulmonary_cxr_findings" name="pulmonary_cxr_findings"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="pulmonary_notes">Additional notes</label>
           <textarea class="textarea" id="pulmonary_notes" name="pulmonary_notes"></textarea>

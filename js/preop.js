@@ -382,20 +382,93 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   });
 })();
 
-/* ---------- Cardiac test click-to-reveal (click a test to add details) ---------- */
-document.querySelectorAll('[data-cardiac-test]').forEach((test) => {
-  const toggle = test.querySelector('[data-cardiac-test-toggle]');
-  const detail = test.querySelector('[data-cardiac-test-detail]');
-  const status = test.querySelector('[data-cardiac-test-status]');
-  if (!toggle || !detail) return;
-  toggle.addEventListener('click', () => {
-    const willOpen = detail.hidden;
+/* ---------- Cardiac/imaging test click-to-reveal (click a test to add details) ---------- */
+(function () {
+  const testsByKey = {};
+
+  function setTestActive(test, willOpen) {
+    const toggle = test.querySelector('[data-cardiac-test-toggle]');
+    const detail = test.querySelector('[data-cardiac-test-detail]');
+    const status = test.querySelector('[data-cardiac-test-status]');
+    if (!toggle || !detail) return;
+    if (detail.hidden !== willOpen) return; // already in the desired state
     detail.hidden = !willOpen;
     test.classList.toggle('is-active', willOpen);
     toggle.setAttribute('aria-expanded', String(willOpen));
     if (status) status.textContent = willOpen ? 'Added' : 'N/A';
+  }
+
+  document.querySelectorAll('[data-cardiac-test]').forEach((test) => {
+    const toggle = test.querySelector('[data-cardiac-test-toggle]');
+    const detail = test.querySelector('[data-cardiac-test-detail]');
+    if (!toggle || !detail) return;
+    const key = test.getAttribute('data-cardiac-test-key');
+    if (key) testsByKey[key] = test;
+    toggle.addEventListener('click', () => {
+      setTestActive(test, detail.hidden);
+      if (key) syncLinkedCheckboxes(key);
+    });
   });
-});
+
+  function isTestActive(test) {
+    return test ? test.classList.contains('is-active') : false;
+  }
+
+  function linkedCheckboxes(key) {
+    return Array.from(document.querySelectorAll(`[data-test-link="${key}"]`));
+  }
+
+  // When a test card's own toggle is clicked directly, keep its linked checklist checkbox(es) in sync.
+  function syncLinkedCheckboxes(key) {
+    const test = testsByKey[key];
+    const boxes = linkedCheckboxes(key);
+    if (!test || !boxes.length) return;
+    const active = isTestActive(test);
+    if (active) {
+      if (!boxes.some((b) => b.checked)) boxes[0].checked = true;
+    } else {
+      boxes.forEach((b) => { b.checked = false; });
+    }
+  }
+
+  // When a linked checklist checkbox is checked/unchecked, open or close its test card.
+  document.querySelectorAll('[data-test-link]').forEach((box) => {
+    const key = box.getAttribute('data-test-link');
+    box.addEventListener('change', () => {
+      const test = testsByKey[key];
+      if (!test) return;
+      const shouldBeOpen = linkedCheckboxes(key).some((b) => b.checked);
+      setTestActive(test, shouldBeOpen);
+    });
+  });
+
+  window.MapsCardiacTests = { testsByKey };
+})();
+
+/* ---------- Pacemaker/AICD interrogation-date reminder ---------- */
+(function () {
+  const procDateInput = document.getElementById('procedure-date');
+  const pacerDateInput = document.getElementById('cardiac_pacer_date');
+  const warning = document.querySelector('[data-pacer-interrogation-warning]');
+  if (!procDateInput || !pacerDateInput || !warning) return;
+
+  function check() {
+    const procVal = procDateInput.value;
+    const pacerVal = pacerDateInput.value;
+    if (!procVal || !pacerVal) { warning.hidden = true; return; }
+    const procDate = new Date(procVal + 'T00:00:00');
+    const pacerDate = new Date(pacerVal + 'T00:00:00');
+    if (isNaN(procDate.getTime()) || isNaN(pacerDate.getTime())) { warning.hidden = true; return; }
+    const diffDays = (procDate - pacerDate) / (1000 * 60 * 60 * 24);
+    warning.hidden = !(diffDays > 365);
+  }
+
+  procDateInput.addEventListener('change', check);
+  procDateInput.addEventListener('input', check);
+  pacerDateInput.addEventListener('change', check);
+  pacerDateInput.addEventListener('input', check);
+  check();
+})();
 
 /* ---------- Diagnosis / Procedure code repeater ----------
    Markup: <div class="code-repeater" data-code-repeater data-code-source="ICD10_CODES" data-field-name="dx">
