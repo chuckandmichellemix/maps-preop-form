@@ -23,5 +23,9 @@ window.CPT_CODES = [
   {
     code: '01000',
     label: 'Upper and Lower Arch Implants, Dental Implants, Single Arch Implants (cash-pay) — Internal data-collection code only; not an actual billable CPT code.'
+  },
+  {
+    code: '00170',
+    label: 'Intraoral procedures (dental extractions, oral biopsy, alveoloplasty, dental implant placement, incision & drainage of oral abscess) — Anesthesia for intraoral procedures, including biopsy; not otherwise specified.'
   }
 ];
