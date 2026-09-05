@@ -250,3 +250,274 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   const source = sourceName ? window[sourceName] : [];
   window.MapsChipField(el, source);
 });
+
+/* ---------- Date of Birth -> age + pediatric(<12)/adult switch ---------- */
+(function () {
+  const dob = document.getElementById('dob');
+  const ageOut = document.getElementById('calc-age');
+  const form = document.getElementById('preop-form');
+  if (!dob || !form) return;
+
+  const PEDIATRIC_CUTOFF = 12;
+
+  function calcAgeYears(dobStr) {
+    const d = new Date(dobStr + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    const today = new Date();
+    if (d > today) return null;
+    let years = today.getFullYear() - d.getFullYear();
+    const monthDiff = today.getMonth() - d.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < d.getDate())) years--;
+    return years;
+  }
+
+  function calcAgeMonths(dobStr) {
+    const d = new Date(dobStr + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    const today = new Date();
+    if (d > today) return null;
+    let months = (today.getFullYear() - d.getFullYear()) * 12 + (today.getMonth() - d.getMonth());
+    if (today.getDate() < d.getDate()) months--;
+    return Math.max(months, 0);
+  }
+
+  window.MapsApplyAgeGroup = apply;
+
+  function apply() {
+    const years = calcAgeYears(dob.value);
+
+    if (years === null) {
+      form.removeAttribute('data-age-group');
+      form.removeAttribute('data-patient-age');
+      if (ageOut) { ageOut.textContent = '—'; ageOut.classList.remove('has-value'); }
+      togglePediatricOnly(null);
+      document.dispatchEvent(new CustomEvent('maps:age-group-change', { detail: { age: null, group: null } }));
+      return;
+    }
+
+    const group = years < PEDIATRIC_CUTOFF ? 'pediatric' : 'adult';
+    form.setAttribute('data-patient-age', String(years));
+    form.setAttribute('data-age-group', group);
+
+    if (ageOut) {
+      let text;
+      if (years < 2) {
+        const months = calcAgeMonths(dob.value);
+        text = months + (months === 1 ? ' month' : ' months');
+      } else {
+        text = years + (years === 1 ? ' year' : ' years');
+      }
+      ageOut.textContent = text + (group === 'pediatric' ? ' (pediatric)' : '');
+      ageOut.classList.add('has-value');
+    }
+
+    togglePediatricOnly(group);
+    document.dispatchEvent(new CustomEvent('maps:age-group-change', { detail: { age: years, group: group } }));
+  }
+
+  function togglePediatricOnly(group) {
+    const isPediatric = group === 'pediatric';
+    document.querySelectorAll('[data-pediatric-only]').forEach((el) => {
+      const show = group === null ? false : isPediatric;
+      el.hidden = !show;
+      el.querySelectorAll('input, textarea, select').forEach((f) => {
+        if (f.dataset.conditionalRequired === 'true') f.required = show;
+      });
+    });
+  }
+
+  dob.addEventListener('change', apply);
+  dob.addEventListener('input', apply);
+  apply();
+})();
+
+/* ---------- Gender + age -> HCG field visibility (Female, age >= 12) ---------- */
+(function () {
+  const genderSel = document.getElementById('gender');
+  const hcgField = document.getElementById('hcg-field');
+  const form = document.getElementById('preop-form');
+  if (!genderSel || !hcgField || !form) return;
+
+  function update() {
+    const age = form.hasAttribute('data-patient-age') ? parseInt(form.getAttribute('data-patient-age'), 10) : null;
+    const show = genderSel.value === 'Female' && age !== null && age >= 12;
+    hcgField.hidden = !show;
+  }
+
+  genderSel.addEventListener('change', update);
+  document.addEventListener('maps:age-group-change', update);
+  update();
+})();
+
+/* ---------- Labs reviewed on EMR -> toggle manual lab entry ---------- */
+(function () {
+  const checkbox = document.getElementById('labs-reviewed-emr');
+  const manual = document.getElementById('labs-manual-entry');
+  if (!checkbox || !manual) return;
+  const update = () => { manual.hidden = checkbox.checked; };
+  checkbox.addEventListener('change', update);
+  update();
+})();
+
+/* ---------- Generic Yes/No radio reveal (data-reveal-target) ----------
+   Any radio with data-reveal-target="elementId" shows that element when
+   the checked radio in its name-group has value "Yes", hides otherwise.
+*/
+(function () {
+  const radios = document.querySelectorAll('input[type="radio"][data-reveal-target]');
+  const groups = new Map();
+  radios.forEach((radio) => {
+    if (!groups.has(radio.name)) groups.set(radio.name, radio.getAttribute('data-reveal-target'));
+  });
+  groups.forEach((targetId, name) => {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const update = () => {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      const show = !!checked && checked.value === 'Yes';
+      target.hidden = !show;
+    };
+    document.querySelectorAll(`input[name="${name}"]`).forEach((r) => r.addEventListener('change', update));
+    update();
+  });
+})();
+
+/* ---------- Cardiac test click-to-reveal (click a test to add details) ---------- */
+document.querySelectorAll('[data-cardiac-test]').forEach((test) => {
+  const toggle = test.querySelector('[data-cardiac-test-toggle]');
+  const detail = test.querySelector('[data-cardiac-test-detail]');
+  const status = test.querySelector('[data-cardiac-test-status]');
+  if (!toggle || !detail) return;
+  toggle.addEventListener('click', () => {
+    const willOpen = detail.hidden;
+    detail.hidden = !willOpen;
+    test.classList.toggle('is-active', willOpen);
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    if (status) status.textContent = willOpen ? 'Added' : 'N/A';
+  });
+});
+
+/* ---------- Diagnosis / Procedure code repeater ----------
+   Markup: <div class="code-repeater" data-code-repeater data-code-source="ICD10_CODES" data-field-name="dx">
+             <div class="code-repeater__rows" data-code-repeater-rows>
+               <div class="code-row" data-code-row>
+                 <div class="code-search" data-code-search>
+                   <input class="code-row__code-input" ...>
+                   <div class="chip-field__suggestions" data-code-suggestions></div>
+                 </div>
+                 <input class="code-row__desc-input" ...>
+                 <button data-code-row-remove>...</button>
+               </div>
+             </div>
+             <button data-code-repeater-add>+ Add</button>
+           </div>
+*/
+(function () {
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function wireRow(row, sourceList) {
+    const codeInput = row.querySelector('.code-row__code-input');
+    const descInput = row.querySelector('.code-row__desc-input');
+    const suggestBox = row.querySelector('[data-code-suggestions]');
+    const removeBtn = row.querySelector('[data-code-row-remove]');
+    const repeater = row.closest('[data-code-repeater]');
+    const rowsWrap = row.closest('[data-code-repeater-rows]');
+
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
+        const rows = rowsWrap.querySelectorAll('[data-code-row]');
+        if (rows.length <= 1) {
+          if (codeInput) codeInput.value = '';
+          if (descInput) descInput.value = '';
+          return;
+        }
+        row.remove();
+      });
+    }
+
+    if (!codeInput || !suggestBox || !sourceList || !sourceList.length) return;
+
+    let activeIndex = -1;
+
+    function closeSuggestions() {
+      suggestBox.classList.remove('is-open');
+      suggestBox.innerHTML = '';
+      activeIndex = -1;
+    }
+
+    function openSuggestions(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) { closeSuggestions(); return; }
+      const matches = [];
+      for (let i = 0; i < sourceList.length && matches.length < 25; i++) {
+        const item = sourceList[i];
+        if (item.code.toLowerCase().startsWith(q) || item.label.toLowerCase().includes(q)) matches.push(item);
+      }
+      if (!matches.length) { closeSuggestions(); return; }
+      suggestBox.innerHTML = '';
+      matches.forEach((item) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip-field__suggestion';
+        btn.innerHTML = `<strong>${escapeHtml(item.code)}</strong> — ${escapeHtml(item.label)}`;
+        btn.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          codeInput.value = item.code;
+          if (descInput) descInput.value = item.label;
+          closeSuggestions();
+        });
+        suggestBox.appendChild(btn);
+      });
+      suggestBox.classList.add('is-open');
+      activeIndex = -1;
+    }
+
+    codeInput.addEventListener('input', () => openSuggestions(codeInput.value));
+    codeInput.addEventListener('focus', () => { if (codeInput.value.trim()) openSuggestions(codeInput.value); });
+    codeInput.addEventListener('blur', () => setTimeout(closeSuggestions, 120));
+    codeInput.addEventListener('keydown', (e) => {
+      const items = suggestBox.querySelectorAll('.chip-field__suggestion');
+      if (e.key === 'ArrowDown' && items.length) {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        items.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
+      } else if (e.key === 'ArrowUp' && items.length) {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        items.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
+      } else if (e.key === 'Enter' && activeIndex >= 0 && items[activeIndex]) {
+        e.preventDefault();
+        items[activeIndex].dispatchEvent(new MouseEvent('mousedown'));
+      } else if (e.key === 'Escape') {
+        closeSuggestions();
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-code-repeater]').forEach((repeater) => {
+    const sourceName = repeater.getAttribute('data-code-source');
+    const sourceList = sourceName ? (window[sourceName] || []) : [];
+    const rowsWrap = repeater.querySelector('[data-code-repeater-rows]');
+    const addBtn = repeater.querySelector('[data-code-repeater-add]');
+    const fieldName = repeater.getAttribute('data-field-name') || 'code';
+
+    rowsWrap.querySelectorAll('[data-code-row]').forEach((row) => wireRow(row, sourceList));
+
+    if (addBtn) {
+      addBtn.addEventListener('click', () => {
+        const rows = rowsWrap.querySelectorAll('[data-code-row]');
+        const template = rows[rows.length - 1];
+        const clone = template.cloneNode(true);
+        clone.querySelectorAll('input').forEach((inp) => { inp.value = ''; });
+        const suggestBox = clone.querySelector('[data-code-suggestions]');
+        if (suggestBox) suggestBox.innerHTML = '';
+        rowsWrap.appendChild(clone);
+        wireRow(clone, sourceList);
+        const firstInput = clone.querySelector('.code-row__code-input');
+        if (firstInput) firstInput.focus();
+      });
+    }
+  });
+})();

@@ -186,9 +186,134 @@
 
 .field__hint--error { color: #b3261e; font-style: normal; }
 
+/* ---------- Age readout ---------- */
+.age-readout {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  font-size: var(--text-base);
+  color: var(--color-text-faint);
+}
+.age-readout.has-value { color: var(--color-text); font-weight: 700; font-family: var(--font-display); }
+
+/* ---------- Section title tag ("Pediatric" pill) ---------- */
+.section__title-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-highlight);
+  color: var(--color-primary-active);
+  vertical-align: middle;
+  margin-left: var(--space-3);
+}
+
+/* ---------- Code repeater (Diagnosis / Procedure) ---------- */
+.code-repeater { display: flex; flex-direction: column; gap: var(--space-2); }
+.code-repeater__head {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 2fr 32px;
+  gap: var(--space-3);
+  padding: 0 var(--space-1);
+}
+.code-repeater__head-label { font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.code-repeater__rows { display: flex; flex-direction: column; gap: var(--space-2); }
+.code-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 2fr 32px;
+  gap: var(--space-3);
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .code-repeater__head { display: none; }
+  .code-row { grid-template-columns: 1fr; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--color-divider); border-radius: var(--radius-md); }
+  .code-row__remove { justify-self: end; }
+}
+.code-search { position: relative; }
+.code-row__remove {
+  display: grid;
+  place-items: center;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-faint);
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+.code-row__remove:hover { background: var(--color-surface-offset); color: var(--color-error); }
+.code-repeater__add { align-self: flex-start; margin-top: var(--space-1); }
+
+/* ---------- Pediatric allergy checklist ---------- */
+.ped-allergy-list { display: flex; flex-direction: column; gap: var(--space-3); }
+.ped-allergy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  flex-wrap: wrap;
+}
+.ped-allergy-row__label { font-size: var(--text-sm); font-weight: 600; }
+.ped-allergy-which { margin-top: var(--space-2); margin-left: var(--space-4); }
+@media (max-width: 560px) { .ped-allergy-which { margin-left: 0; } }
+
+/* ---------- Cardiac tests (click-to-reveal) ---------- */
+.cardiac-tests { display: flex; flex-direction: column; gap: var(--space-2); }
+.cardiac-test {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  overflow: hidden;
+}
+.cardiac-test.is-active { border-color: var(--color-primary); }
+.cardiac-test__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  cursor: pointer;
+}
+.cardiac-test__name { font-size: var(--text-sm); font-weight: 600; flex: 1 1 auto; min-width: 0; }
+.cardiac-test__status {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-offset);
+  color: var(--color-text-faint);
+  flex-shrink: 0;
+}
+.cardiac-test.is-active .cardiac-test__status { background: var(--color-primary-highlight); color: var(--color-primary-active); }
+.cardiac-test__detail {
+  padding: 0 var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.cardiac-test__detail[hidden] { display: none; }
+.cardiac-test__detail .field { margin-bottom: 0; }
+.cardiac-test__detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+@media (max-width: 560px) { .cardiac-test__detail-row { grid-template-columns: 1fr; } }
+
 /* ---------- Print polish for the point-of-care layout ---------- */
 @media print {
   .system-card { background: #fff; break-inside: avoid; }
   .system-card__findings[hidden] { display: block !important; }
   .chip-field__input-row, .chip-field__add { display: none !important; }
+  [data-pediatric-only][hidden] { display: none !important; }
+  [data-pediatric-only]:not([hidden]) { display: block !important; }
+  .code-repeater__add, .code-row__remove { display: none !important; }
+  .cardiac-test__detail[hidden] { display: flex !important; }
+  .cardiac-test__toggle { cursor: default; }
 }

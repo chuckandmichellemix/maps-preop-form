@@ -37,7 +37,7 @@
   <div class="intro">
     <span class="intro__eyebrow">Anesthesia Pre-Op</span>
     <h1 class="intro__title">Anesthesia Pre-Op Assessment</h1>
-    <p class="intro__desc">Point-of-care clinical assessment completed by the anesthesia provider prior to the procedure. Height/weight auto-convert and calculate BMI/BSA; diagnosis and CPT codes support multiple entries and will populate from your final code list.</p>
+    <p class="intro__desc">Point-of-care clinical assessment completed by the anesthesia provider prior to the procedure. Height/weight auto-convert and calculate BMI/BSA. Date of birth auto-calculates age, and the layout adapts for pediatric patients (under 12). Diagnosis codes are searchable against the full ICD-10-CM code set.</p>
   </div>
 
   <form data-local-form novalidate id="preop-form">
@@ -49,8 +49,25 @@
 
       <div class="encounter-grid">
         <div class="field">
-          <label class="field__label" for="age">Age</label>
-          <input class="input" type="number" min="0" id="age" name="age" placeholder="e.g., 7">
+          <label class="field__label" for="dob">Date of Birth</label>
+          <input class="input" type="date" id="dob" name="dob">
+        </div>
+        <div class="field">
+          <label class="field__label">Age</label>
+          <div class="age-readout" id="calc-age">—</div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="gender">Gender</label>
+          <select class="input" id="gender" name="gender">
+            <option value="">Select…</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field" id="gest-age-field" data-pediatric-only hidden>
+          <label class="field__label" for="gest-age">Gestational Age at Birth (weeks)</label>
+          <input class="input" type="number" min="20" max="45" id="gest-age" name="gestational_age_weeks" placeholder="e.g., 38">
         </div>
         <div class="field">
           <label class="field__label" for="height-in">Height</label>
@@ -131,38 +148,107 @@
       </div>
     </div>
 
-    <!-- ============ Diagnosis & Billing Codes ============ -->
+    <!-- ============ Diagnosis ============ -->
     <div class="section">
-      <h2 class="section__title">Diagnosis &amp; Billing Codes</h2>
-      <p class="section__subtitle">Multiple ICD-10 diagnosis codes and CPT procedure codes can be added. Suggestions will populate once the final Kansas dental-disability-anesthesia code list is provided — you can still type and add any code now.</p>
+      <h2 class="section__title">Diagnosis</h2>
+      <p class="section__subtitle">Search the full ICD-10-CM code set by code or description. Add as many rows as needed.</p>
 
-      <div class="field">
-        <label class="field__label" for="dx-input">Diagnosis (ICD-10)</label>
-        <div class="chip-field" data-chip-field data-chip-name="dx_codes" data-chip-source="ICD10_CODES">
-          <div class="chip-field__chips"></div>
-          <div class="chip-field__input-row">
-            <input class="chip-field__input" id="dx-input" type="text" placeholder="Type a code or description, press Enter to add…">
-            <button type="button" class="chip-field__add">Add</button>
-          </div>
-          <div class="chip-field__suggestions"></div>
+      <div class="code-repeater" data-code-repeater data-code-source="ICD10_CODES" data-field-name="dx">
+        <div class="code-repeater__head">
+          <span class="code-repeater__head-label code-repeater__head-label--code">Code</span>
+          <span class="code-repeater__head-label code-repeater__head-label--desc">Description</span>
         </div>
-        <p class="chip-field__empty-hint">No code list loaded yet — every code you type is added as-is.</p>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="cpt-input">CPT Codes</label>
-        <div class="chip-field" data-chip-field data-chip-name="cpt_codes" data-chip-source="CPT_CODES">
-          <div class="chip-field__chips"></div>
-          <div class="chip-field__input-row">
-            <input class="chip-field__input" id="cpt-input" type="text" placeholder="Type a code or description, press Enter to add…">
-            <button type="button" class="chip-field__add">Add</button>
+        <div class="code-repeater__rows" data-code-repeater-rows>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="K02.9" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Dental caries, unspecified" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
           </div>
-          <div class="chip-field__suggestions"></div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="F43.0" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Acute stress reaction related to traumatic dental events" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="F84.0" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Autistic disorder" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="F43.12" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Chronic post-traumatic stress disorder" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="G40.909" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Epilepsy, unspecified, not intractable, without status epilepticus" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="F88" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Global developmental delay" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
+          <div class="code-row" data-code-row>
+            <div class="code-row__field code-row__field--code">
+              <div class="code-search" data-code-search>
+                <input class="input code-row__code-input" type="text" name="dx_code[]" value="F73" placeholder="Search code…" autocomplete="off">
+                <div class="chip-field__suggestions" data-code-suggestions></div>
+              </div>
+            </div>
+            <div class="code-row__field code-row__field--desc">
+              <input class="input code-row__desc-input" type="text" name="dx_desc[]" value="Profound intellectual disabilities" placeholder="Description">
+            </div>
+            <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+          </div>
         </div>
-        <p class="chip-field__empty-hint">No code list loaded yet — every code you type is added as-is.</p>
+        <button type="button" class="btn btn--ghost code-repeater__add" data-code-repeater-add>+ Add diagnosis</button>
       </div>
+      <p class="field__hint" style="margin-top: var(--space-3);">F73 and F88 have no billable decimal subdivision per the CDC/NCHS ICD-10-CM order file — confirm these two before billing.</p>
 
-      <div class="field">
+      <div class="field" style="margin-top: var(--space-5);">
         <label class="field__label" for="dx-notes">Additional diagnosis notes (optional)</label>
         <textarea class="textarea" id="dx-notes" name="dx_notes" placeholder="Any nuance not captured by the codes above"></textarea>
       </div>
@@ -174,6 +260,31 @@
       <div class="field">
         <label class="field__label" for="procedure">Procedure description</label>
         <input class="input" type="text" id="procedure" name="procedure" placeholder="e.g., Full mouth dental rehabilitation">
+      </div>
+
+      <div class="field">
+        <label class="field__label">Procedure Code(s)</label>
+        <p class="field__hint" style="margin-top: 0; margin-bottom: var(--space-3);">CPT codes are AMA copyrighted, so there's no built-in search list here — type the code and description manually.</p>
+        <div class="code-repeater" data-code-repeater data-field-name="proc">
+          <div class="code-repeater__head">
+            <span class="code-repeater__head-label code-repeater__head-label--code">Code</span>
+            <span class="code-repeater__head-label code-repeater__head-label--desc">Description</span>
+          </div>
+          <div class="code-repeater__rows" data-code-repeater-rows>
+            <div class="code-row" data-code-row>
+              <div class="code-row__field code-row__field--code">
+                <div class="code-search" data-code-search>
+                  <input class="input code-row__code-input" type="text" name="proc_code[]" value="" placeholder="Code…" autocomplete="off">
+                </div>
+              </div>
+              <div class="code-row__field code-row__field--desc">
+                <input class="input code-row__desc-input" type="text" name="proc_desc[]" value="" placeholder="Description">
+              </div>
+              <button type="button" class="code-row__remove" data-code-row-remove aria-label="Remove row">&times;</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn--ghost code-repeater__add" data-code-repeater-add>+ Add procedure code</button>
+        </div>
       </div>
     </div>
 
@@ -240,6 +351,11 @@
     <div class="section">
       <h2 class="section__title">Labs</h2>
 
+      <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
+        <input type="checkbox" id="labs-reviewed-emr" name="labs_reviewed_emr" value="Yes"> Labs reviewed on EMR
+      </label>
+
+      <div id="labs-manual-entry">
       <div class="labs-group">
         <span class="labs-group__title">CBC</span>
         <div class="labs-grid">
@@ -271,12 +387,127 @@
           <div class="mini-field"><span class="mini-field__label">Gluc</span><input class="input" type="text" name="lab_gluc"></div>
         </div>
       </div>
+      </div>
 
-      <div class="field">
+      <div class="field" id="hcg-field" hidden>
         <label class="field__label">HcG</label>
         <div class="option-group" data-radio-group="hcg">
           <label class="option"><input type="radio" name="hcg" value="Pos"> Pos</label>
           <label class="option"><input type="radio" name="hcg" value="Neg"> Neg</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Pediatric Medical History ============ -->
+    <div class="section" data-pediatric-only hidden>
+      <h2 class="section__title">Medical History <span class="section__title-tag">Pediatric</span></h2>
+      <div class="field">
+        <label class="field__label" for="ped-illness-desc">Describe any recent illness</label>
+        <textarea class="textarea" id="ped-illness-desc" name="pediatric_illness_description" placeholder="e.g., cold symptoms started 3 days ago…"></textarea>
+      </div>
+      <div class="checklist" data-checklist>
+        <label class="checklist-item" for="ped-hx-0"><input type="checkbox" id="ped-hx-0" name="pediatric_history[]" value="Recent Illness (Cold/Flu)"><span>Recent Illness (Cold/Flu)</span></label>
+        <label class="checklist-item" for="ped-hx-1"><input type="checkbox" id="ped-hx-1" name="pediatric_history[]" value="Frequent colds/cough"><span>Frequent colds/cough</span></label>
+        <label class="checklist-item" for="ped-hx-2"><input type="checkbox" id="ped-hx-2" name="pediatric_history[]" value="Born Prematurely"><span>Born Prematurely</span></label>
+        <label class="checklist-item" for="ped-hx-3"><input type="checkbox" id="ped-hx-3" name="pediatric_history[]" value="Behavioral Issues"><span>Behavioral Issues</span></label>
+        <label class="checklist-item" for="ped-hx-4"><input type="checkbox" id="ped-hx-4" name="pediatric_history[]" value="Developmental Delay"><span>Developmental Delay</span></label>
+        <label class="checklist-item" for="ped-hx-5"><input type="checkbox" id="ped-hx-5" name="pediatric_history[]" value="Heart Condition"><span>Heart Condition</span></label>
+        <label class="checklist-item" for="ped-hx-6"><input type="checkbox" id="ped-hx-6" name="pediatric_history[]" value="Lung Condition"><span>Lung Condition</span></label>
+        <label class="checklist-item" for="ped-hx-7"><input type="checkbox" id="ped-hx-7" name="pediatric_history[]" value="Airway or Breathing Trouble"><span>Airway or Breathing Trouble</span></label>
+        <label class="checklist-item" for="ped-hx-8"><input type="checkbox" id="ped-hx-8" name="pediatric_history[]" value="Congenital/Genetic Syndrome"><span>Congenital/Genetic Syndrome</span></label>
+        <label class="checklist-item" for="ped-hx-9"><input type="checkbox" id="ped-hx-9" name="pediatric_history[]" value="Liver/Kidney/Stomach Issues"><span>Liver/Kidney/Stomach Issues</span></label>
+        <label class="checklist-item" for="ped-hx-10"><input type="checkbox" id="ped-hx-10" name="pediatric_history[]" value="Metabolic/Endocrine Problem"><span>Metabolic/Endocrine Problem</span></label>
+        <label class="checklist-item" for="ped-hx-11"><input type="checkbox" id="ped-hx-11" name="pediatric_history[]" value="Positioning Concerns"><span>Positioning Concerns</span></label>
+      </div>
+      <div class="field" style="margin-top: var(--space-4);">
+        <label class="field__label" for="ped-anes-team-questions">Any questions or concerns for the Anesthesia Team</label>
+        <textarea class="textarea" id="ped-anes-team-questions" name="pediatric_anesthesia_team_questions"></textarea>
+      </div>
+      <div class="field">
+        <label class="field__label" for="ped-poor-anes-history">Any history of poor anesthesia experiences for kiddo</label>
+        <textarea class="textarea" id="ped-poor-anes-history" name="pediatric_poor_anesthesia_history"></textarea>
+      </div>
+    </div>
+
+    <!-- ============ Pediatric Allergy Checklist ============ -->
+    <div class="section" data-pediatric-only hidden>
+      <h2 class="section__title">Is Your Child Allergic or Hypersensitive To? <span class="section__title-tag">Pediatric</span></h2>
+      <div class="ped-allergy-list">
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">Latex</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_latex" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_latex" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">Plasters</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_plasters" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_plasters" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">House dust mites/household dust</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_dust" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_dust" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">Dental anaesthesia</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_dental_anesthesia" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_dental_anesthesia" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">Plants/pollen/trees</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_plants" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_plants" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row">
+          <span class="ped-allergy-row__label">Antiseptic agents/iodine</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_antiseptic" value="Yes"> Yes</label><label class="option"><input type="radio" name="ped_allergy_antiseptic" value="No" checked> No</label></div>
+        </div>
+        <div class="ped-allergy-row" data-reveals-sibling>
+          <span class="ped-allergy-row__label">Medication</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_medication" value="Yes" data-reveal-target="ped-allergy-medication-which"> Yes</label><label class="option"><input type="radio" name="ped_allergy_medication" value="No" data-reveal-target="ped-allergy-medication-which" checked> No</label></div>
+        </div>
+        <div class="field ped-allergy-which" id="ped-allergy-medication-which" hidden>
+          <label class="field__label" for="ped-allergy-medication-which-input">Which medication(s)?</label>
+          <input class="input" type="text" id="ped-allergy-medication-which-input" name="ped_allergy_medication_which">
+        </div>
+        <div class="ped-allergy-row" data-reveals-sibling>
+          <span class="ped-allergy-row__label">Food or other</span>
+          <div class="option-group option-group--sm"><label class="option"><input type="radio" name="ped_allergy_food" value="Yes" data-reveal-target="ped-allergy-food-which"> Yes</label><label class="option"><input type="radio" name="ped_allergy_food" value="No" data-reveal-target="ped-allergy-food-which" checked> No</label></div>
+        </div>
+        <div class="field ped-allergy-which" id="ped-allergy-food-which" hidden>
+          <label class="field__label" for="ped-allergy-food-which-input">Which food or other?</label>
+          <input class="input" type="text" id="ped-allergy-food-which-input" name="ped_allergy_food_which">
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Pediatric Congenital Malformations/Genetic Disorders ============ -->
+    <div class="section" data-pediatric-only hidden>
+      <h2 class="section__title">Congenital Malformations/Genetic Disorders <span class="section__title-tag">Pediatric</span></h2>
+      <p class="section__subtitle">Common conditions relevant to anesthesia planning. Select any that apply and add detail below — this list is a general starting point, not exhaustive.</p>
+      <div class="checklist" data-checklist>
+        <label class="checklist-item" for="ped-cong-0"><input type="checkbox" id="ped-cong-0" name="pediatric_congenital[]" value="Down syndrome (Trisomy 21)"><span>Down syndrome (Trisomy 21)</span></label>
+        <label class="checklist-item" for="ped-cong-1"><input type="checkbox" id="ped-cong-1" name="pediatric_congenital[]" value="Cleft lip/palate"><span>Cleft lip/palate</span></label>
+        <label class="checklist-item" for="ped-cong-2"><input type="checkbox" id="ped-cong-2" name="pediatric_congenital[]" value="Congenital heart disease"><span>Congenital heart disease</span></label>
+        <label class="checklist-item" for="ped-cong-3"><input type="checkbox" id="ped-cong-3" name="pediatric_congenital[]" value="Craniofacial syndrome (e.g., Treacher Collins, Pierre Robin, Goldenhar)"><span>Craniofacial syndrome (e.g., Treacher Collins, Pierre Robin, Goldenhar)</span></label>
+        <label class="checklist-item" for="ped-cong-4"><input type="checkbox" id="ped-cong-4" name="pediatric_congenital[]" value="Spina bifida"><span>Spina bifida</span></label>
+        <label class="checklist-item" for="ped-cong-5"><input type="checkbox" id="ped-cong-5" name="pediatric_congenital[]" value="Skeletal dysplasia"><span>Skeletal dysplasia</span></label>
+        <label class="checklist-item" for="ped-cong-6"><input type="checkbox" id="ped-cong-6" name="pediatric_congenital[]" value="Muscular dystrophy"><span>Muscular dystrophy</span></label>
+        <label class="checklist-item" for="ped-cong-7"><input type="checkbox" id="ped-cong-7" name="pediatric_congenital[]" value="Tracheoesophageal fistula/esophageal atresia"><span>Tracheoesophageal fistula/esophageal atresia</span></label>
+        <label class="checklist-item" for="ped-cong-8"><input type="checkbox" id="ped-cong-8" name="pediatric_congenital[]" value="Congenital diaphragmatic hernia"><span>Congenital diaphragmatic hernia</span></label>
+        <label class="checklist-item" for="ped-cong-9"><input type="checkbox" id="ped-cong-9" name="pediatric_congenital[]" value="Other chromosomal/genetic syndrome"><span>Other chromosomal/genetic syndrome</span></label>
+      </div>
+      <div class="field" style="margin-top: var(--space-4);">
+        <label class="field__label" for="ped-congenital-other">Describe / additional details</label>
+        <textarea class="textarea" id="ped-congenital-other" name="pediatric_congenital_other"></textarea>
+      </div>
+    </div>
+
+    <!-- ============ NPO ============ -->
+    <div class="section">
+      <h2 class="section__title">NPO Status</h2>
+      <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
+        <input type="checkbox" name="npo_standard" value="Solids 8hrs, Clears 2hrs"> NPO: Solids 8hrs, Clears 2 hrs
+      </label>
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="npo-pca">If pregnant, PCA (weeks)</label>
+          <input class="input" type="number" min="0" id="npo-pca" name="npo_pca_weeks" placeholder="—">
         </div>
       </div>
     </div>
@@ -308,6 +539,19 @@
           </div>
         </div>
         <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Mouth Opening Distance / TMD</span>
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="airway_mouth_opening">Mouth Opening Distance (cm)</label>
+              <input class="input" type="text" id="airway_mouth_opening" name="airway_mouth_opening" placeholder="e.g., 4">
+            </div>
+            <div class="field">
+              <label class="field__label" for="airway_tmd">TMD — Thyromental Distance (cm)</label>
+              <input class="input" type="text" id="airway_tmd" name="airway_tmd" placeholder="e.g., 6">
+            </div>
+          </div>
+        </div>
+        <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Teeth</span>
 <div class="checklist" data-checklist>
       <label class="checklist-item" for="airway_teeth_0">
@@ -327,6 +571,21 @@
         <span>Loose/Chipped</span>
       </label>
     </div>
+          <div class="field" style="margin-top: var(--space-3);">
+            <label class="field__label" for="airway_teeth_desc">Teeth — describe any outliers</label>
+            <input class="input" type="text" id="airway_teeth_desc" name="airway_teeth_desc" placeholder="e.g., chipped upper left incisor">
+          </div>
+          <div class="field" style="margin-top: var(--space-3); max-width: 260px;">
+            <label class="field__label">Any loose teeth?</label>
+            <div class="option-group option-group--sm">
+              <label class="option"><input type="radio" name="airway_loose_teeth" value="Yes" data-reveal-target="airway-loose-teeth-detail"> Yes</label>
+              <label class="option"><input type="radio" name="airway_loose_teeth" value="No" data-reveal-target="airway-loose-teeth-detail" checked> No</label>
+            </div>
+          </div>
+          <div class="field" id="airway-loose-teeth-detail" hidden>
+            <label class="field__label" for="airway_loose_teeth_desc">Which tooth/teeth?</label>
+            <input class="input" type="text" id="airway_loose_teeth_desc" name="airway_loose_teeth_desc">
+          </div>
         </div>
         <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Neck ROM</span>
@@ -455,6 +714,102 @@
         <span>CHF</span>
       </label>
     </div>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Cardiac Workup — click a test to add details</span>
+          <div class="cardiac-tests" data-cardiac-tests>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">EKG</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_ekg_date">Date</label><input class="input" type="date" id="cardiac_ekg_date" name="cardiac_ekg_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_ekg_findings">Findings</label><input class="input" type="text" id="cardiac_ekg_findings" name="cardiac_ekg_findings"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Stress Test</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_stress_date">Date</label><input class="input" type="date" id="cardiac_stress_date" name="cardiac_stress_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_stress_findings">Findings</label><input class="input" type="text" id="cardiac_stress_findings" name="cardiac_stress_findings"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Echo</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_echo_date">Date</label><input class="input" type="date" id="cardiac_echo_date" name="cardiac_echo_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_echo_findings">Findings (EF, etc.)</label><input class="input" type="text" id="cardiac_echo_findings" name="cardiac_echo_findings"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Cardiac Cath</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_cath_date">Date</label><input class="input" type="date" id="cardiac_cath_date" name="cardiac_cath_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_cath_findings">Findings</label><input class="input" type="text" id="cardiac_cath_findings" name="cardiac_cath_findings"></div>
+                </div>
+                <div class="field">
+                  <label class="field__label">Stent placed?</label>
+                  <div class="option-group option-group--sm">
+                    <label class="option"><input type="radio" name="cardiac_cath_stent" value="Yes" data-reveal-target="cardiac-cath-stent-where"> Yes</label>
+                    <label class="option"><input type="radio" name="cardiac_cath_stent" value="No" data-reveal-target="cardiac-cath-stent-where" checked> No</label>
+                  </div>
+                </div>
+                <div class="field" id="cardiac-cath-stent-where" hidden>
+                  <label class="field__label" for="cardiac_cath_stent_where">Where?</label>
+                  <input class="input" type="text" id="cardiac_cath_stent_where" name="cardiac_cath_stent_where">
+                </div>
+              </div>
+            </div>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Pacemaker/Defibrillator Check</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_pacer_date">Date of last check</label><input class="input" type="date" id="cardiac_pacer_date" name="cardiac_pacer_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_pacer_type">Device type</label><input class="input" type="text" id="cardiac_pacer_type" name="cardiac_pacer_type" placeholder="Pacemaker, AICD, or both"></div>
+                </div>
+                <div class="field"><label class="field__label" for="cardiac_pacer_findings">Findings/Notes</label><input class="input" type="text" id="cardiac_pacer_findings" name="cardiac_pacer_findings"></div>
+              </div>
+            </div>
+
+            <div class="cardiac-test" data-cardiac-test>
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Chest X-Ray</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="cardiac_cxr_date">Date</label><input class="input" type="date" id="cardiac_cxr_date" name="cardiac_cxr_date"></div>
+                  <div class="field"><label class="field__label" for="cardiac_cxr_findings">Findings</label><input class="input" type="text" id="cardiac_cxr_findings" name="cardiac_cxr_findings"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 
@@ -508,6 +863,10 @@
         <span>CXR</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="pulmonary_notes">Additional notes</label>
+          <textarea class="textarea" id="pulmonary_notes" name="pulmonary_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -553,6 +912,10 @@
         <span>GERD</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="hepatic_gi_notes">Additional notes</label>
+          <textarea class="textarea" id="hepatic_gi_notes" name="hepatic_gi_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -594,6 +957,10 @@
         <span>MS / MG / ALS</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="neuro_notes">Additional notes</label>
+          <textarea class="textarea" id="neuro_notes" name="neuro_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -627,6 +994,10 @@
         <span>Peritoneal dialysis</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="renal_gu_notes">Additional notes</label>
+          <textarea class="textarea" id="renal_gu_notes" name="renal_gu_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -655,6 +1026,10 @@
         <div class="field" style="margin-top: var(--space-3); max-width: 220px;">
           <label class="field__label" for="endocrine_glucose">Glucose (if DM)</label>
           <input class="input" type="text" id="endocrine_glucose" name="endocrine_glucose" placeholder="e.g., 110 mg/dL">
+        </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="endocrine_notes">Additional notes</label>
+          <textarea class="textarea" id="endocrine_notes" name="endocrine_notes"></textarea>
         </div>
       </div>
     </div>
@@ -693,6 +1068,10 @@
           <label class="field__label" for="heme_cancer">Cancer (type, if applicable)</label>
           <input class="input" type="text" id="heme_cancer" name="heme_cancer" placeholder="e.g., ALL, in remission">
         </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="heme_onc_notes">Additional notes</label>
+          <textarea class="textarea" id="heme_onc_notes" name="heme_onc_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -730,6 +1109,10 @@
         <span>Fibromyalgia</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="musculoskeletal_notes">Additional notes</label>
+          <textarea class="textarea" id="musculoskeletal_notes" name="musculoskeletal_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -775,23 +1158,13 @@
         <span>PTSD</span>
       </label>
     </div>
-      </div>
-    </div>
-
-    </div>
-
-    <!-- ============ NPO ============ -->
-    <div class="section">
-      <h2 class="section__title">NPO Status</h2>
-      <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
-        <input type="checkbox" name="npo_standard" value="Solids 8hrs, Clears 2hrs"> NPO: Solids 8hrs, Clears 2 hrs
-      </label>
-      <div class="field-row">
-        <div class="field">
-          <label class="field__label" for="npo-pca">If pregnant, PCA (weeks)</label>
-          <input class="input" type="number" min="0" id="npo-pca" name="npo_pca_weeks" placeholder="—">
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="psychosocial_notes">Additional notes</label>
+          <textarea class="textarea" id="psychosocial_notes" name="psychosocial_notes"></textarea>
         </div>
       </div>
+    </div>
+
     </div>
 
     <!-- ============ Anesthetic Plan ============ -->
@@ -850,6 +1223,7 @@
   Maps Healthcare Logistics, LLC — Anesthesia Pre-Op Assessment. Licensed under Creative Commons Attribution-NoDerivatives 4.0 International. Local-only tool: no data is transmitted from this page.
 </footer>
 
+<script src="js/icd10-data.js"></script>
 <script src="js/app.js"></script>
 <script src="js/preop.js"></script>
 </body>
