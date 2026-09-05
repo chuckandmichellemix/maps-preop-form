@@ -264,8 +264,8 @@
 
       <div class="field">
         <label class="field__label">Procedure Code(s)</label>
-        <p class="field__hint" style="margin-top: 0; margin-bottom: var(--space-3);">CPT codes are AMA copyrighted, so there's no built-in search list here — type the code and description manually.</p>
-        <div class="code-repeater" data-code-repeater data-field-name="proc">
+        <p class="field__hint" style="margin-top: 0; margin-bottom: var(--space-3);">Search by procedure name or code from the practice's curated list below, or type any code/description manually. CPT codes are AMA copyrighted, so this is not the full CPT set — just the practice's own short list. 01000 is an internal, non-billable placeholder used only for cash-pay dental implant cases.</p>
+        <div class="code-repeater" data-code-repeater data-code-source="CPT_CODES" data-field-name="proc">
           <div class="code-repeater__head">
             <span class="code-repeater__head-label code-repeater__head-label--code">Code</span>
             <span class="code-repeater__head-label code-repeater__head-label--desc">Description</span>
@@ -274,7 +274,8 @@
             <div class="code-row" data-code-row>
               <div class="code-row__field code-row__field--code">
                 <div class="code-search" data-code-search>
-                  <input class="input code-row__code-input" type="text" name="proc_code[]" value="" placeholder="Code…" autocomplete="off">
+                  <input class="input code-row__code-input" type="text" name="proc_code[]" value="" placeholder="Search code or procedure…" autocomplete="off">
+                  <div class="chip-field__suggestions" data-code-suggestions></div>
                 </div>
               </div>
               <div class="code-row__field code-row__field--desc">
@@ -846,7 +847,33 @@
         <input type="checkbox" id="pulmonary_8" name="pulmonary[]" value="CXR" data-test-link="cxr">
         <span>CXR</span>
       </label>
+      <label class="checklist-item" for="pulmonary_smoke_exposure_home" data-pediatric-only hidden>
+        <input type="checkbox" id="pulmonary_smoke_exposure_home" name="pulmonary[]" value="Smoking exposure within the home">
+        <span>Smoking exposure within the home?</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_smoking_vaping_history" data-adult-only hidden>
+        <input type="checkbox" id="pulmonary_smoking_vaping_history" name="pulmonary[]" value="Smoking/Vaping History" data-reveals="pulmonary_pack_years">
+        <span>Smoking/Vaping History</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_thc_illicit_drug_use" data-adult-only hidden>
+        <input type="checkbox" id="pulmonary_thc_illicit_drug_use" name="pulmonary[]" value="THC/Illicit Drug Use">
+        <span>THC/Illicit Drug Use</span>
+      </label>
     </div>
+        <div class="field subfield" id="pulmonary_pack_years" hidden>
+          <label class="field__label" for="pulmonary_pack_years-select">Pack-Years</label>
+          <select class="input" id="pulmonary_pack_years-select" name="pulmonary_pack_years">
+            <option value="">Select…</option>
+            <option>Less than 5 pack-years</option>
+            <option>5–10 pack-years</option>
+            <option>10–20 pack-years</option>
+            <option>20–30 pack-years</option>
+            <option>30–40 pack-years</option>
+            <option>40+ pack-years</option>
+            <option>Vaping only / not applicable</option>
+            <option>Unknown</option>
+          </select>
+        </div>
         <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Chest X-Ray — click to add details</span>
           <div class="cardiac-tests" data-cardiac-tests>
@@ -1225,6 +1252,7 @@
 </footer>
 
 <script src="js/icd10-data.js"></script>
+<script src="js/cpt-data.js"></script>
 <script src="js/app.js"></script>
 <script src="js/preop.js"></script>
 </body>

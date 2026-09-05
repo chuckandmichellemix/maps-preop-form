@@ -398,6 +398,11 @@ input, textarea, select { font: inherit; color: inherit; }
   background: var(--color-primary-highlight);
 }
 .checklist-item input { margin-top: 3px; accent-color: var(--color-primary); flex-shrink: 0; }
+/* .checklist-item's own display:flex has equal specificity to the [hidden]
+   UA default, so age-scoped items (data-pediatric-only/data-adult-only)
+   need an explicit override to actually disappear when hidden is set. */
+.checklist-item[data-pediatric-only][hidden],
+.checklist-item[data-adult-only][hidden] { display: none; }
 .checklist-item--none { grid-column: 1 / -1; font-weight: 600; border-style: dashed; }
 
 .subfield {

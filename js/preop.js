@@ -238,10 +238,12 @@ window.MapsChipField = function (root, sourceList) {
 };
 
 /* Initialize chip fields present on the page.
-   ICD10_CODES / CPT_CODES start empty — populate once the practice
-   sends the final Kansas dental-disability-anesthesia code list.
-   Clinicians can still type any code/description now; it's just not
-   suggested from a list yet. */
+   ICD10_CODES loads from js/icd10-data.js (CMS/CDC order file).
+   CPT_CODES loads from js/cpt-data.js (practice's own curated short
+   list — CPT codes/descriptors are AMA copyrighted, so this isn't the
+   full CPT set). Both fall back to an empty array so the page still
+   works if a data file is missing; clinicians can always type any
+   code/description manually even without a matching list entry. */
 window.ICD10_CODES = window.ICD10_CODES || [];
 window.CPT_CODES = window.CPT_CODES || [];
 
@@ -315,15 +317,32 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
     document.dispatchEvent(new CustomEvent('maps:age-group-change', { detail: { age: years, group: group } }));
   }
 
-  function togglePediatricOnly(group) {
-    const isPediatric = group === 'pediatric';
-    document.querySelectorAll('[data-pediatric-only]').forEach((el) => {
-      const show = group === null ? false : isPediatric;
+  /* [data-adult-only] mirrors [data-pediatric-only] for the >=12 group.
+     Also force-unchecks any checkbox left checked inside an element that's
+     about to be hidden (age changed after a box was ticked), dispatching a
+     bubbling 'change' so dependent [data-reveals] sub-fields collapse too. */
+  function toggleAgeScope(selector, show) {
+    document.querySelectorAll(selector).forEach((el) => {
       el.hidden = !show;
       el.querySelectorAll('input, textarea, select').forEach((f) => {
         if (f.dataset.conditionalRequired === 'true') f.required = show;
       });
+      if (!show) {
+        el.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+          if (cb.checked) {
+            cb.checked = false;
+            cb.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      }
     });
+  }
+
+  function togglePediatricOnly(group) {
+    const isPediatric = group === 'pediatric';
+    const isAdult = group === 'adult';
+    toggleAgeScope('[data-pediatric-only]', group === null ? false : isPediatric);
+    toggleAgeScope('[data-adult-only]', group === null ? false : isAdult);
   }
 
   dob.addEventListener('change', apply);
