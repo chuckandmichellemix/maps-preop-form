@@ -724,48 +724,52 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   });
 })();
 
-/* ---------- Pulmonary: Breath Sounds -> laterality/lung-field popup ---------- */
+/* ---------- Pulmonary: Breath Sounds -> per-finding laterality/lung-field popup ---------- */
+/* Each lateralized finding (Wheezing, Rhonchi, Crackles, Diminished, Stridor) gets its own
+   popup and its own summary line, so different findings can carry different lateralities
+   at the same time (e.g. bilateral Diminished + left-lower-lobe Crackles). */
 (function () {
   const triggers = document.querySelectorAll('[data-breath-lateralized]');
-  const modal = document.getElementById('breath-location-modal');
-  const summaryRow = document.querySelector('[data-breath-location-summary-row]');
-  const summaryText = document.querySelector('[data-breath-location-summary]');
-  const editBtn = document.querySelector('[data-breath-location-edit]');
-  if (!triggers.length || !modal) return;
-  const locationInputs = modal.querySelectorAll('[data-breath-location-input]');
+  if (!triggers.length) return;
 
-  function anyTriggerChecked() {
-    return Array.from(triggers).some((t) => t.checked);
-  }
+  triggers.forEach((trigger) => {
+    const slug = trigger.getAttribute('data-breath-lateralized');
+    const label = trigger.value;
+    const modal = document.getElementById('breath-location-modal-' + slug);
+    const summaryRow = document.querySelector('[data-breath-summary-row="' + slug + '"]');
+    const summaryText = document.querySelector('[data-breath-summary="' + slug + '"]');
+    const editBtn = document.querySelector('[data-breath-summary-edit="' + slug + '"]');
+    if (!modal) return;
+    const locationInputs = modal.querySelectorAll('[data-breath-location-input="' + slug + '"]');
 
-  function updateSummary() {
-    const selected = Array.from(locationInputs).filter((i) => i.checked).map((i) => i.value);
-    if (selected.length) {
-      summaryText.textContent = 'Location: ' + selected.join(', ');
-      summaryRow.hidden = false;
-    } else {
-      summaryRow.hidden = true;
+    function updateSummary() {
+      const selected = Array.from(locationInputs).filter((i) => i.checked).map((i) => i.value);
+      if (selected.length) {
+        summaryText.textContent = label + ': ' + selected.join(', ');
+        summaryRow.hidden = false;
+      } else {
+        summaryRow.hidden = true;
+      }
     }
-  }
 
-  triggers.forEach((t) => {
-    t.addEventListener('change', () => {
-      if (t.checked) {
+    trigger.addEventListener('change', () => {
+      if (trigger.checked) {
         modal.hidden = false;
-      } else if (!anyTriggerChecked()) {
+      } else {
         locationInputs.forEach((i) => { i.checked = false; });
+        modal.hidden = true;
         updateSummary();
       }
     });
+
+    locationInputs.forEach((i) => i.addEventListener('change', updateSummary));
+
+    if (editBtn) {
+      editBtn.addEventListener('click', () => { modal.hidden = false; });
+    }
+
+    updateSummary();
   });
-
-  locationInputs.forEach((i) => i.addEventListener('change', updateSummary));
-
-  if (editBtn) {
-    editBtn.addEventListener('click', () => { modal.hidden = false; });
-  }
-
-  updateSummary();
 })();
 
 /* ---------- Endocrine: DM -> Type I/II popup -> (Type II only) Insulin Dependent popup ---------- */
@@ -1037,3 +1041,64 @@ initConditionAnticoagModal({
     return parts.length ? parts.join('; ') : null;
   },
 });
+
+initConditionAnticoagModal({
+  triggerId: 'heme_onc_2',
+  modalId: 'bleeding-disorder-details-modal',
+  onAnticoagId: 'bleeding-on-anticoag',
+  anticoagListId: 'bleeding-anticoag-list',
+  summaryRowSelector: '[data-bleeding-summary-row]',
+  summaryTextSelector: '[data-bleeding-summary]',
+  editSelector: '[data-bleeding-edit]',
+  extraFieldIds: ['heme_bleeding_description'],
+  buildExtraSummary: function () {
+    const desc = document.getElementById('heme_bleeding_description');
+    return desc && desc.value.trim() ? desc.value.trim() : null;
+  },
+});
+
+/* ---------- Endocrine: Thyroid disease -> Hyperthyroidism/Hypothyroidism popup ---------- */
+(function () {
+  const thyroidCheckbox = document.getElementById('endocrine_1');
+  const modal = document.getElementById('thyroid-type-modal');
+  if (!thyroidCheckbox || !modal) return;
+  const typeInputs = modal.querySelectorAll('[data-thyroid-type-input]');
+  const summaryRow = document.querySelector('[data-thyroid-summary-row]');
+  const summaryText = document.querySelector('[data-thyroid-summary]');
+  const editBtn = document.querySelector('[data-thyroid-edit]');
+
+  function currentType() {
+    const checked = Array.from(typeInputs).find((i) => i.checked);
+    return checked ? checked.value : null;
+  }
+
+  function updateSummary() {
+    const type = currentType();
+    if (!type) { summaryRow.hidden = true; return; }
+    summaryText.textContent = 'Type: ' + type;
+    summaryRow.hidden = false;
+  }
+
+  thyroidCheckbox.addEventListener('change', () => {
+    if (thyroidCheckbox.checked) {
+      modal.hidden = false;
+    } else {
+      typeInputs.forEach((i) => { i.checked = false; });
+      modal.hidden = true;
+    }
+    updateSummary();
+  });
+
+  typeInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      modal.hidden = true;
+      updateSummary();
+    });
+  });
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => { modal.hidden = false; });
+  }
+
+  updateSummary();
+})();

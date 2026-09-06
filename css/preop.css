@@ -403,6 +403,8 @@
   color: var(--color-text-muted);
 }
 .assessment-summary[hidden] { display: none; }
+.breath-location-summaries { display: flex; flex-direction: column; }
+.breath-location-summaries .assessment-summary { margin-top: var(--space-1); }
 .assessment-summary__edit {
   font-size: var(--text-xs);
   font-weight: 600;

@@ -946,48 +946,170 @@
               <span>Equal</span>
             </label>
             <label class="checklist-item" for="pulmonary_breath_2">
-              <input type="checkbox" id="pulmonary_breath_2" name="pulmonary_breath_sounds[]" value="Wheezing" data-breath-lateralized>
+              <input type="checkbox" id="pulmonary_breath_2" name="pulmonary_breath_sounds[]" value="Wheezing" data-breath-lateralized="wheezing">
               <span>Wheezing</span>
             </label>
             <label class="checklist-item" for="pulmonary_breath_3">
-              <input type="checkbox" id="pulmonary_breath_3" name="pulmonary_breath_sounds[]" value="Rhonchi" data-breath-lateralized>
+              <input type="checkbox" id="pulmonary_breath_3" name="pulmonary_breath_sounds[]" value="Rhonchi" data-breath-lateralized="rhonchi">
               <span>Rhonchi</span>
             </label>
             <label class="checklist-item" for="pulmonary_breath_4">
-              <input type="checkbox" id="pulmonary_breath_4" name="pulmonary_breath_sounds[]" value="Crackles" data-breath-lateralized>
+              <input type="checkbox" id="pulmonary_breath_4" name="pulmonary_breath_sounds[]" value="Crackles" data-breath-lateralized="crackles">
               <span>Crackles</span>
             </label>
             <label class="checklist-item" for="pulmonary_breath_5">
-              <input type="checkbox" id="pulmonary_breath_5" name="pulmonary_breath_sounds[]" value="Diminished" data-breath-lateralized>
+              <input type="checkbox" id="pulmonary_breath_5" name="pulmonary_breath_sounds[]" value="Diminished" data-breath-lateralized="diminished">
               <span>Diminished</span>
             </label>
             <label class="checklist-item" for="pulmonary_breath_6">
-              <input type="checkbox" id="pulmonary_breath_6" name="pulmonary_breath_sounds[]" value="Stridor" data-breath-lateralized>
+              <input type="checkbox" id="pulmonary_breath_6" name="pulmonary_breath_sounds[]" value="Stridor" data-breath-lateralized="stridor">
               <span>Stridor</span>
             </label>
           </div>
-          <div class="assessment-summary" data-breath-location-summary-row hidden>
-            <span data-breath-location-summary></span>
-            <button type="button" class="assessment-summary__edit" data-breath-location-edit>Edit location</button>
+          <div class="breath-location-summaries" data-breath-summaries>
+            <div class="assessment-summary" data-breath-summary-row="wheezing" hidden>
+              <span data-breath-summary="wheezing">Wheezing: </span>
+              <button type="button" class="assessment-summary__edit" data-breath-summary-edit="wheezing">Edit</button>
+            </div>
+            <div class="assessment-summary" data-breath-summary-row="rhonchi" hidden>
+              <span data-breath-summary="rhonchi">Rhonchi: </span>
+              <button type="button" class="assessment-summary__edit" data-breath-summary-edit="rhonchi">Edit</button>
+            </div>
+            <div class="assessment-summary" data-breath-summary-row="crackles" hidden>
+              <span data-breath-summary="crackles">Crackles: </span>
+              <button type="button" class="assessment-summary__edit" data-breath-summary-edit="crackles">Edit</button>
+            </div>
+            <div class="assessment-summary" data-breath-summary-row="diminished" hidden>
+              <span data-breath-summary="diminished">Diminished: </span>
+              <button type="button" class="assessment-summary__edit" data-breath-summary-edit="diminished">Edit</button>
+            </div>
+            <div class="assessment-summary" data-breath-summary-row="stridor" hidden>
+              <span data-breath-summary="stridor">Stridor: </span>
+              <button type="button" class="assessment-summary__edit" data-breath-summary-edit="stridor">Edit</button>
+            </div>
           </div>
-          <div class="modal-overlay" id="breath-location-modal" hidden>
-            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-title">
-              <h3 class="modal__title" id="breath-location-modal-title">Breath Sound Location</h3>
+          <div class="modal-overlay" id="breath-location-modal-wheezing" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-wheezing-title">
+              <h3 class="modal__title" id="breath-location-modal-wheezing-title">Wheezing — Location</h3>
               <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
               <div class="modal__body">
                 <div>
                   <label class="field__label">Side</label>
                   <div class="option-group">
-                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Left" data-breath-location-input> Left</label>
-                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Right" data-breath-location-input> Right</label>
-                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Bilateral" data-breath-location-input> Bilateral</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_wheezing[]" value="Left" data-breath-location-input="wheezing"> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_wheezing[]" value="Right" data-breath-location-input="wheezing"> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_wheezing[]" value="Bilateral" data-breath-location-input="wheezing"> Bilateral</label>
                   </div>
                 </div>
                 <div>
                   <label class="field__label">Lung Field</label>
                   <div class="option-group">
-                    <label class="option"><input type="checkbox" name="pulmonary_breath_field[]" value="Upper" data-breath-location-input> Upper</label>
-                    <label class="option"><input type="checkbox" name="pulmonary_breath_field[]" value="Lower" data-breath-location-input> Lower</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_wheezing[]" value="Upper" data-breath-location-input="wheezing"> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_wheezing[]" value="Lower" data-breath-location-input="wheezing"> Lower</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer">
+                <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-overlay" id="breath-location-modal-rhonchi" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-rhonchi-title">
+              <h3 class="modal__title" id="breath-location-modal-rhonchi-title">Rhonchi — Location</h3>
+              <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
+              <div class="modal__body">
+                <div>
+                  <label class="field__label">Side</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_rhonchi[]" value="Left" data-breath-location-input="rhonchi"> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_rhonchi[]" value="Right" data-breath-location-input="rhonchi"> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_rhonchi[]" value="Bilateral" data-breath-location-input="rhonchi"> Bilateral</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="field__label">Lung Field</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_rhonchi[]" value="Upper" data-breath-location-input="rhonchi"> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_rhonchi[]" value="Lower" data-breath-location-input="rhonchi"> Lower</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer">
+                <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-overlay" id="breath-location-modal-crackles" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-crackles-title">
+              <h3 class="modal__title" id="breath-location-modal-crackles-title">Crackles — Location</h3>
+              <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
+              <div class="modal__body">
+                <div>
+                  <label class="field__label">Side</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_crackles[]" value="Left" data-breath-location-input="crackles"> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_crackles[]" value="Right" data-breath-location-input="crackles"> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_crackles[]" value="Bilateral" data-breath-location-input="crackles"> Bilateral</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="field__label">Lung Field</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_crackles[]" value="Upper" data-breath-location-input="crackles"> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_crackles[]" value="Lower" data-breath-location-input="crackles"> Lower</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer">
+                <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-overlay" id="breath-location-modal-diminished" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-diminished-title">
+              <h3 class="modal__title" id="breath-location-modal-diminished-title">Diminished — Location</h3>
+              <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
+              <div class="modal__body">
+                <div>
+                  <label class="field__label">Side</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_diminished[]" value="Left" data-breath-location-input="diminished"> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_diminished[]" value="Right" data-breath-location-input="diminished"> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_diminished[]" value="Bilateral" data-breath-location-input="diminished"> Bilateral</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="field__label">Lung Field</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_diminished[]" value="Upper" data-breath-location-input="diminished"> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_diminished[]" value="Lower" data-breath-location-input="diminished"> Lower</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer">
+                <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-overlay" id="breath-location-modal-stridor" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-stridor-title">
+              <h3 class="modal__title" id="breath-location-modal-stridor-title">Stridor — Location</h3>
+              <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
+              <div class="modal__body">
+                <div>
+                  <label class="field__label">Side</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_stridor[]" value="Left" data-breath-location-input="stridor"> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_stridor[]" value="Right" data-breath-location-input="stridor"> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side_stridor[]" value="Bilateral" data-breath-location-input="stridor"> Bilateral</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="field__label">Lung Field</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_stridor[]" value="Upper" data-breath-location-input="stridor"> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field_stridor[]" value="Lower" data-breath-location-input="stridor"> Lower</label>
                   </div>
                 </div>
               </div>
@@ -1354,6 +1476,21 @@
         <span>Adrenal Gland Dysfunction</span>
       </label>
     </div>
+        <div class="assessment-summary" data-thyroid-summary-row hidden>
+          <span data-thyroid-summary></span>
+          <button type="button" class="assessment-summary__edit" data-thyroid-edit>Edit</button>
+        </div>
+        <div class="modal-overlay" id="thyroid-type-modal" hidden>
+          <div class="modal" role="dialog" aria-labelledby="thyroid-type-modal-title">
+            <h3 class="modal__title" id="thyroid-type-modal-title">Thyroid Disease</h3>
+            <div class="modal__body">
+              <div class="option-group">
+                <label class="option"><input type="radio" name="endocrine_thyroid_type" value="Hyperthyroidism" data-thyroid-type-input> Hyperthyroidism</label>
+                <label class="option"><input type="radio" name="endocrine_thyroid_type" value="Hypothyroidism" data-thyroid-type-input> Hypothyroidism</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="assessment-summary" data-adrenal-summary-row hidden>
           <span data-adrenal-summary></span>
           <button type="button" class="assessment-summary__edit" data-adrenal-edit>Edit</button>
@@ -1444,6 +1581,178 @@
         <span>Cancer</span>
       </label>
     </div>
+      <div class="assessment-summary" data-bleeding-summary-row hidden>
+        <span data-bleeding-summary></span>
+        <button type="button" class="assessment-summary__edit" data-bleeding-edit>Edit</button>
+      </div>
+      <div class="modal-overlay" id="bleeding-disorder-details-modal" hidden>
+        <div class="modal modal--wide" role="dialog" aria-labelledby="bleeding-disorder-details-modal-title">
+          <h3 class="modal__title" id="bleeding-disorder-details-modal-title">Bleeding Disorder Details</h3>
+          <div class="modal__body">
+            <div class="field">
+              <label class="field__label" for="heme_bleeding_description">Type / description</label>
+              <textarea class="textarea" id="heme_bleeding_description" name="heme_bleeding_description" placeholder="e.g., Von Willebrand disease, Type 1"></textarea>
+            </div>
+            <label class="option"><input type="checkbox" id="bleeding-on-anticoag" name="heme_bleeding_on_anticoagulants" value="Yes"> On Anticoagulants/Antiplatelets</label>
+          <div class="drug-checklist" id="bleeding-anticoag-list" data-anticoag-list="bleeding" hidden>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Anticoagulants</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-warfarin">
+                <input type="checkbox" id="bleeding-drug-warfarin" name="bleeding_drug[]" value="Warfarin (Coumadin)" data-drug-input="bleeding">
+                <span>Warfarin (Coumadin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-warfarin">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-warfarin" name="bleeding_drug_date_warfarin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-heparin">
+                <input type="checkbox" id="bleeding-drug-heparin" name="bleeding_drug[]" value="Heparin (unfractionated)" data-drug-input="bleeding">
+                <span>Heparin (unfractionated)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-heparin">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-heparin" name="bleeding_drug_date_heparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-enoxaparin">
+                <input type="checkbox" id="bleeding-drug-enoxaparin" name="bleeding_drug[]" value="Enoxaparin (Lovenox)" data-drug-input="bleeding">
+                <span>Enoxaparin (Lovenox)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-enoxaparin">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-enoxaparin" name="bleeding_drug_date_enoxaparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-dalteparin">
+                <input type="checkbox" id="bleeding-drug-dalteparin" name="bleeding_drug[]" value="Dalteparin (Fragmin)" data-drug-input="bleeding">
+                <span>Dalteparin (Fragmin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-dalteparin">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-dalteparin" name="bleeding_drug_date_dalteparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-fondaparinux">
+                <input type="checkbox" id="bleeding-drug-fondaparinux" name="bleeding_drug[]" value="Fondaparinux (Arixtra)" data-drug-input="bleeding">
+                <span>Fondaparinux (Arixtra)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-fondaparinux">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-fondaparinux" name="bleeding_drug_date_fondaparinux" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-apixaban">
+                <input type="checkbox" id="bleeding-drug-apixaban" name="bleeding_drug[]" value="Apixaban (Eliquis)" data-drug-input="bleeding">
+                <span>Apixaban (Eliquis)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-apixaban">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-apixaban" name="bleeding_drug_date_apixaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-rivaroxaban">
+                <input type="checkbox" id="bleeding-drug-rivaroxaban" name="bleeding_drug[]" value="Rivaroxaban (Xarelto)" data-drug-input="bleeding">
+                <span>Rivaroxaban (Xarelto)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-rivaroxaban">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-rivaroxaban" name="bleeding_drug_date_rivaroxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-edoxaban">
+                <input type="checkbox" id="bleeding-drug-edoxaban" name="bleeding_drug[]" value="Edoxaban (Savaysa)" data-drug-input="bleeding">
+                <span>Edoxaban (Savaysa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-edoxaban">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-edoxaban" name="bleeding_drug_date_edoxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-dabigatran">
+                <input type="checkbox" id="bleeding-drug-dabigatran" name="bleeding_drug[]" value="Dabigatran (Pradaxa)" data-drug-input="bleeding">
+                <span>Dabigatran (Pradaxa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-dabigatran">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-dabigatran" name="bleeding_drug_date_dabigatran" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Antiplatelets</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-aspirin">
+                <input type="checkbox" id="bleeding-drug-aspirin" name="bleeding_drug[]" value="Aspirin" data-drug-input="bleeding">
+                <span>Aspirin</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-aspirin">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-aspirin" name="bleeding_drug_date_aspirin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-clopidogrel">
+                <input type="checkbox" id="bleeding-drug-clopidogrel" name="bleeding_drug[]" value="Clopidogrel (Plavix)" data-drug-input="bleeding">
+                <span>Clopidogrel (Plavix)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-clopidogrel">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-clopidogrel" name="bleeding_drug_date_clopidogrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-ticagrelor">
+                <input type="checkbox" id="bleeding-drug-ticagrelor" name="bleeding_drug[]" value="Ticagrelor (Brilinta)" data-drug-input="bleeding">
+                <span>Ticagrelor (Brilinta)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-ticagrelor">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-ticagrelor" name="bleeding_drug_date_ticagrelor" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-prasugrel">
+                <input type="checkbox" id="bleeding-drug-prasugrel" name="bleeding_drug[]" value="Prasugrel (Effient)" data-drug-input="bleeding">
+                <span>Prasugrel (Effient)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-prasugrel">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-prasugrel" name="bleeding_drug_date_prasugrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="bleeding-drug-dipyridamole">
+                <input type="checkbox" id="bleeding-drug-dipyridamole" name="bleeding_drug[]" value="Dipyridamole (Persantine)" data-drug-input="bleeding">
+                <span>Dipyridamole (Persantine)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="bleeding-drug-date-dipyridamole">Last taken</label>
+                <input class="input" type="date" id="bleeding-drug-date-dipyridamole" name="bleeding_drug_date_dipyridamole" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+
+          </div>
+          <div class="modal__footer">
+            <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+          </div>
+        </div>
+      </div>
         <div class="field" id="heme-cancer-description-field" style="margin-top: var(--space-3);" hidden>
           <label class="field__label" for="heme_cancer">Description / type</label>
           <textarea class="textarea" id="heme_cancer" name="heme_cancer" placeholder="e.g., ALL, in remission"></textarea>
