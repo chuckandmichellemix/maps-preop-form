@@ -246,6 +246,36 @@
 .code-row__remove:hover { background: var(--color-surface-offset); color: var(--color-error); }
 .code-repeater__add { align-self: flex-start; margin-top: var(--space-1); }
 
+/* ---------- Imaging repeater ---------- */
+.imaging-repeater { display: flex; flex-direction: column; gap: var(--space-2); }
+.imaging-repeater__rows { display: flex; flex-direction: column; gap: var(--space-2); }
+.imaging-row {
+  display: grid;
+  grid-template-columns: 100px minmax(140px, 1fr) 165px 2fr 32px;
+  gap: var(--space-3);
+  align-items: end;
+}
+.imaging-row__field .field__label { display: block; margin-bottom: var(--space-1); }
+@media (max-width: 720px) {
+  .imaging-row { grid-template-columns: 1fr 1fr; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--color-divider); border-radius: var(--radius-md); }
+  .imaging-row__field--notes { grid-column: 1 / -1; }
+  .imaging-row__remove { grid-column: 1 / -1; justify-self: end; }
+}
+.imaging-row__remove {
+  display: grid;
+  place-items: center;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-faint);
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+.imaging-row__remove:hover { background: var(--color-surface-offset); color: var(--color-error); }
+.imaging-repeater__add { align-self: flex-start; margin-top: var(--space-1); }
+@media print {
+  .imaging-repeater__add, .imaging-row__remove { display: none !important; }
+}
+
 /* ---------- Pediatric allergy checklist ---------- */
 .ped-allergy-list { display: flex; flex-direction: column; gap: var(--space-3); }
 .ped-allergy-row {

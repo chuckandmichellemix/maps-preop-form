@@ -411,6 +411,43 @@
       </div>
     </div>
 
+    <!-- ============ Imaging ============ -->
+    <div class="section">
+      <h2 class="section__title">Imaging</h2>
+      <p class="section__subtitle">Standing place to document any CXR, CT, MRI, or X-ray relevant to this assessment — not just imaging tied to a specific checklist trigger. Add as many rows as needed.</p>
+      <div class="imaging-repeater" data-imaging-repeater>
+        <div class="imaging-repeater__rows" data-imaging-repeater-rows>
+          <div class="imaging-row" data-imaging-row>
+            <div class="imaging-row__field">
+              <label class="field__label">Type</label>
+              <select class="input" name="imaging_type[]">
+                <option value="">Select…</option>
+                <option value="CXR">CXR</option>
+                <option value="CT">CT</option>
+                <option value="MRI">MRI</option>
+                <option value="X-ray">X-ray</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="imaging-row__field">
+              <label class="field__label">Area</label>
+              <input class="input" type="text" name="imaging_area[]" placeholder="e.g., Head/Neck, Chest, C-spine">
+            </div>
+            <div class="imaging-row__field">
+              <label class="field__label">Date</label>
+              <input class="input" type="date" name="imaging_date[]">
+            </div>
+            <div class="imaging-row__field imaging-row__field--notes">
+              <label class="field__label">Findings / Notes</label>
+              <input class="input" type="text" name="imaging_notes[]">
+            </div>
+            <button type="button" class="imaging-row__remove" data-imaging-row-remove aria-label="Remove row">&times;</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn--ghost imaging-repeater__add" data-imaging-repeater-add>+ Add imaging</button>
+      </div>
+    </div>
+
     <!-- ============ Pediatric Medical History ============ -->
     <div class="section" data-pediatric-only hidden>
       <h2 class="section__title">Medical History <span class="section__title-tag">Pediatric</span></h2>
@@ -1160,7 +1197,7 @@
         <span>Arthritis</span>
       </label>
       <label class="checklist-item" for="musculoskeletal_2">
-        <input type="checkbox" id="musculoskeletal_2" name="musculoskeletal[]" value="RA">
+        <input type="checkbox" id="musculoskeletal_2" name="musculoskeletal[]" value="RA" data-test-link="msk_headneck_imaging">
         <span>RA</span>
       </label>
       <label class="checklist-item" for="musculoskeletal_3">
@@ -1172,6 +1209,36 @@
         <span>Fibromyalgia</span>
       </label>
     </div>
+        <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Imaging Workup — click a test to add details</span>
+          <div class="cardiac-tests" data-cardiac-tests>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="msk_headneck_imaging">
+              <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
+                <span class="cardiac-test__name">Head/Neck CXR / CT / MRI</span>
+                <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
+              </button>
+              <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
+                <p class="field__hint" style="margin: 0 0 var(--space-2);">RA can involve atlantoaxial instability — relevant for airway positioning and intubation planning.</p>
+                <div class="field-row">
+                  <div class="field"><label class="field__label" for="msk_imaging_date">Date</label><input class="input" type="date" id="msk_imaging_date" name="msk_imaging_date"></div>
+                  <div class="field"><label class="field__label" for="msk_imaging_type">Type</label>
+                    <select class="input" id="msk_imaging_type" name="msk_imaging_type">
+                      <option value="">Select…</option>
+                      <option value="CXR">CXR</option>
+                      <option value="CT">CT</option>
+                      <option value="MRI">MRI</option>
+                      <option value="X-ray">X-ray</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field" style="margin-top: var(--space-3);">
+                  <label class="field__label" for="msk_imaging_notes">Notes</label>
+                  <textarea class="textarea" id="msk_imaging_notes" name="msk_imaging_notes" placeholder="e.g., C-spine flexion/extension views, findings"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="musculoskeletal_notes">Additional notes</label>
           <textarea class="textarea" id="musculoskeletal_notes" name="musculoskeletal_notes"></textarea>

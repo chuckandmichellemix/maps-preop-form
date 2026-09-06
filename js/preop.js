@@ -535,6 +535,46 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   check();
 })();
 
+/* ---------- Imaging repeater (simple add/remove rows) ---------- */
+(function () {
+  const repeater = document.querySelector('[data-imaging-repeater]');
+  if (!repeater) return;
+  const rowsWrap = repeater.querySelector('[data-imaging-repeater-rows]');
+  const addBtn = repeater.querySelector('[data-imaging-repeater-add]');
+  if (!rowsWrap || !addBtn) return;
+
+  function wireRow(row) {
+    const removeBtn = row.querySelector('[data-imaging-row-remove]');
+    if (!removeBtn) return;
+    removeBtn.addEventListener('click', () => {
+      const rows = rowsWrap.querySelectorAll('[data-imaging-row]');
+      if (rows.length <= 1) {
+        row.querySelectorAll('input, select').forEach((el) => {
+          if (el.tagName === 'SELECT') el.selectedIndex = 0;
+          else el.value = '';
+        });
+        return;
+      }
+      row.remove();
+    });
+  }
+
+  function addRow() {
+    const template = rowsWrap.querySelector('[data-imaging-row]');
+    if (!template) return;
+    const row = template.cloneNode(true);
+    row.querySelectorAll('input, select').forEach((el) => {
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else el.value = '';
+    });
+    wireRow(row);
+    rowsWrap.appendChild(row);
+  }
+
+  rowsWrap.querySelectorAll('[data-imaging-row]').forEach(wireRow);
+  addBtn.addEventListener('click', addRow);
+})();
+
 /* ---------- Diagnosis / Procedure code repeater ----------
    Markup: <div class="code-repeater" data-code-repeater data-code-source="ICD10_CODES" data-field-name="dx">
              <div class="code-repeater__rows" data-code-repeater-rows>
