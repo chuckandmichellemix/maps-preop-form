@@ -368,6 +368,52 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   update();
 })();
 
+/* ---------- Women's Health section -> Female, age > 13 ---------- */
+(function () {
+  const genderSel = document.getElementById('gender');
+  const section = document.getElementById('womens-health-section');
+  const form = document.getElementById('preop-form');
+  if (!genderSel || !section || !form) return;
+
+  function clearSection() {
+    section.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
+      radio.checked = false;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    section.querySelectorAll('input[type="number"], input[type="text"]').forEach((field) => {
+      field.value = '';
+    });
+  }
+
+  function updateVisibility() {
+    const age = form.hasAttribute('data-patient-age') ? parseInt(form.getAttribute('data-patient-age'), 10) : null;
+    const show = genderSel.value === 'Female' && age !== null && age > 13;
+    if (section.hidden === !show) return;
+    section.hidden = !show;
+    if (!show) clearSection();
+  }
+
+  genderSel.addEventListener('change', updateVisibility);
+  document.addEventListener('maps:age-group-change', updateVisibility);
+  updateVisibility();
+})();
+
+/* ---------- Women's Health: pregnancy status -> gestational age (PCA) reveal ---------- */
+(function () {
+  const radios = document.querySelectorAll('input[name="women_status"]');
+  const pcaField = document.getElementById('womens-pca-field');
+  if (!radios.length || !pcaField) return;
+
+  function update() {
+    const checked = document.querySelector('input[name="women_status"]:checked');
+    const show = !!checked && checked.value === 'Pregnant or Possible Pregnancy';
+    pcaField.hidden = !show;
+  }
+
+  radios.forEach((radio) => radio.addEventListener('change', update));
+  update();
+})();
+
 /* ---------- Labs reviewed on EMR -> toggle manual lab entry ---------- */
 (function () {
   const checkbox = document.getElementById('labs-reviewed-emr');

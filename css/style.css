@@ -345,6 +345,7 @@ input, textarea, select { font: inherit; color: inherit; }
 .textarea { min-height: 96px; resize: vertical; }
 
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.field-row[hidden] { display: none; }
 @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
 
 /* Radio / checkbox groups */

@@ -517,10 +517,21 @@
       <label class="option" style="margin-bottom: var(--space-4); display: inline-flex;">
         <input type="checkbox" name="npo_standard" value="Solids 8hrs, Clears 2hrs"> NPO: Solids 8hrs, Clears 2 hrs
       </label>
-      <div class="field-row">
+    </div>
+
+    <!-- ============ Women's Health ============ -->
+    <div class="section" id="womens-health-section" hidden>
+      <h2 class="section__title">Women's Health</h2>
+      <p class="section__subtitle">Shown for female patients over age 13.</p>
+      <div class="option-group" data-radio-group="women-status">
+        <label class="option"><input type="radio" name="women_status" value="Pregnant or Possible Pregnancy"> Pregnant or Possible Pregnancy</label>
+        <label class="option"><input type="radio" name="women_status" value="Breastfeeding"> Breastfeeding</label>
+        <label class="option"><input type="radio" name="women_status" value="Menopause/Hysterectomy"> Menopause/Hysterectomy</label>
+      </div>
+      <div class="field-row" id="womens-pca-field" hidden style="margin-top: var(--space-4);">
         <div class="field">
-          <label class="field__label" for="npo-pca">If pregnant, PCA (weeks)</label>
-          <input class="input" type="number" min="0" id="npo-pca" name="npo_pca_weeks" placeholder="—">
+          <label class="field__label" for="womens-pca">Gestational age / PCA (weeks)</label>
+          <input class="input" type="number" min="0" id="womens-pca" name="womens_pca_weeks" placeholder="—">
         </div>
       </div>
     </div>
