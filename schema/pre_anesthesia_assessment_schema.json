@@ -1,0 +1,1037 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MAPS Clinical Forms — Pre-Anesthesia Assessment (Clinician)",
+  "description": "JSON Schema for the MAPS Pre-Anesthesia Assessment, the clinician-facing counterpart to the MAPS Pre-Anesthesia Questionnaire. Part of the MAPS Clinical Forms digitization handoff package. Field 'type' vocabulary: text, long_text, number, date, radio, checkbox_list, checkbox, select, signature. This schema is generated directly from the live form (maps-preop-form, chuckandmichellemix/maps-preop-form) as of the September 2026 build, and reflects: searchable CPT procedure code lookup, real-code diagnosis (ICD-10-CM) and procedure (CPT) line items, per-finding pulmonary breath-sound laterality popups, cardiac heart tones checklist, endocrine DM Type/Insulin-dependent and Adrenal Gland Dysfunction/Steroid Therapy cascades, endocrine Thyroid disease Hyper/Hypothyroidism selection, heme/onc Cancer free-text and Bleeding Disorder/DVT anticoagulant chains, and neuro CVA/TIA anticoagulant chain. All diagnosis and procedure codes must be sourced from real public datasets (CMS/CDC ICD-10-CM order file for diagnoses; standard CPT code sets for procedures) -- this schema does not fabricate codes.",
+  "source": "https://github.com/chuckandmichellemix/maps-preop-form",
+  "definitions": {
+    "wnlSystemBlock": {
+      "type": "object",
+      "description": "Reusable pattern for each body-system exam card: a WNL (within normal limits) Yes/No toggle, a multi-select checkbox list of abnormal findings (only meaningful/enabled when WNL = No), and a free-text notes field.",
+      "properties": {
+        "wnl": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Selected checkbox values for this system; see each system's own options_enum."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-text clinician notes for this system."
+        }
+      },
+      "required": [
+        "wnl"
+      ]
+    },
+    "drugChecklistBlock": {
+      "type": "object",
+      "description": "Reusable anticoagulant/antiplatelet drug-class checklist. Used identically for CVA/TIA (neuro), Bleeding Disorder (heme/onc), and DVT (heme/onc) conditional chains. Each selected drug reveals a paired date field ('last dose' or 'started').",
+      "properties": {
+        "on_anticoagulants_or_antiplatelets": {
+          "type": "boolean",
+          "description": "Checkbox gating whether the drug checklist is shown at all."
+        },
+        "selected_drugs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Warfarin (Coumadin)",
+              "Heparin (unfractionated)",
+              "Enoxaparin (Lovenox)",
+              "Dalteparin (Fragmin)",
+              "Fondaparinux (Arixtra)",
+              "Apixaban (Eliquis)",
+              "Rivaroxaban (Xarelto)",
+              "Edoxaban (Savaysa)",
+              "Dabigatran (Pradaxa)",
+              "Aspirin",
+              "Clopidogrel (Plavix)",
+              "Ticagrelor (Brilinta)",
+              "Prasugrel (Effient)",
+              "Dipyridamole (Persantine)"
+            ]
+          },
+          "description": "Multi-select of anticoagulant/antiplatelet drug classes."
+        },
+        "drug_dates": {
+          "type": "object",
+          "description": "Map of drug slug -> date (e.g. 'warfarin': '2026-08-01'). Shown per selected drug only.",
+          "properties": {
+            "warfarin": {
+              "type": "string",
+              "format": "date"
+            },
+            "heparin": {
+              "type": "string",
+              "format": "date"
+            },
+            "enoxaparin": {
+              "type": "string",
+              "format": "date"
+            },
+            "dalteparin": {
+              "type": "string",
+              "format": "date"
+            },
+            "fondaparinux": {
+              "type": "string",
+              "format": "date"
+            },
+            "apixaban": {
+              "type": "string",
+              "format": "date"
+            },
+            "rivaroxaban": {
+              "type": "string",
+              "format": "date"
+            },
+            "edoxaban": {
+              "type": "string",
+              "format": "date"
+            },
+            "dabigatran": {
+              "type": "string",
+              "format": "date"
+            },
+            "aspirin": {
+              "type": "string",
+              "format": "date"
+            },
+            "clopidogrel": {
+              "type": "string",
+              "format": "date"
+            },
+            "ticagrelor": {
+              "type": "string",
+              "format": "date"
+            },
+            "prasugrel": {
+              "type": "string",
+              "format": "date"
+            },
+            "dipyridamole": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "required": [
+        "on_anticoagulants_or_antiplatelets"
+      ]
+    },
+    "breathSoundLateralityBlock": {
+      "type": "object",
+      "description": "Reusable per-finding laterality popup used independently for each of 5 pulmonary breath-sound findings (Wheezing, Rhonchi, Crackles, Diminished, Stridor). Each finding has its own modal, side selection, and field selection, and produces its own independent summary line -- selecting multiple findings simultaneously (e.g. Wheezing + Rhonchi + Diminished) does not merge or overwrite the other findings' details.",
+      "properties": {
+        "side": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Left",
+              "Right",
+              "Bilateral"
+            ]
+          }
+        },
+        "field": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Upper",
+              "Lower"
+            ]
+          }
+        }
+      }
+    },
+    "attestationBlock": {
+      "type": "object",
+      "description": "Shared attestation component, same pattern as the patient questionnaire schema.",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "description": "Captured electronic signature (image/base64 or e-sign provider reference)"
+        },
+        "signature_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "signature"
+      ]
+    },
+    "imagingRow": {
+      "type": "object",
+      "description": "Repeatable row pattern used for MSK imaging and general imaging tables.",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "area_or_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "codeLineItem": {
+      "type": "object",
+      "description": "Repeatable diagnosis or procedure line item. Codes must be real, valid codes drawn from a legitimate public dataset (CMS/CDC ICD-10-CM order file for diagnoses; standard CPT code set for procedures) -- never fabricated.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Real ICD-10-CM or CPT code selected via the form's searchable code lookup."
+        },
+        "description": {
+          "type": "string",
+          "description": "Official short description for the selected code, auto-filled by the code search feature."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "description": "Patient date of birth. Drives client-side age-based branching (pediatric vs adult fields) throughout the form, same DOB/age logic pattern as the patient-facing questionnaire."
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "Female",
+        "Male",
+        "Other"
+      ],
+      "description": "Patient gender. Used together with age to gate the Women's Health section (women_status) and the HCG field, mirroring the patient questionnaire's gender+age gating logic."
+    },
+    "gestational_age_weeks": {
+      "type": "number",
+      "x-conditional": {
+        "shown_when": "clinically relevant pediatric/obstetric context"
+      }
+    },
+    "height_in": {
+      "type": "string"
+    },
+    "weight_lb": {
+      "type": "number"
+    },
+    "asa_class": {
+      "type": "string",
+      "enum": [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI"
+      ],
+      "description": "ASA Physical Status Classification."
+    },
+    "asa_e": {
+      "type": "boolean",
+      "description": "Emergency modifier appended to ASA class (e.g. 'II-E')."
+    },
+    "procedure_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "hcg": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Pos",
+        "Neg",
+        null
+      ],
+      "x-conditional": {
+        "shown_when": "gender == 'Female' AND age is of childbearing potential",
+        "enforced_by": "client-side form logic, not this schema"
+      }
+    },
+    "labs_reviewed_emr": {
+      "type": "boolean",
+      "description": "Checkbox: labs reviewed on EMR. When checked, reveals the HCG field per prior QA verification (see 'HCG field visible with Labs reviewed on EMR checked' reference screenshot)."
+    },
+    "vitals": {
+      "type": "object",
+      "properties": {
+        "spo2": {
+          "type": "string"
+        },
+        "bp": {
+          "type": "string"
+        },
+        "hr": {
+          "type": "string"
+        },
+        "rr": {
+          "type": "string"
+        },
+        "temp": {
+          "type": "string"
+        }
+      }
+    },
+    "diagnoses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/codeLineItem"
+      },
+      "description": "Up to 8 repeatable ICD-10-CM diagnosis line items (dx_code[]/dx_desc[]), each populated via the searchable/selectable ICD-10 code lookup added this build. Codes sourced from the CMS/CDC ICD-10-CM order file only."
+    },
+    "diagnosis_notes": {
+      "type": "string"
+    },
+    "procedure": {
+      "type": "string",
+      "description": "Free-text procedure name/summary."
+    },
+    "procedures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/codeLineItem"
+      },
+      "description": "Repeatable CPT procedure code line items (proc_code[]/proc_desc[]), populated via the searchable/selectable CPT code lookup added this build. Codes sourced from a legitimate public CPT code set only, never fabricated."
+    },
+    "medications_see_mar": {
+      "type": "boolean"
+    },
+    "medication_notes": {
+      "type": "string"
+    },
+    "allergies_none": {
+      "type": "boolean"
+    },
+    "allergies_latex": {
+      "type": "boolean"
+    },
+    "allergies_other": {
+      "type": "string"
+    },
+    "surgical_history_none": {
+      "type": "boolean"
+    },
+    "prior_anesthesia_complications": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "prior_anesthesia_complications_detail": {
+      "type": "string",
+      "description": "Conditional; required when prior_anesthesia_complications = Yes."
+    },
+    "family_anesthesia_complications": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "family_anesthesia_complications_detail": {
+      "type": "string",
+      "description": "Conditional; required when family_anesthesia_complications = Yes."
+    },
+    "npo_standard": {
+      "type": "boolean"
+    },
+    "pediatric": {
+      "type": "object",
+      "x-conditional": {
+        "shown_when": "age_from(date_of_birth) is pediatric"
+      },
+      "properties": {
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Recent Illness (Cold/Flu)",
+              "Frequent colds/cough",
+              "Born Prematurely",
+              "Behavioral Issues",
+              "Developmental Delay",
+              "Heart Condition",
+              "Lung Condition",
+              "Airway or Breathing Trouble",
+              "Congenital/Genetic Syndrome",
+              "Liver/Kidney/Stomach Issues",
+              "Metabolic/Endocrine Problem",
+              "Positioning Concerns"
+            ]
+          }
+        },
+        "illness_description": {
+          "type": "string"
+        },
+        "congenital": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Down syndrome (Trisomy 21)",
+              "Cleft lip/palate",
+              "Congenital heart disease",
+              "Craniofacial syndrome (e.g., Treacher Collins, Pierre Robin, Goldenhar)",
+              "Spina bifida",
+              "Skeletal dysplasia",
+              "Muscular dystrophy",
+              "Tracheoesophageal fistula/esophageal atresia",
+              "Congenital diaphragmatic hernia",
+              "Other chromosomal/genetic syndrome"
+            ]
+          }
+        },
+        "congenital_other": {
+          "type": "string"
+        },
+        "anesthesia_team_questions": {
+          "type": "string"
+        },
+        "poor_anesthesia_history": {
+          "type": "string"
+        },
+        "allergies": {
+          "type": "object",
+          "properties": {
+            "latex": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "plasters": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "dust": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "dental_anesthesia": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "plants": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "antiseptic": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "medication": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "medication_which": {
+              "type": "string",
+              "description": "Conditional; shown when allergies.medication = Yes."
+            },
+            "food": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "food_which": {
+              "type": "string",
+              "description": "Conditional; shown when allergies.food = Yes."
+            }
+          }
+        }
+      }
+    },
+    "womens_health": {
+      "type": "object",
+      "x-conditional": {
+        "shown_when": "gender == 'Female' AND age is of relevant range",
+        "enforced_by": "client-side form logic, not this schema"
+      },
+      "properties": {
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Pregnant or Possible Pregnancy",
+            "Breastfeeding",
+            "Menopause/Hysterectomy",
+            null
+          ]
+        },
+        "pca_weeks": {
+          "type": "number",
+          "description": "Post-conceptional age in weeks; relevant when status indicates pregnancy."
+        }
+      }
+    },
+    "airway": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Multiple missing",
+        "Dent Full / Partial",
+        "Upper / Lower",
+        "Loose/Chipped",
+        "History of difficult airway"
+      ],
+      "sub_fields": {
+        "teeth_description": {
+          "type": "string"
+        },
+        "mallampati_class": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "mouth_opening": {
+          "type": "string",
+          "enum": [
+            "1 FB",
+            "2 FB",
+            "3 FB",
+            ">3 FB"
+          ]
+        },
+        "thyromental_distance": {
+          "type": "string",
+          "enum": [
+            "1 FB",
+            "2 FB",
+            "3 FB",
+            ">3 FB"
+          ]
+        },
+        "loose_teeth": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "loose_teeth_description": {
+          "type": "string",
+          "description": "Conditional; shown when loose_teeth = Yes."
+        },
+        "neck_rom": {
+          "type": "string",
+          "enum": [
+            "Normal",
+            "Limited"
+          ]
+        }
+      }
+    },
+    "ent": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Otitis Media",
+        "Dental",
+        "Chronic Tonsillitis",
+        "Glaucoma"
+      ]
+    },
+    "cardiac": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "RRR",
+        "HTN",
+        "Abnormal EKG",
+        "Murmurs",
+        "Stress test",
+        "CAD",
+        "Pacemaker",
+        "AICD",
+        "Arrhythmias",
+        "Hyperlipidemia",
+        "MI",
+        "CHF"
+      ],
+      "sub_fields": {
+        "heart_tones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RRR",
+              "Irregular",
+              "Gallop",
+              "Murmur"
+            ]
+          },
+          "description": "NEW this build: multi-select cardiac auscultation checklist, independent of the WNL findings list above."
+        },
+        "ekg_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "ekg_findings": {
+          "type": "string"
+        },
+        "stress_test_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "stress_test_findings": {
+          "type": "string"
+        },
+        "echo_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "echo_findings": {
+          "type": "string"
+        },
+        "cath_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cath_findings": {
+          "type": "string"
+        },
+        "cath_stent_placed": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "cath_stent_where": {
+          "type": "string",
+          "description": "Conditional; shown when cath_stent_placed = Yes."
+        },
+        "pacer_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "pacer_type": {
+          "type": "string"
+        },
+        "pacer_findings": {
+          "type": "string"
+        }
+      }
+    },
+    "pulmonary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Clear bilateral",
+        "Asthma",
+        "Tobacco use",
+        "Equal bilateral",
+        "CPAP",
+        "SOB",
+        "COPD",
+        "Sleep apnea",
+        "CXR",
+        "Smoking exposure within the home",
+        "Smoking/Vaping History",
+        "THC/Illicit Drug Use"
+      ],
+      "sub_fields": {
+        "pack_years": {
+          "type": "string",
+          "description": "Shown when Smoking/Vaping History is checked; same option set as the patient questionnaire's pack-years select."
+        },
+        "cxr_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cxr_findings": {
+          "type": "string"
+        },
+        "breath_sounds": {
+          "type": "object",
+          "description": "NEW this build: 7-option breath sound checklist (Clear Bilateral, Equal, Wheezing, Rhonchi, Crackles, Diminished, Stridor). The 5 abnormal findings (Wheezing/Rhonchi/Crackles/Diminished/Stridor) each independently open their own laterality popup -- selecting multiple simultaneously produces separate, non-overwriting summaries for each.",
+          "properties": {
+            "selected": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Clear Bilateral",
+                  "Equal",
+                  "Wheezing",
+                  "Rhonchi",
+                  "Crackles",
+                  "Diminished",
+                  "Stridor"
+                ]
+              }
+            },
+            "wheezing_detail": {
+              "$ref": "#/definitions/breathSoundLateralityBlock"
+            },
+            "rhonchi_detail": {
+              "$ref": "#/definitions/breathSoundLateralityBlock"
+            },
+            "crackles_detail": {
+              "$ref": "#/definitions/breathSoundLateralityBlock"
+            },
+            "diminished_detail": {
+              "$ref": "#/definitions/breathSoundLateralityBlock"
+            },
+            "stridor_detail": {
+              "$ref": "#/definitions/breathSoundLateralityBlock"
+            }
+          }
+        }
+      }
+    },
+    "hepatic_gi": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Hepatitis A",
+        "Hepatitis B",
+        "Hepatitis C",
+        "Recreational drug use",
+        "PONV risk",
+        "EtOH use",
+        "GERD"
+      ]
+    },
+    "neuro": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Seizures",
+        "Migraines",
+        "Chronic pain",
+        "CVA/TIA",
+        "Neuropathy",
+        "MS / MG / ALS"
+      ],
+      "sub_fields": {
+        "cva_last_stroke_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Conditional; shown when CVA/TIA is checked."
+        },
+        "cva_deficits": {
+          "type": "string",
+          "description": "Free-text residual deficits; conditional on CVA/TIA."
+        },
+        "cva_anticoagulant_chain": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/drugChecklistBlock"
+            }
+          ],
+          "description": "NEW this build: revealed when CVA/TIA is checked; asks whether the patient is on anticoagulants/antiplatelets, then reveals the shared 14-drug checklist with per-drug last-dose dates."
+        }
+      }
+    },
+    "renal_gu": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "ARF",
+        "CKD",
+        "Hemodialysis",
+        "Peritoneal dialysis"
+      ]
+    },
+    "endocrine": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "DM",
+        "Thyroid disease",
+        "Adrenal Gland Dysfunction"
+      ],
+      "sub_fields": {
+        "glucose": {
+          "type": "string"
+        },
+        "dm_type": {
+          "type": "string",
+          "enum": [
+            "Type I",
+            "Type II"
+          ],
+          "description": "NEW this build: popup shown when DM is checked."
+        },
+        "dm_insulin_dependent": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "NEW this build: cascade popup shown after dm_type is selected."
+        },
+        "thyroid_type": {
+          "type": "string",
+          "enum": [
+            "Hyperthyroidism",
+            "Hypothyroidism"
+          ],
+          "description": "NEW this build: popup shown when Thyroid disease is checked; auto-closes on selection."
+        },
+        "adrenal_steroid_therapy": {
+          "type": "boolean",
+          "description": "NEW this build: checkbox shown when Adrenal Gland Dysfunction is checked."
+        },
+        "adrenal_steroid_description": {
+          "type": "string",
+          "description": "Conditional free-text; shown when adrenal_steroid_therapy = Yes."
+        }
+      }
+    },
+    "heme_oncology": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Anemia",
+        "Sickle cell",
+        "Bleeding disorder",
+        "DVT",
+        "Cancer"
+      ],
+      "sub_fields": {
+        "cancer_description": {
+          "type": "string",
+          "description": "NEW this build: free-text reveal shown when Cancer is checked."
+        },
+        "bleeding_disorder_description": {
+          "type": "string",
+          "description": "NEW this build: free-text description of the bleeding disorder type, shown when Bleeding disorder is checked."
+        },
+        "bleeding_anticoagulant_chain": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/drugChecklistBlock"
+            }
+          ],
+          "description": "NEW this build: shown alongside bleeding_disorder_description; same shared 14-drug checklist pattern as CVA/TIA and DVT."
+        },
+        "dvt_description": {
+          "type": "string"
+        },
+        "dvt_anticoagulant_chain": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/drugChecklistBlock"
+            }
+          ],
+          "description": "Shown when DVT is checked; same shared 14-drug checklist pattern as CVA/TIA and Bleeding Disorder."
+        }
+      }
+    },
+    "musculoskeletal": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Obese",
+        "Arthritis",
+        "RA",
+        "Hypotonia",
+        "Fibromyalgia"
+      ],
+      "sub_fields": {
+        "imaging": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/imagingRow"
+          },
+          "description": "Repeatable rows: imaging type (CXR/CT/MRI/X-ray), date, notes."
+        }
+      }
+    },
+    "psychosocial": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wnlSystemBlock"
+        }
+      ],
+      "options_enum": [
+        "Bipolar",
+        "Anxiety",
+        "Depression",
+        "Schizophrenia",
+        "ADD/ADHD",
+        "Panic Disorder",
+        "PTSD"
+      ]
+    },
+    "imaging": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/imagingRow"
+      },
+      "description": "General repeatable imaging table: type (CXR/CT/MRI/X-ray/Other), area, date, notes."
+    },
+    "labs": {
+      "type": "object",
+      "properties": {
+        "hgb": {
+          "type": "string"
+        },
+        "wbc": {
+          "type": "string"
+        },
+        "hct": {
+          "type": "string"
+        },
+        "plt": {
+          "type": "string"
+        },
+        "inr": {
+          "type": "string"
+        },
+        "pt": {
+          "type": "string"
+        },
+        "ptt": {
+          "type": "string"
+        },
+        "na": {
+          "type": "string"
+        },
+        "k": {
+          "type": "string"
+        },
+        "cl": {
+          "type": "string"
+        },
+        "co2": {
+          "type": "string"
+        },
+        "bun": {
+          "type": "string"
+        },
+        "cr": {
+          "type": "string"
+        },
+        "gluc": {
+          "type": "string"
+        }
+      }
+    },
+    "anesthesia_plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "General",
+          "MAC",
+          "Regional",
+          "Spinal",
+          "Epidural",
+          "Labor Epidural"
+        ]
+      }
+    },
+    "signature": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/attestationBlock"
+        }
+      ],
+      "description": "Clinician signature + date block; same attestation pattern as the patient questionnaire."
+    },
+    "signature_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "date_of_birth",
+    "gender",
+    "asa_class",
+    "airway",
+    "ent",
+    "cardiac",
+    "pulmonary",
+    "hepatic_gi",
+    "neuro",
+    "renal_gu",
+    "endocrine",
+    "heme_oncology",
+    "musculoskeletal",
+    "psychosocial"
+  ]
+}
