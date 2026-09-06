@@ -1102,3 +1102,50 @@ initConditionAnticoagModal({
 
   updateSummary();
 })();
+
+/* ---------- Comprehensive body-system sub-checklist reveals (2026-09-06 expansion) ----------
+   Each new/expanded category checkbox reveals a nested "select all that apply" subgroup
+   using the existing window.MapsConditional helper. */
+(function () {
+  if (!window.MapsConditional) return;
+  window.MapsConditional('#ent_4', document.getElementById('reveal-ent-anatomic-issue'), () => { const t = document.getElementById('ent_4'); return !!(t && t.checked); });
+  window.MapsConditional('#ent_5', document.getElementById('reveal-ent-neck-pain'), () => { const t = document.getElementById('ent_5'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_1', document.getElementById('reveal-cardiac-htn'), () => { const t = document.getElementById('cardiac_1'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_7', document.getElementById('reveal-cardiac-cad'), () => { const t = document.getElementById('cardiac_7'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_16', document.getElementById('reveal-cardiac-cabg'), () => { const t = document.getElementById('cardiac_16'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_17', document.getElementById('reveal-cardiac-coronary-intervention'), () => { const t = document.getElementById('cardiac_17'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_18', document.getElementById('reveal-cardiac-cardiac-device'), () => { const t = document.getElementById('cardiac_18'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_19', document.getElementById('reveal-cardiac-hx-of-dysrhythmia'), () => { const t = document.getElementById('cardiac_19'); return !!(t && t.checked); });
+  window.MapsConditional('#cardiac_20', document.getElementById('reveal-cardiac-vascular-issues'), () => { const t = document.getElementById('cardiac_20'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_1', document.getElementById('reveal-pulmonary-asthma'), () => { const t = document.getElementById('pulmonary_1'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_6', document.getElementById('reveal-pulmonary-copd'), () => { const t = document.getElementById('pulmonary_6'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_9', document.getElementById('reveal-pulmonary-restrictive-lung-disease'), () => { const t = document.getElementById('pulmonary_9'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_5', document.getElementById('reveal-pulmonary-sob'), () => { const t = document.getElementById('pulmonary_5'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_10', document.getElementById('reveal-pulmonary-cough-congestion'), () => { const t = document.getElementById('pulmonary_10'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_11', document.getElementById('reveal-pulmonary-recent-respiratory-infection'), () => { const t = document.getElementById('pulmonary_11'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_12', document.getElementById('reveal-pulmonary-lung-pathology'), () => { const t = document.getElementById('pulmonary_12'); return !!(t && t.checked); });
+  window.MapsConditional('#pulmonary_7', document.getElementById('reveal-pulmonary-sleep-apnea'), () => { const t = document.getElementById('pulmonary_7'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_7', document.getElementById('reveal-hepatic-gi-nausea'), () => { const t = document.getElementById('hepatic_gi_7'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_8', document.getElementById('reveal-hepatic-gi-vomiting'), () => { const t = document.getElementById('hepatic_gi_8'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_9', document.getElementById('reveal-hepatic-gi-esophageal-issues'), () => { const t = document.getElementById('hepatic_gi_9'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_10', document.getElementById('reveal-hepatic-gi-bowel-issues'), () => { const t = document.getElementById('hepatic_gi_10'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_11', document.getElementById('reveal-hepatic-gi-liver-issues'), () => { const t = document.getElementById('hepatic_gi_11'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_12', document.getElementById('reveal-hepatic-gi-pancreatic-issues'), () => { const t = document.getElementById('hepatic_gi_12'); return !!(t && t.checked); });
+  window.MapsConditional('#hepatic_gi_6', document.getElementById('reveal-hepatic-gi-gerd'), () => { const t = document.getElementById('hepatic_gi_6'); return !!(t && t.checked); });
+  window.MapsConditional('#renal_gu_7', document.getElementById('reveal-renal-gu-urinary-issues'), () => { const t = document.getElementById('renal_gu_7'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_6', document.getElementById('reveal-neuro-headaches'), () => { const t = document.getElementById('neuro_6'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_7', document.getElementById('reveal-neuro-syncope'), () => { const t = document.getElementById('neuro_7'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_2', document.getElementById('reveal-neuro-chronic-pain'), () => { const t = document.getElementById('neuro_2'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_0', document.getElementById('reveal-neuro-seizures'), () => { const t = document.getElementById('neuro_0'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_8', document.getElementById('reveal-neuro-structural-brain-disease'), () => { const t = document.getElementById('neuro_8'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_4', document.getElementById('reveal-neuro-neuropathy'), () => { const t = document.getElementById('neuro_4'); return !!(t && t.checked); });
+  window.MapsConditional('#neuro_5', document.getElementById('reveal-neuro-ms-mg-als'), () => { const t = document.getElementById('neuro_5'); return !!(t && t.checked); });
+  window.MapsConditional('#endocrine_0', document.getElementById('reveal-endocrine-dm'), () => { const t = document.getElementById('endocrine_0'); return !!(t && t.checked); });
+  window.MapsConditional('#endocrine_3', document.getElementById('reveal-endocrine-endocrine-tumor'), () => { const t = document.getElementById('endocrine_3'); return !!(t && t.checked); });
+  window.MapsConditional('#endocrine_4', document.getElementById('reveal-endocrine-pituitary-disease'), () => { const t = document.getElementById('endocrine_4'); return !!(t && t.checked); });
+  window.MapsConditional('#endocrine_2', document.getElementById('reveal-endocrine-adrenal-gland-dysfunction'), () => { const t = document.getElementById('endocrine_2'); return !!(t && t.checked); });
+  window.MapsConditional('#endocrine_5', document.getElementById('reveal-endocrine-autoimmune-disease'), () => { const t = document.getElementById('endocrine_5'); return !!(t && t.checked); });
+  window.MapsConditional('#heme_onc_5', document.getElementById('reveal-heme-onc-heme-oncology-abnormalities'), () => { const t = document.getElementById('heme_onc_5'); return !!(t && t.checked); });
+  window.MapsConditional('#heme_onc_6', document.getElementById('reveal-heme-onc-blood-transfusion'), () => { const t = document.getElementById('heme_onc_6'); return !!(t && t.checked); });
+  window.MapsConditional('#heme_onc_7', document.getElementById('reveal-heme-onc-blood-dyscrasia'), () => { const t = document.getElementById('heme_onc_7'); return !!(t && t.checked); });
+})();

@@ -671,7 +671,73 @@
         <input type="checkbox" id="ent_3" name="ent[]" value="Glaucoma">
         <span>Glaucoma</span>
       </label>
+      <label class="checklist-item" for="ent_4">
+        <input type="checkbox" id="ent_4" name="ent[]" value="Anatomic Issue">
+        <span>Anatomic Issue</span>
+      </label>
+      <label class="checklist-item" for="ent_5">
+        <input type="checkbox" id="ent_5" name="ent[]" value="Neck Pain">
+        <span>Neck Pain</span>
+      </label>
+      <label class="checklist-item" for="ent_6">
+        <input type="checkbox" id="ent_6" name="ent[]" value="Visual Impairment">
+        <span>Visual Impairment</span>
+      </label>
+      <label class="checklist-item" for="ent_7">
+        <input type="checkbox" id="ent_7" name="ent[]" value="Hearing Impairment">
+        <span>Hearing Impairment</span>
+      </label>
+      <label class="checklist-item" for="ent_8">
+        <input type="checkbox" id="ent_8" name="ent[]" value="Hoarseness">
+        <span>Hoarseness</span>
+      </label>
+      <label class="checklist-item" for="ent_9">
+        <input type="checkbox" id="ent_9" name="ent[]" value="Hx of Stridor">
+        <span>Hx of Stridor</span>
+      </label>
+      <label class="checklist-item" for="ent_10">
+        <input type="checkbox" id="ent_10" name="ent[]" value="TMJ">
+        <span>TMJ</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-ent-anatomic-issue" hidden>
+          <span class="system-card__subgroup-label">Anatomic Issue — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="ent_anatomic_issue_0">
+            <input type="checkbox" id="ent_anatomic_issue_0" name="ent_anatomic_issue[]" value="Mass">
+            <span>Mass</span>
+          </label>
+          <label class="checklist-item" for="ent_anatomic_issue_1">
+            <input type="checkbox" id="ent_anatomic_issue_1" name="ent_anatomic_issue[]" value="Radiation">
+            <span>Radiation</span>
+          </label>
+          <label class="checklist-item" for="ent_anatomic_issue_2">
+            <input type="checkbox" id="ent_anatomic_issue_2" name="ent_anatomic_issue[]" value="Hx of Laryngectomy">
+            <span>Hx of Laryngectomy</span>
+          </label>
+          <label class="checklist-item" for="ent_anatomic_issue_3">
+            <input type="checkbox" id="ent_anatomic_issue_3" name="ent_anatomic_issue[]" value="Facial Trauma">
+            <span>Facial Trauma</span>
+          </label>
+          <label class="checklist-item" for="ent_anatomic_issue_4">
+            <input type="checkbox" id="ent_anatomic_issue_4" name="ent_anatomic_issue[]" value="Hx of Tracheostomy">
+            <span>Hx of Tracheostomy</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-ent-neck-pain" hidden>
+          <span class="system-card__subgroup-label">Neck Pain — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="ent_neck_pain_0">
+            <input type="checkbox" id="ent_neck_pain_0" name="ent_neck_pain[]" value="Limited Movement">
+            <span>Limited Movement</span>
+          </label>
+          <label class="checklist-item" for="ent_neck_pain_1">
+            <input type="checkbox" id="ent_neck_pain_1" name="ent_neck_pain[]" value="Radicular Pain with Movement">
+            <span>Radicular Pain with Movement</span>
+          </label>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="ent_notes">Additional notes</label>
           <textarea class="textarea" id="ent_notes" name="ent_notes"></textarea>
@@ -740,7 +806,214 @@
         <input type="checkbox" id="cardiac_15" name="cardiac[]" value="CHF" data-test-link="echo">
         <span>CHF</span>
       </label>
+      <label class="checklist-item" for="cardiac_16">
+        <input type="checkbox" id="cardiac_16" name="cardiac[]" value="CABG">
+        <span>CABG</span>
+      </label>
+      <label class="checklist-item" for="cardiac_17">
+        <input type="checkbox" id="cardiac_17" name="cardiac[]" value="Coronary Intervention">
+        <span>Coronary Intervention</span>
+      </label>
+      <label class="checklist-item" for="cardiac_18">
+        <input type="checkbox" id="cardiac_18" name="cardiac[]" value="Cardiac Device">
+        <span>Cardiac Device</span>
+      </label>
+      <label class="checklist-item" for="cardiac_19">
+        <input type="checkbox" id="cardiac_19" name="cardiac[]" value="Hx of Dysrhythmia">
+        <span>Hx of Dysrhythmia</span>
+      </label>
+      <label class="checklist-item" for="cardiac_20">
+        <input type="checkbox" id="cardiac_20" name="cardiac[]" value="Vascular Issues">
+        <span>Vascular Issues</span>
+      </label>
+      <label class="checklist-item" for="cardiac_21">
+        <input type="checkbox" id="cardiac_21" name="cardiac[]" value="Orthopnea">
+        <span>Orthopnea</span>
+      </label>
+      <label class="checklist-item" for="cardiac_22">
+        <input type="checkbox" id="cardiac_22" name="cardiac[]" value="Angina">
+        <span>Angina</span>
+      </label>
+      <label class="checklist-item" for="cardiac_23">
+        <input type="checkbox" id="cardiac_23" name="cardiac[]" value="Artificial Valve">
+        <span>Artificial Valve</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-htn" hidden>
+          <span class="system-card__subgroup-label">HTN Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_htn_0">
+            <input type="checkbox" id="cardiac_htn_0" name="cardiac_htn[]" value="Well Controlled">
+            <span>Well Controlled</span>
+          </label>
+          <label class="checklist-item" for="cardiac_htn_1">
+            <input type="checkbox" id="cardiac_htn_1" name="cardiac_htn[]" value="Poorly Controlled">
+            <span>Poorly Controlled</span>
+          </label>
+          <label class="checklist-item" for="cardiac_htn_2">
+            <input type="checkbox" id="cardiac_htn_2" name="cardiac_htn[]" value="Gestational">
+            <span>Gestational</span>
+          </label>
+          <label class="checklist-item" for="cardiac_htn_3">
+            <input type="checkbox" id="cardiac_htn_3" name="cardiac_htn[]" value="Took ACE/ARB Today">
+            <span>Took ACE/ARB Today</span>
+          </label>
+          <label class="checklist-item" for="cardiac_htn_4">
+            <input type="checkbox" id="cardiac_htn_4" name="cardiac_htn[]" value="3+ Meds">
+            <span>3+ Meds</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-cad" hidden>
+          <span class="system-card__subgroup-label">CAD Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_cad_0">
+            <input type="checkbox" id="cardiac_cad_0" name="cardiac_cad[]" value="Asymptomatic">
+            <span>Asymptomatic</span>
+          </label>
+          <label class="checklist-item" for="cardiac_cad_1">
+            <input type="checkbox" id="cardiac_cad_1" name="cardiac_cad[]" value="Exercised Regularly">
+            <span>Exercised Regularly</span>
+          </label>
+          <label class="checklist-item" for="cardiac_cad_2">
+            <input type="checkbox" id="cardiac_cad_2" name="cardiac_cad[]" value="Cardiac Rehab">
+            <span>Cardiac Rehab</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-cabg" hidden>
+          <span class="system-card__subgroup-label">CABG Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_cabg_0">
+            <input type="checkbox" id="cardiac_cabg_0" name="cardiac_cabg[]" value="No Chest Pain Since">
+            <span>No Chest Pain Since</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-coronary-intervention" hidden>
+          <span class="system-card__subgroup-label">Coronary Intervention Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_coronary_intervention_0">
+            <input type="checkbox" id="cardiac_coronary_intervention_0" name="cardiac_coronary_intervention[]" value="Stent">
+            <span>Stent</span>
+          </label>
+          <label class="checklist-item" for="cardiac_coronary_intervention_1">
+            <input type="checkbox" id="cardiac_coronary_intervention_1" name="cardiac_coronary_intervention[]" value="Within 6 Weeks">
+            <span>Within 6 Weeks</span>
+          </label>
+          <label class="checklist-item" for="cardiac_coronary_intervention_2">
+            <input type="checkbox" id="cardiac_coronary_intervention_2" name="cardiac_coronary_intervention[]" value="Within 6 Months">
+            <span>Within 6 Months</span>
+          </label>
+          <label class="checklist-item" for="cardiac_coronary_intervention_3">
+            <input type="checkbox" id="cardiac_coronary_intervention_3" name="cardiac_coronary_intervention[]" value="No Chest Pain Since">
+            <span>No Chest Pain Since</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-cardiac-device" hidden>
+          <span class="system-card__subgroup-label">Cardiac Device Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_cardiac_device_0">
+            <input type="checkbox" id="cardiac_cardiac_device_0" name="cardiac_cardiac_device[]" value="Pacer">
+            <span>Pacer</span>
+          </label>
+          <label class="checklist-item" for="cardiac_cardiac_device_1">
+            <input type="checkbox" id="cardiac_cardiac_device_1" name="cardiac_cardiac_device[]" value="Pacer-Dependent">
+            <span>Pacer-Dependent</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-hx-of-dysrhythmia" hidden>
+          <span class="system-card__subgroup-label">Hx of Dysrhythmia Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_0">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_0" name="cardiac_hx_of_dysrhythmia[]" value="Currently Afib">
+            <span>Currently Afib</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_1">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_1" name="cardiac_hx_of_dysrhythmia[]" value="Atrial Fib">
+            <span>Atrial Fib</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_2">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_2" name="cardiac_hx_of_dysrhythmia[]" value="SVT">
+            <span>SVT</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_3">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_3" name="cardiac_hx_of_dysrhythmia[]" value="PAC/PVCs">
+            <span>PAC/PVCs</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_4">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_4" name="cardiac_hx_of_dysrhythmia[]" value="VT">
+            <span>VT</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_5">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_5" name="cardiac_hx_of_dysrhythmia[]" value="Vfib">
+            <span>Vfib</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_6">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_6" name="cardiac_hx_of_dysrhythmia[]" value="Symptomatic">
+            <span>Symptomatic</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_7">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_7" name="cardiac_hx_of_dysrhythmia[]" value="Asymptomatic">
+            <span>Asymptomatic</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_8">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_8" name="cardiac_hx_of_dysrhythmia[]" value="Tachy">
+            <span>Tachy</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_9">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_9" name="cardiac_hx_of_dysrhythmia[]" value="Brady">
+            <span>Brady</span>
+          </label>
+          <label class="checklist-item" for="cardiac_hx_of_dysrhythmia_10">
+            <input type="checkbox" id="cardiac_hx_of_dysrhythmia_10" name="cardiac_hx_of_dysrhythmia[]" value="HOCM">
+            <span>HOCM</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-cardiac-vascular-issues" hidden>
+          <span class="system-card__subgroup-label">Vascular Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="cardiac_vascular_issues_0">
+            <input type="checkbox" id="cardiac_vascular_issues_0" name="cardiac_vascular_issues[]" value="PVD">
+            <span>PVD</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_1">
+            <input type="checkbox" id="cardiac_vascular_issues_1" name="cardiac_vascular_issues[]" value="PAD">
+            <span>PAD</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_2">
+            <input type="checkbox" id="cardiac_vascular_issues_2" name="cardiac_vascular_issues[]" value="Claudication">
+            <span>Claudication</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_3">
+            <input type="checkbox" id="cardiac_vascular_issues_3" name="cardiac_vascular_issues[]" value="Raynaud's Syndrome">
+            <span>Raynaud's Syndrome</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_4">
+            <input type="checkbox" id="cardiac_vascular_issues_4" name="cardiac_vascular_issues[]" value="SVC Syndrome">
+            <span>SVC Syndrome</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_5">
+            <input type="checkbox" id="cardiac_vascular_issues_5" name="cardiac_vascular_issues[]" value="Renal Artery Stenosis">
+            <span>Renal Artery Stenosis</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_6">
+            <input type="checkbox" id="cardiac_vascular_issues_6" name="cardiac_vascular_issues[]" value="AAA">
+            <span>AAA</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_7">
+            <input type="checkbox" id="cardiac_vascular_issues_7" name="cardiac_vascular_issues[]" value="TAA">
+            <span>TAA</span>
+          </label>
+          <label class="checklist-item" for="cardiac_vascular_issues_8">
+            <input type="checkbox" id="cardiac_vascular_issues_8" name="cardiac_vascular_issues[]" value="Stents">
+            <span>Stents</span>
+          </label>
+          </div>
+        </div>
         <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Heart Tones — select all that apply</span>
           <div class="checklist" data-checklist>
@@ -919,7 +1192,219 @@
         <input type="checkbox" id="pulmonary_thc_illicit_drug_use" name="pulmonary[]" value="THC/Illicit Drug Use">
         <span>THC/Illicit Drug Use</span>
       </label>
+      <label class="checklist-item" for="pulmonary_9">
+        <input type="checkbox" id="pulmonary_9" name="pulmonary[]" value="Restrictive Lung Disease">
+        <span>Restrictive Lung Disease</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_10">
+        <input type="checkbox" id="pulmonary_10" name="pulmonary[]" value="Cough Congestion">
+        <span>Cough Congestion</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_11">
+        <input type="checkbox" id="pulmonary_11" name="pulmonary[]" value="Recent Respiratory Infection">
+        <span>Recent Respiratory Infection</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_12">
+        <input type="checkbox" id="pulmonary_12" name="pulmonary[]" value="Lung Pathology">
+        <span>Lung Pathology</span>
+      </label>
+      <label class="checklist-item" for="pulmonary_13">
+        <input type="checkbox" id="pulmonary_13" name="pulmonary[]" value="Currently Active Environmental Allergy">
+        <span>Currently Active Environmental Allergy</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-asthma" hidden>
+          <span class="system-card__subgroup-label">Asthma Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_asthma_0">
+            <input type="checkbox" id="pulmonary_asthma_0" name="pulmonary_asthma[]" value="Mild Intermittent">
+            <span>Mild Intermittent</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_1">
+            <input type="checkbox" id="pulmonary_asthma_1" name="pulmonary_asthma[]" value="Mild Persistent">
+            <span>Mild Persistent</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_2">
+            <input type="checkbox" id="pulmonary_asthma_2" name="pulmonary_asthma[]" value="Moderate Persistent">
+            <span>Moderate Persistent</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_3">
+            <input type="checkbox" id="pulmonary_asthma_3" name="pulmonary_asthma[]" value="Severe">
+            <span>Severe</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_4">
+            <input type="checkbox" id="pulmonary_asthma_4" name="pulmonary_asthma[]" value="Exercise Induced">
+            <span>Exercise Induced</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_5">
+            <input type="checkbox" id="pulmonary_asthma_5" name="pulmonary_asthma[]" value="PO Steroids">
+            <span>PO Steroids</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_6">
+            <input type="checkbox" id="pulmonary_asthma_6" name="pulmonary_asthma[]" value="Inhaler Daily">
+            <span>Inhaler Daily</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_7">
+            <input type="checkbox" id="pulmonary_asthma_7" name="pulmonary_asthma[]" value="Allergy Induced">
+            <span>Allergy Induced</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_asthma_8">
+            <input type="checkbox" id="pulmonary_asthma_8" name="pulmonary_asthma[]" value="URI">
+            <span>URI</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-copd" hidden>
+          <span class="system-card__subgroup-label">COPD Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_copd_0">
+            <input type="checkbox" id="pulmonary_copd_0" name="pulmonary_copd[]" value="Mild">
+            <span>Mild</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_copd_1">
+            <input type="checkbox" id="pulmonary_copd_1" name="pulmonary_copd[]" value="Moderate">
+            <span>Moderate</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_copd_2">
+            <input type="checkbox" id="pulmonary_copd_2" name="pulmonary_copd[]" value="Severe">
+            <span>Severe</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_copd_3">
+            <input type="checkbox" id="pulmonary_copd_3" name="pulmonary_copd[]" value="Home O2">
+            <span>Home O2</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-restrictive-lung-disease" hidden>
+          <span class="system-card__subgroup-label">Restrictive Lung Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_restrictive_lung_disease_0">
+            <input type="checkbox" id="pulmonary_restrictive_lung_disease_0" name="pulmonary_restrictive_lung_disease[]" value="Mild">
+            <span>Mild</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_restrictive_lung_disease_1">
+            <input type="checkbox" id="pulmonary_restrictive_lung_disease_1" name="pulmonary_restrictive_lung_disease[]" value="Moderate">
+            <span>Moderate</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_restrictive_lung_disease_2">
+            <input type="checkbox" id="pulmonary_restrictive_lung_disease_2" name="pulmonary_restrictive_lung_disease[]" value="Severe">
+            <span>Severe</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_restrictive_lung_disease_3">
+            <input type="checkbox" id="pulmonary_restrictive_lung_disease_3" name="pulmonary_restrictive_lung_disease[]" value="Home O2">
+            <span>Home O2</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-sob" hidden>
+          <span class="system-card__subgroup-label">Shortness of Breath Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_sob_0">
+            <input type="checkbox" id="pulmonary_sob_0" name="pulmonary_sob[]" value="At Baseline">
+            <span>At Baseline</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_sob_1">
+            <input type="checkbox" id="pulmonary_sob_1" name="pulmonary_sob[]" value="At Minimal Exertion">
+            <span>At Minimal Exertion</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-cough-congestion" hidden>
+          <span class="system-card__subgroup-label">Cough Congestion Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_cough_congestion_0">
+            <input type="checkbox" id="pulmonary_cough_congestion_0" name="pulmonary_cough_congestion[]" value="Non-Productive">
+            <span>Non-Productive</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_cough_congestion_1">
+            <input type="checkbox" id="pulmonary_cough_congestion_1" name="pulmonary_cough_congestion[]" value="Clear Sputum">
+            <span>Clear Sputum</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_cough_congestion_2">
+            <input type="checkbox" id="pulmonary_cough_congestion_2" name="pulmonary_cough_congestion[]" value="Purulent Sputum">
+            <span>Purulent Sputum</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-recent-respiratory-infection" hidden>
+          <span class="system-card__subgroup-label">Recent Respiratory Infection Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_recent_respiratory_infection_0">
+            <input type="checkbox" id="pulmonary_recent_respiratory_infection_0" name="pulmonary_recent_respiratory_infection[]" value="URI">
+            <span>URI</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_recent_respiratory_infection_1">
+            <input type="checkbox" id="pulmonary_recent_respiratory_infection_1" name="pulmonary_recent_respiratory_infection[]" value="Bronchitis">
+            <span>Bronchitis</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_recent_respiratory_infection_2">
+            <input type="checkbox" id="pulmonary_recent_respiratory_infection_2" name="pulmonary_recent_respiratory_infection[]" value="Pneumonia">
+            <span>Pneumonia</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_recent_respiratory_infection_3">
+            <input type="checkbox" id="pulmonary_recent_respiratory_infection_3" name="pulmonary_recent_respiratory_infection[]" value="Resolved">
+            <span>Resolved</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_recent_respiratory_infection_4">
+            <input type="checkbox" id="pulmonary_recent_respiratory_infection_4" name="pulmonary_recent_respiratory_infection[]" value="Fever/Chills Last 24 Hrs">
+            <span>Fever/Chills Last 24 Hrs</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-lung-pathology" hidden>
+          <span class="system-card__subgroup-label">Lung Pathology Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_lung_pathology_0">
+            <input type="checkbox" id="pulmonary_lung_pathology_0" name="pulmonary_lung_pathology[]" value="ARDS">
+            <span>ARDS</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_1">
+            <input type="checkbox" id="pulmonary_lung_pathology_1" name="pulmonary_lung_pathology[]" value="Acute Respiratory Failure">
+            <span>Acute Respiratory Failure</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_2">
+            <input type="checkbox" id="pulmonary_lung_pathology_2" name="pulmonary_lung_pathology[]" value="Pulmonary HTN">
+            <span>Pulmonary HTN</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_3">
+            <input type="checkbox" id="pulmonary_lung_pathology_3" name="pulmonary_lung_pathology[]" value="Edema">
+            <span>Edema</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_4">
+            <input type="checkbox" id="pulmonary_lung_pathology_4" name="pulmonary_lung_pathology[]" value="Effusion">
+            <span>Effusion</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_5">
+            <input type="checkbox" id="pulmonary_lung_pathology_5" name="pulmonary_lung_pathology[]" value="Pneumothorax">
+            <span>Pneumothorax</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_lung_pathology_6">
+            <input type="checkbox" id="pulmonary_lung_pathology_6" name="pulmonary_lung_pathology[]" value="Hx of PE">
+            <span>Hx of PE</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-pulmonary-sleep-apnea" hidden>
+          <span class="system-card__subgroup-label">Sleep Apnea Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="pulmonary_sleep_apnea_0">
+            <input type="checkbox" id="pulmonary_sleep_apnea_0" name="pulmonary_sleep_apnea[]" value="BiPAP">
+            <span>BiPAP</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_sleep_apnea_1">
+            <input type="checkbox" id="pulmonary_sleep_apnea_1" name="pulmonary_sleep_apnea[]" value="O2">
+            <span>O2</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_sleep_apnea_2">
+            <input type="checkbox" id="pulmonary_sleep_apnea_2" name="pulmonary_sleep_apnea[]" value="Non-Compliant">
+            <span>Non-Compliant</span>
+          </label>
+          <label class="checklist-item" for="pulmonary_sleep_apnea_3">
+            <input type="checkbox" id="pulmonary_sleep_apnea_3" name="pulmonary_sleep_apnea[]" value="High Suspicion">
+            <span>High Suspicion</span>
+          </label>
+          </div>
+        </div>
         <div class="field subfield" id="pulmonary_pack_years" hidden>
           <label class="field__label" for="pulmonary_pack_years-select">Pack-Years</label>
           <select class="input" id="pulmonary_pack_years-select" name="pulmonary_pack_years">
@@ -1184,7 +1669,182 @@
         <input type="checkbox" id="hepatic_gi_6" name="hepatic_gi[]" value="GERD">
         <span>GERD</span>
       </label>
+      <label class="checklist-item" for="hepatic_gi_7">
+        <input type="checkbox" id="hepatic_gi_7" name="hepatic_gi[]" value="Nausea">
+        <span>Nausea</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_8">
+        <input type="checkbox" id="hepatic_gi_8" name="hepatic_gi[]" value="Vomiting">
+        <span>Vomiting</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_9">
+        <input type="checkbox" id="hepatic_gi_9" name="hepatic_gi[]" value="Esophageal Issues">
+        <span>Esophageal Issues</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_10">
+        <input type="checkbox" id="hepatic_gi_10" name="hepatic_gi[]" value="Bowel Issues">
+        <span>Bowel Issues</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_11">
+        <input type="checkbox" id="hepatic_gi_11" name="hepatic_gi[]" value="Liver Issues">
+        <span>Liver Issues</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_12">
+        <input type="checkbox" id="hepatic_gi_12" name="hepatic_gi[]" value="Pancreatic Issues">
+        <span>Pancreatic Issues</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_13">
+        <input type="checkbox" id="hepatic_gi_13" name="hepatic_gi[]" value="GI Bleed">
+        <span>GI Bleed</span>
+      </label>
+      <label class="checklist-item" for="hepatic_gi_14">
+        <input type="checkbox" id="hepatic_gi_14" name="hepatic_gi[]" value="Hx of PUD">
+        <span>Hx of PUD</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-nausea" hidden>
+          <span class="system-card__subgroup-label">Nausea Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_nausea_0">
+            <input type="checkbox" id="hepatic_gi_nausea_0" name="hepatic_gi_nausea[]" value="Acute">
+            <span>Acute</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_nausea_1">
+            <input type="checkbox" id="hepatic_gi_nausea_1" name="hepatic_gi_nausea[]" value="Chronic">
+            <span>Chronic</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-vomiting" hidden>
+          <span class="system-card__subgroup-label">Vomiting Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_vomiting_0">
+            <input type="checkbox" id="hepatic_gi_vomiting_0" name="hepatic_gi_vomiting[]" value="Acute">
+            <span>Acute</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_vomiting_1">
+            <input type="checkbox" id="hepatic_gi_vomiting_1" name="hepatic_gi_vomiting[]" value="Chronic">
+            <span>Chronic</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-esophageal-issues" hidden>
+          <span class="system-card__subgroup-label">Esophageal Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_esophageal_issues_0">
+            <input type="checkbox" id="hepatic_gi_esophageal_issues_0" name="hepatic_gi_esophageal_issues[]" value="Achalasia">
+            <span>Achalasia</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_esophageal_issues_1">
+            <input type="checkbox" id="hepatic_gi_esophageal_issues_1" name="hepatic_gi_esophageal_issues[]" value="Hiatal Hernia">
+            <span>Hiatal Hernia</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_esophageal_issues_2">
+            <input type="checkbox" id="hepatic_gi_esophageal_issues_2" name="hepatic_gi_esophageal_issues[]" value="Esophagectomy">
+            <span>Esophagectomy</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_esophageal_issues_3">
+            <input type="checkbox" id="hepatic_gi_esophageal_issues_3" name="hepatic_gi_esophageal_issues[]" value="Varices">
+            <span>Varices</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-bowel-issues" hidden>
+          <span class="system-card__subgroup-label">Bowel Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_0">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_0" name="hepatic_gi_bowel_issues[]" value="Obstruction">
+            <span>Obstruction</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_1">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_1" name="hepatic_gi_bowel_issues[]" value="Ileus">
+            <span>Ileus</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_2">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_2" name="hepatic_gi_bowel_issues[]" value="Perforation">
+            <span>Perforation</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_3">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_3" name="hepatic_gi_bowel_issues[]" value="Diverticulitis">
+            <span>Diverticulitis</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_4">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_4" name="hepatic_gi_bowel_issues[]" value="Ulcerative Colitis">
+            <span>Ulcerative Colitis</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_5">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_5" name="hepatic_gi_bowel_issues[]" value="Crohn's Disease">
+            <span>Crohn's Disease</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_6">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_6" name="hepatic_gi_bowel_issues[]" value="IBS">
+            <span>IBS</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_7">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_7" name="hepatic_gi_bowel_issues[]" value="Bowel Ischemia">
+            <span>Bowel Ischemia</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_bowel_issues_8">
+            <input type="checkbox" id="hepatic_gi_bowel_issues_8" name="hepatic_gi_bowel_issues[]" value="Delayed Gastric Emptying">
+            <span>Delayed Gastric Emptying</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-liver-issues" hidden>
+          <span class="system-card__subgroup-label">Liver Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_liver_issues_0">
+            <input type="checkbox" id="hepatic_gi_liver_issues_0" name="hepatic_gi_liver_issues[]" value="Cirrhosis">
+            <span>Cirrhosis</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_liver_issues_1">
+            <input type="checkbox" id="hepatic_gi_liver_issues_1" name="hepatic_gi_liver_issues[]" value="Biliary Tract Disease">
+            <span>Biliary Tract Disease</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_liver_issues_2">
+            <input type="checkbox" id="hepatic_gi_liver_issues_2" name="hepatic_gi_liver_issues[]" value="Liver Transplant">
+            <span>Liver Transplant</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_liver_issues_3">
+            <input type="checkbox" id="hepatic_gi_liver_issues_3" name="hepatic_gi_liver_issues[]" value="Fatty Liver">
+            <span>Fatty Liver</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-pancreatic-issues" hidden>
+          <span class="system-card__subgroup-label">Pancreatic Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_pancreatic_issues_0">
+            <input type="checkbox" id="hepatic_gi_pancreatic_issues_0" name="hepatic_gi_pancreatic_issues[]" value="Acute">
+            <span>Acute</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_pancreatic_issues_1">
+            <input type="checkbox" id="hepatic_gi_pancreatic_issues_1" name="hepatic_gi_pancreatic_issues[]" value="Chronic">
+            <span>Chronic</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_pancreatic_issues_2">
+            <input type="checkbox" id="hepatic_gi_pancreatic_issues_2" name="hepatic_gi_pancreatic_issues[]" value="Recurrent">
+            <span>Recurrent</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-hepatic-gi-gerd" hidden>
+          <span class="system-card__subgroup-label">GERD Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="hepatic_gi_gerd_0">
+            <input type="checkbox" id="hepatic_gi_gerd_0" name="hepatic_gi_gerd[]" value="Well Controlled">
+            <span>Well Controlled</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_gerd_1">
+            <input type="checkbox" id="hepatic_gi_gerd_1" name="hepatic_gi_gerd[]" value="Poorly Controlled">
+            <span>Poorly Controlled</span>
+          </label>
+          <label class="checklist-item" for="hepatic_gi_gerd_2">
+            <input type="checkbox" id="hepatic_gi_gerd_2" name="hepatic_gi_gerd[]" value="Gestational">
+            <span>Gestational</span>
+          </label>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="hepatic_gi_notes">Additional notes</label>
           <textarea class="textarea" id="hepatic_gi_notes" name="hepatic_gi_notes"></textarea>
@@ -1229,7 +1889,166 @@
         <input type="checkbox" id="neuro_5" name="neuro[]" value="MS / MG / ALS">
         <span>MS / MG / ALS</span>
       </label>
+      <label class="checklist-item" for="neuro_6">
+        <input type="checkbox" id="neuro_6" name="neuro[]" value="Headaches">
+        <span>Headaches</span>
+      </label>
+      <label class="checklist-item" for="neuro_7">
+        <input type="checkbox" id="neuro_7" name="neuro[]" value="Syncope">
+        <span>Syncope</span>
+      </label>
+      <label class="checklist-item" for="neuro_8">
+        <input type="checkbox" id="neuro_8" name="neuro[]" value="Structural Brain Disease">
+        <span>Structural Brain Disease</span>
+      </label>
+      <label class="checklist-item" for="neuro_9">
+        <input type="checkbox" id="neuro_9" name="neuro[]" value="Dizziness / Motion Sickness">
+        <span>Dizziness / Motion Sickness</span>
+      </label>
+      <label class="checklist-item" for="neuro_10">
+        <input type="checkbox" id="neuro_10" name="neuro[]" value="Intellectual Disability">
+        <span>Intellectual Disability</span>
+      </label>
+      <label class="checklist-item" for="neuro_11">
+        <input type="checkbox" id="neuro_11" name="neuro[]" value="Dementia">
+        <span>Dementia</span>
+      </label>
+      <label class="checklist-item" for="neuro_12">
+        <input type="checkbox" id="neuro_12" name="neuro[]" value="Spinal Injury">
+        <span>Spinal Injury</span>
+      </label>
+      <label class="checklist-item" for="neuro_13">
+        <input type="checkbox" id="neuro_13" name="neuro[]" value="Delirium">
+        <span>Delirium</span>
+      </label>
+      <label class="checklist-item" for="neuro_14">
+        <input type="checkbox" id="neuro_14" name="neuro[]" value="Gait / Mobility Issues">
+        <span>Gait / Mobility Issues</span>
+      </label>
+      <label class="checklist-item" for="neuro_15">
+        <input type="checkbox" id="neuro_15" name="neuro[]" value="Positioning Issues">
+        <span>Positioning Issues</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-neuro-headaches" hidden>
+          <span class="system-card__subgroup-label">Headaches Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_headaches_0">
+            <input type="checkbox" id="neuro_headaches_0" name="neuro_headaches[]" value="Infrequent">
+            <span>Infrequent</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-syncope" hidden>
+          <span class="system-card__subgroup-label">Syncope Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_syncope_0">
+            <input type="checkbox" id="neuro_syncope_0" name="neuro_syncope[]" value="Recent">
+            <span>Recent</span>
+          </label>
+          <label class="checklist-item" for="neuro_syncope_1">
+            <input type="checkbox" id="neuro_syncope_1" name="neuro_syncope[]" value="Non-cardiac / Situational">
+            <span>Non-cardiac / Situational</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-chronic-pain" hidden>
+          <span class="system-card__subgroup-label">Chronic Pain Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_chronic_pain_0">
+            <input type="checkbox" id="neuro_chronic_pain_0" name="neuro_chronic_pain[]" value="Opioid Tolerant">
+            <span>Opioid Tolerant</span>
+          </label>
+          <label class="checklist-item" for="neuro_chronic_pain_1">
+            <input type="checkbox" id="neuro_chronic_pain_1" name="neuro_chronic_pain[]" value="Methadone">
+            <span>Methadone</span>
+          </label>
+          <label class="checklist-item" for="neuro_chronic_pain_2">
+            <input type="checkbox" id="neuro_chronic_pain_2" name="neuro_chronic_pain[]" value="Sees Pain Specialist">
+            <span>Sees Pain Specialist</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-seizures" hidden>
+          <span class="system-card__subgroup-label">Seizures Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_seizures_0">
+            <input type="checkbox" id="neuro_seizures_0" name="neuro_seizures[]" value="Well Controlled">
+            <span>Well Controlled</span>
+          </label>
+          <label class="checklist-item" for="neuro_seizures_1">
+            <input type="checkbox" id="neuro_seizures_1" name="neuro_seizures[]" value="Poorly Controlled">
+            <span>Poorly Controlled</span>
+          </label>
+          <label class="checklist-item" for="neuro_seizures_2">
+            <input type="checkbox" id="neuro_seizures_2" name="neuro_seizures[]" value="Tonic Clonic">
+            <span>Tonic Clonic</span>
+          </label>
+          <label class="checklist-item" for="neuro_seizures_3">
+            <input type="checkbox" id="neuro_seizures_3" name="neuro_seizures[]" value="Absence">
+            <span>Absence</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-structural-brain-disease" hidden>
+          <span class="system-card__subgroup-label">Structural Brain Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_structural_brain_disease_0">
+            <input type="checkbox" id="neuro_structural_brain_disease_0" name="neuro_structural_brain_disease[]" value="TBI">
+            <span>TBI</span>
+          </label>
+          <label class="checklist-item" for="neuro_structural_brain_disease_1">
+            <input type="checkbox" id="neuro_structural_brain_disease_1" name="neuro_structural_brain_disease[]" value="Tumor">
+            <span>Tumor</span>
+          </label>
+          <label class="checklist-item" for="neuro_structural_brain_disease_2">
+            <input type="checkbox" id="neuro_structural_brain_disease_2" name="neuro_structural_brain_disease[]" value="Hydrocephalus">
+            <span>Hydrocephalus</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-neuropathy" hidden>
+          <span class="system-card__subgroup-label">Peripheral Nerve Issue Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_neuropathy_0">
+            <input type="checkbox" id="neuro_neuropathy_0" name="neuro_neuropathy[]" value="Carpal Tunnel">
+            <span>Carpal Tunnel</span>
+          </label>
+          <label class="checklist-item" for="neuro_neuropathy_1">
+            <input type="checkbox" id="neuro_neuropathy_1" name="neuro_neuropathy[]" value="Radiculopathy">
+            <span>Radiculopathy</span>
+          </label>
+          <label class="checklist-item" for="neuro_neuropathy_2">
+            <input type="checkbox" id="neuro_neuropathy_2" name="neuro_neuropathy[]" value="Motor Deficit">
+            <span>Motor Deficit</span>
+          </label>
+          <label class="checklist-item" for="neuro_neuropathy_3">
+            <input type="checkbox" id="neuro_neuropathy_3" name="neuro_neuropathy[]" value="Sensory Deficit">
+            <span>Sensory Deficit</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-neuro-ms-mg-als" hidden>
+          <span class="system-card__subgroup-label">Neuromuscular Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="neuro_ms_mg_als_0">
+            <input type="checkbox" id="neuro_ms_mg_als_0" name="neuro_ms_mg_als[]" value="Parkinson's">
+            <span>Parkinson's</span>
+          </label>
+          <label class="checklist-item" for="neuro_ms_mg_als_1">
+            <input type="checkbox" id="neuro_ms_mg_als_1" name="neuro_ms_mg_als[]" value="Muscular Dystrophy">
+            <span>Muscular Dystrophy</span>
+          </label>
+          <label class="checklist-item" for="neuro_ms_mg_als_2">
+            <input type="checkbox" id="neuro_ms_mg_als_2" name="neuro_ms_mg_als[]" value="Myopathy">
+            <span>Myopathy</span>
+          </label>
+          <label class="checklist-item" for="neuro_ms_mg_als_3">
+            <input type="checkbox" id="neuro_ms_mg_als_3" name="neuro_ms_mg_als[]" value="Cerebral Palsy">
+            <span>Cerebral Palsy</span>
+          </label>
+          </div>
+        </div>
         <div class="assessment-summary" data-cva-summary-row hidden>
           <span data-cva-summary></span>
           <button type="button" class="assessment-summary__edit" data-cva-edit>Edit</button>
@@ -1442,7 +2261,40 @@
         <input type="checkbox" id="renal_gu_3" name="renal_gu[]" value="Peritoneal dialysis">
         <span>Peritoneal dialysis</span>
       </label>
+      <label class="checklist-item" for="renal_gu_4">
+        <input type="checkbox" id="renal_gu_4" name="renal_gu[]" value="Anuric">
+        <span>Anuric</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_5">
+        <input type="checkbox" id="renal_gu_5" name="renal_gu[]" value="Oliguric">
+        <span>Oliguric</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_6">
+        <input type="checkbox" id="renal_gu_6" name="renal_gu[]" value="Hx of Kidney Stones">
+        <span>Hx of Kidney Stones</span>
+      </label>
+      <label class="checklist-item" for="renal_gu_7">
+        <input type="checkbox" id="renal_gu_7" name="renal_gu[]" value="Urinary Issues">
+        <span>Urinary Issues</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-renal-gu-urinary-issues" hidden>
+          <span class="system-card__subgroup-label">Urinary Issues Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="renal_gu_urinary_issues_0">
+            <input type="checkbox" id="renal_gu_urinary_issues_0" name="renal_gu_urinary_issues[]" value="BPH">
+            <span>BPH</span>
+          </label>
+          <label class="checklist-item" for="renal_gu_urinary_issues_1">
+            <input type="checkbox" id="renal_gu_urinary_issues_1" name="renal_gu_urinary_issues[]" value="Urinary Hesitancy">
+            <span>Urinary Hesitancy</span>
+          </label>
+          <label class="checklist-item" for="renal_gu_urinary_issues_2">
+            <input type="checkbox" id="renal_gu_urinary_issues_2" name="renal_gu_urinary_issues[]" value="Interstitial Cystitis">
+            <span>Interstitial Cystitis</span>
+          </label>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="renal_gu_notes">Additional notes</label>
           <textarea class="textarea" id="renal_gu_notes" name="renal_gu_notes"></textarea>
@@ -1475,7 +2327,128 @@
         <input type="checkbox" id="endocrine_2" name="endocrine[]" value="Adrenal Gland Dysfunction">
         <span>Adrenal Gland Dysfunction</span>
       </label>
+      <label class="checklist-item" for="endocrine_3">
+        <input type="checkbox" id="endocrine_3" name="endocrine[]" value="Endocrine Tumor">
+        <span>Endocrine Tumor</span>
+      </label>
+      <label class="checklist-item" for="endocrine_4">
+        <input type="checkbox" id="endocrine_4" name="endocrine[]" value="Pituitary Disease">
+        <span>Pituitary Disease</span>
+      </label>
+      <label class="checklist-item" for="endocrine_5">
+        <input type="checkbox" id="endocrine_5" name="endocrine[]" value="Autoimmune Disease">
+        <span>Autoimmune Disease</span>
+      </label>
+      <label class="checklist-item" for="endocrine_6">
+        <input type="checkbox" id="endocrine_6" name="endocrine[]" value="Malignancy">
+        <span>Malignancy</span>
+      </label>
+      <label class="checklist-item" for="endocrine_7">
+        <input type="checkbox" id="endocrine_7" name="endocrine[]" value="Electrolyte Imbalance">
+        <span>Electrolyte Imbalance</span>
+      </label>
+      <label class="checklist-item" for="endocrine_8">
+        <input type="checkbox" id="endocrine_8" name="endocrine[]" value="Hormone Use">
+        <span>Hormone Use</span>
+      </label>
+      <label class="checklist-item" for="endocrine_9">
+        <input type="checkbox" id="endocrine_9" name="endocrine[]" value="Chemo Hx">
+        <span>Chemo Hx</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-endocrine-dm" hidden>
+          <span class="system-card__subgroup-label">DM Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="endocrine_dm_0">
+            <input type="checkbox" id="endocrine_dm_0" name="endocrine_dm[]" value="Gestational">
+            <span>Gestational</span>
+          </label>
+          <label class="checklist-item" for="endocrine_dm_1">
+            <input type="checkbox" id="endocrine_dm_1" name="endocrine_dm[]" value="Well Controlled">
+            <span>Well Controlled</span>
+          </label>
+          <label class="checklist-item" for="endocrine_dm_2">
+            <input type="checkbox" id="endocrine_dm_2" name="endocrine_dm[]" value="Poorly Controlled">
+            <span>Poorly Controlled</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-endocrine-endocrine-tumor" hidden>
+          <span class="system-card__subgroup-label">Endocrine Tumor Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="endocrine_endocrine_tumor_0">
+            <input type="checkbox" id="endocrine_endocrine_tumor_0" name="endocrine_endocrine_tumor[]" value="Small Cell">
+            <span>Small Cell</span>
+          </label>
+          <label class="checklist-item" for="endocrine_endocrine_tumor_1">
+            <input type="checkbox" id="endocrine_endocrine_tumor_1" name="endocrine_endocrine_tumor[]" value="Carcinoid">
+            <span>Carcinoid</span>
+          </label>
+          <label class="checklist-item" for="endocrine_endocrine_tumor_2">
+            <input type="checkbox" id="endocrine_endocrine_tumor_2" name="endocrine_endocrine_tumor[]" value="Parathyroid">
+            <span>Parathyroid</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-endocrine-pituitary-disease" hidden>
+          <span class="system-card__subgroup-label">Pituitary Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="endocrine_pituitary_disease_0">
+            <input type="checkbox" id="endocrine_pituitary_disease_0" name="endocrine_pituitary_disease[]" value="Cushing Disease">
+            <span>Cushing Disease</span>
+          </label>
+          <label class="checklist-item" for="endocrine_pituitary_disease_1">
+            <input type="checkbox" id="endocrine_pituitary_disease_1" name="endocrine_pituitary_disease[]" value="SIADH">
+            <span>SIADH</span>
+          </label>
+          <label class="checklist-item" for="endocrine_pituitary_disease_2">
+            <input type="checkbox" id="endocrine_pituitary_disease_2" name="endocrine_pituitary_disease[]" value="DI">
+            <span>DI</span>
+          </label>
+          <label class="checklist-item" for="endocrine_pituitary_disease_3">
+            <input type="checkbox" id="endocrine_pituitary_disease_3" name="endocrine_pituitary_disease[]" value="Acromegaly">
+            <span>Acromegaly</span>
+          </label>
+          <label class="checklist-item" for="endocrine_pituitary_disease_4">
+            <input type="checkbox" id="endocrine_pituitary_disease_4" name="endocrine_pituitary_disease[]" value="GHD">
+            <span>GHD</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-endocrine-adrenal-gland-dysfunction" hidden>
+          <span class="system-card__subgroup-label">Adrenal Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="endocrine_adrenal_gland_dysfunction_0">
+            <input type="checkbox" id="endocrine_adrenal_gland_dysfunction_0" name="endocrine_adrenal_gland_dysfunction[]" value="Addison's">
+            <span>Addison's</span>
+          </label>
+          <label class="checklist-item" for="endocrine_adrenal_gland_dysfunction_1">
+            <input type="checkbox" id="endocrine_adrenal_gland_dysfunction_1" name="endocrine_adrenal_gland_dysfunction[]" value="Pheochromocytoma">
+            <span>Pheochromocytoma</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-endocrine-autoimmune-disease" hidden>
+          <span class="system-card__subgroup-label">Autoimmune Disease Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="endocrine_autoimmune_disease_0">
+            <input type="checkbox" id="endocrine_autoimmune_disease_0" name="endocrine_autoimmune_disease[]" value="Lupus">
+            <span>Lupus</span>
+          </label>
+          <label class="checklist-item" for="endocrine_autoimmune_disease_1">
+            <input type="checkbox" id="endocrine_autoimmune_disease_1" name="endocrine_autoimmune_disease[]" value="Sjogrens">
+            <span>Sjogrens</span>
+          </label>
+          <label class="checklist-item" for="endocrine_autoimmune_disease_2">
+            <input type="checkbox" id="endocrine_autoimmune_disease_2" name="endocrine_autoimmune_disease[]" value="Scleroderma">
+            <span>Scleroderma</span>
+          </label>
+          <label class="checklist-item" for="endocrine_autoimmune_disease_3">
+            <input type="checkbox" id="endocrine_autoimmune_disease_3" name="endocrine_autoimmune_disease[]" value="Guillain-Barre">
+            <span>Guillain-Barre</span>
+          </label>
+          </div>
+        </div>
         <div class="assessment-summary" data-thyroid-summary-row hidden>
           <span data-thyroid-summary></span>
           <button type="button" class="assessment-summary__edit" data-thyroid-edit>Edit</button>
@@ -1580,7 +2553,62 @@
         <input type="checkbox" id="heme_onc_4" name="heme_onc[]" value="Cancer">
         <span>Cancer</span>
       </label>
+      <label class="checklist-item" for="heme_onc_5">
+        <input type="checkbox" id="heme_onc_5" name="heme_onc[]" value="Heme / Oncology Abnormalities">
+        <span>Heme / Oncology Abnormalities</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_6">
+        <input type="checkbox" id="heme_onc_6" name="heme_onc[]" value="Blood Transfusion">
+        <span>Blood Transfusion</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_7">
+        <input type="checkbox" id="heme_onc_7" name="heme_onc[]" value="Blood Dyscrasia">
+        <span>Blood Dyscrasia</span>
+      </label>
+      <label class="checklist-item" for="heme_onc_8">
+        <input type="checkbox" id="heme_onc_8" name="heme_onc[]" value="Coagulopathy">
+        <span>Coagulopathy</span>
+      </label>
     </div>
+        <div class="system-card__subgroup" id="reveal-heme-onc-heme-oncology-abnormalities" hidden>
+          <span class="system-card__subgroup-label">Heme / Oncology Abnormalities Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="heme_onc_heme_oncology_abnormalities_0">
+            <input type="checkbox" id="heme_onc_heme_oncology_abnormalities_0" name="heme_onc_heme_oncology_abnormalities[]" value="Hypercoagulable">
+            <span>Hypercoagulable</span>
+          </label>
+          <label class="checklist-item" for="heme_onc_heme_oncology_abnormalities_1">
+            <input type="checkbox" id="heme_onc_heme_oncology_abnormalities_1" name="heme_onc_heme_oncology_abnormalities[]" value="Anticoagulation Prophylaxis">
+            <span>Anticoagulation Prophylaxis</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-heme-onc-blood-transfusion" hidden>
+          <span class="system-card__subgroup-label">Blood Transfusion Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="heme_onc_blood_transfusion_0">
+            <input type="checkbox" id="heme_onc_blood_transfusion_0" name="heme_onc_blood_transfusion[]" value="Acute Injury">
+            <span>Acute Injury</span>
+          </label>
+          <label class="checklist-item" for="heme_onc_blood_transfusion_1">
+            <input type="checkbox" id="heme_onc_blood_transfusion_1" name="heme_onc_blood_transfusion[]" value="Chronic Illness">
+            <span>Chronic Illness</span>
+          </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup" id="reveal-heme-onc-blood-dyscrasia" hidden>
+          <span class="system-card__subgroup-label">Blood Dyscrasia Details — select all that apply</span>
+          <div class="checklist" data-checklist>
+          <label class="checklist-item" for="heme_onc_blood_dyscrasia_0">
+            <input type="checkbox" id="heme_onc_blood_dyscrasia_0" name="heme_onc_blood_dyscrasia[]" value="Thrombocytopenia">
+            <span>Thrombocytopenia</span>
+          </label>
+          <label class="checklist-item" for="heme_onc_blood_dyscrasia_1">
+            <input type="checkbox" id="heme_onc_blood_dyscrasia_1" name="heme_onc_blood_dyscrasia[]" value="Polycythemia">
+            <span>Polycythemia</span>
+          </label>
+          </div>
+        </div>
       <div class="assessment-summary" data-bleeding-summary-row hidden>
         <span data-bleeding-summary></span>
         <button type="button" class="assessment-summary__edit" data-bleeding-edit>Edit</button>
@@ -2055,6 +3083,18 @@
       <label class="checklist-item" for="psychosocial_6">
         <input type="checkbox" id="psychosocial_6" name="psychosocial[]" value="PTSD">
         <span>PTSD</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_7">
+        <input type="checkbox" id="psychosocial_7" name="psychosocial[]" value="Claustrophobia">
+        <span>Claustrophobia</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_8">
+        <input type="checkbox" id="psychosocial_8" name="psychosocial[]" value="Panic Attacks">
+        <span>Panic Attacks</span>
+      </label>
+      <label class="checklist-item" for="psychosocial_9">
+        <input type="checkbox" id="psychosocial_9" name="psychosocial[]" value="Autism">
+        <span>Autism</span>
       </label>
     </div>
         <div class="field" style="margin-top: var(--space-3);">
