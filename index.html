@@ -1219,21 +1219,29 @@
               </button>
               <div class="cardiac-test__detail" data-cardiac-test-detail hidden>
                 <p class="field__hint" style="margin: 0 0 var(--space-2);">RA can involve atlantoaxial instability — relevant for airway positioning and intubation planning.</p>
-                <div class="field-row">
-                  <div class="field"><label class="field__label" for="msk_imaging_date">Date</label><input class="input" type="date" id="msk_imaging_date" name="msk_imaging_date"></div>
-                  <div class="field"><label class="field__label" for="msk_imaging_type">Type</label>
-                    <select class="input" id="msk_imaging_type" name="msk_imaging_type">
-                      <option value="">Select…</option>
-                      <option value="CXR">CXR</option>
-                      <option value="CT">CT</option>
-                      <option value="MRI">MRI</option>
-                      <option value="X-ray">X-ray</option>
-                    </select>
+                <div class="imaging-repeater" data-imaging-repeater>
+                  <div class="imaging-repeater__rows" data-imaging-repeater-rows>
+                    <div class="msk-imaging-entry" data-imaging-row>
+                      <div class="msk-imaging-entry__head"><button type="button" class="msk-imaging-entry__remove" data-imaging-row-remove>Remove</button></div>
+                      <div class="field-row">
+                        <div class="field"><label class="field__label">Date</label><input class="input" type="date" name="msk_imaging_date[]"></div>
+                        <div class="field"><label class="field__label">Type</label>
+                          <select class="input" name="msk_imaging_type[]">
+                            <option value="">Select…</option>
+                            <option value="CXR">CXR</option>
+                            <option value="CT">CT</option>
+                            <option value="MRI">MRI</option>
+                            <option value="X-ray">X-ray</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="field" style="margin-top: var(--space-3);">
+                        <label class="field__label">Notes</label>
+                        <textarea class="textarea" name="msk_imaging_notes[]" placeholder="e.g., C-spine flexion/extension views, findings"></textarea>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="field" style="margin-top: var(--space-3);">
-                  <label class="field__label" for="msk_imaging_notes">Notes</label>
-                  <textarea class="textarea" id="msk_imaging_notes" name="msk_imaging_notes" placeholder="e.g., C-spine flexion/extension views, findings"></textarea>
+                  <button type="button" class="btn btn--ghost imaging-repeater__add" data-imaging-repeater-add>+ Add another</button>
                 </div>
               </div>
             </div>

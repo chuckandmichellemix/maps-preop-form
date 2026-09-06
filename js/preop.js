@@ -535,44 +535,48 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
   check();
 })();
 
-/* ---------- Imaging repeater (simple add/remove rows) ---------- */
+/* ---------- Imaging repeater (simple add/remove rows) ----------
+   Supports multiple independent repeater instances on the same page
+   (e.g. the standing Imaging section and the RA-triggered Head/Neck
+   imaging card each have their own [data-imaging-repeater]). ---------- */
 (function () {
-  const repeater = document.querySelector('[data-imaging-repeater]');
-  if (!repeater) return;
-  const rowsWrap = repeater.querySelector('[data-imaging-repeater-rows]');
-  const addBtn = repeater.querySelector('[data-imaging-repeater-add]');
-  if (!rowsWrap || !addBtn) return;
+  document.querySelectorAll('[data-imaging-repeater]').forEach((repeater) => {
+    const rowsWrap = repeater.querySelector('[data-imaging-repeater-rows]');
+    const addBtn = repeater.querySelector('[data-imaging-repeater-add]');
+    if (!rowsWrap || !addBtn) return;
 
-  function wireRow(row) {
-    const removeBtn = row.querySelector('[data-imaging-row-remove]');
-    if (!removeBtn) return;
-    removeBtn.addEventListener('click', () => {
-      const rows = rowsWrap.querySelectorAll('[data-imaging-row]');
-      if (rows.length <= 1) {
-        row.querySelectorAll('input, select').forEach((el) => {
-          if (el.tagName === 'SELECT') el.selectedIndex = 0;
-          else el.value = '';
-        });
-        return;
-      }
-      row.remove();
-    });
-  }
+    function resetFields(row) {
+      row.querySelectorAll('input, select, textarea').forEach((el) => {
+        if (el.tagName === 'SELECT') el.selectedIndex = 0;
+        else el.value = '';
+      });
+    }
 
-  function addRow() {
-    const template = rowsWrap.querySelector('[data-imaging-row]');
-    if (!template) return;
-    const row = template.cloneNode(true);
-    row.querySelectorAll('input, select').forEach((el) => {
-      if (el.tagName === 'SELECT') el.selectedIndex = 0;
-      else el.value = '';
-    });
-    wireRow(row);
-    rowsWrap.appendChild(row);
-  }
+    function wireRow(row) {
+      const removeBtn = row.querySelector('[data-imaging-row-remove]');
+      if (!removeBtn) return;
+      removeBtn.addEventListener('click', () => {
+        const rows = rowsWrap.querySelectorAll('[data-imaging-row]');
+        if (rows.length <= 1) {
+          resetFields(row);
+          return;
+        }
+        row.remove();
+      });
+    }
 
-  rowsWrap.querySelectorAll('[data-imaging-row]').forEach(wireRow);
-  addBtn.addEventListener('click', addRow);
+    function addRow() {
+      const template = rowsWrap.querySelector('[data-imaging-row]');
+      if (!template) return;
+      const row = template.cloneNode(true);
+      resetFields(row);
+      wireRow(row);
+      rowsWrap.appendChild(row);
+    }
+
+    rowsWrap.querySelectorAll('[data-imaging-row]').forEach(wireRow);
+    addBtn.addEventListener('click', addRow);
+  });
 })();
 
 /* ---------- Diagnosis / Procedure code repeater ----------
