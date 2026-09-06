@@ -703,3 +703,337 @@ document.querySelectorAll('[data-chip-field]').forEach((el) => {
     }
   });
 })();
+
+/* ---------- Generic popup modal helpers ---------- */
+(function () {
+  document.addEventListener('click', (e) => {
+    const overlay = e.target.closest('.modal-overlay');
+    if (overlay && e.target === overlay) {
+      overlay.hidden = true;
+      return;
+    }
+    const closeBtn = e.target.closest('[data-modal-close]');
+    if (closeBtn) {
+      const modal = closeBtn.closest('.modal-overlay');
+      if (modal) modal.hidden = true;
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.modal-overlay:not([hidden])').forEach((m) => { m.hidden = true; });
+  });
+})();
+
+/* ---------- Pulmonary: Breath Sounds -> laterality/lung-field popup ---------- */
+(function () {
+  const triggers = document.querySelectorAll('[data-breath-lateralized]');
+  const modal = document.getElementById('breath-location-modal');
+  const summaryRow = document.querySelector('[data-breath-location-summary-row]');
+  const summaryText = document.querySelector('[data-breath-location-summary]');
+  const editBtn = document.querySelector('[data-breath-location-edit]');
+  if (!triggers.length || !modal) return;
+  const locationInputs = modal.querySelectorAll('[data-breath-location-input]');
+
+  function anyTriggerChecked() {
+    return Array.from(triggers).some((t) => t.checked);
+  }
+
+  function updateSummary() {
+    const selected = Array.from(locationInputs).filter((i) => i.checked).map((i) => i.value);
+    if (selected.length) {
+      summaryText.textContent = 'Location: ' + selected.join(', ');
+      summaryRow.hidden = false;
+    } else {
+      summaryRow.hidden = true;
+    }
+  }
+
+  triggers.forEach((t) => {
+    t.addEventListener('change', () => {
+      if (t.checked) {
+        modal.hidden = false;
+      } else if (!anyTriggerChecked()) {
+        locationInputs.forEach((i) => { i.checked = false; });
+        updateSummary();
+      }
+    });
+  });
+
+  locationInputs.forEach((i) => i.addEventListener('change', updateSummary));
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => { modal.hidden = false; });
+  }
+
+  updateSummary();
+})();
+
+/* ---------- Endocrine: DM -> Type I/II popup -> (Type II only) Insulin Dependent popup ---------- */
+(function () {
+  const dmCheckbox = document.getElementById('endocrine_0');
+  const typeModal = document.getElementById('dm-type-modal');
+  const insulinModal = document.getElementById('dm-insulin-modal');
+  if (!dmCheckbox || !typeModal || !insulinModal) return;
+  const typeInputs = typeModal.querySelectorAll('[data-dm-type-input]');
+  const insulinInputs = insulinModal.querySelectorAll('[data-dm-insulin-input]');
+  const summaryRow = document.querySelector('[data-dm-type-summary-row]');
+  const summaryText = document.querySelector('[data-dm-type-summary]');
+  const editBtn = document.querySelector('[data-dm-type-edit]');
+
+  function currentType() {
+    const checked = Array.from(typeInputs).find((i) => i.checked);
+    return checked ? checked.value : null;
+  }
+  function currentInsulin() {
+    const checked = Array.from(insulinInputs).find((i) => i.checked);
+    return checked ? checked.value : null;
+  }
+  function updateSummary() {
+    const type = currentType();
+    if (!type) { summaryRow.hidden = true; return; }
+    let text = 'Type: ' + type;
+    if (type === 'Type II') {
+      const insulin = currentInsulin();
+      text += insulin ? (', Insulin Dependent: ' + insulin) : ', Insulin Dependent: not specified';
+    }
+    summaryText.textContent = text;
+    summaryRow.hidden = false;
+  }
+
+  dmCheckbox.addEventListener('change', () => {
+    if (dmCheckbox.checked) {
+      typeModal.hidden = false;
+    } else {
+      typeInputs.forEach((i) => { i.checked = false; });
+      insulinInputs.forEach((i) => { i.checked = false; });
+      typeModal.hidden = true;
+      insulinModal.hidden = true;
+    }
+    updateSummary();
+  });
+
+  typeInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      typeModal.hidden = true;
+      if (input.value === 'Type II') {
+        insulinModal.hidden = false;
+      } else {
+        insulinInputs.forEach((i) => { i.checked = false; });
+        insulinModal.hidden = true;
+      }
+      updateSummary();
+    });
+  });
+
+  insulinInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      insulinModal.hidden = true;
+      updateSummary();
+    });
+  });
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => { typeModal.hidden = false; });
+  }
+
+  updateSummary();
+})();
+
+/* ---------- Endocrine: Adrenal Gland Dysfunction -> Steroid Therapy popup -> description ---------- */
+(function () {
+  const adrenalCheckbox = document.getElementById('endocrine_2');
+  const modal = document.getElementById('adrenal-modal');
+  if (!adrenalCheckbox || !modal) return;
+  const steroidCheckbox = document.getElementById('adrenal-steroid-therapy');
+  const descField = document.getElementById('adrenal-steroid-description-field');
+  const descInput = document.getElementById('adrenal-steroid-description');
+  const summaryRow = document.querySelector('[data-adrenal-summary-row]');
+  const summaryText = document.querySelector('[data-adrenal-summary]');
+  const editBtn = document.querySelector('[data-adrenal-edit]');
+
+  function updateSummary() {
+    if (!steroidCheckbox.checked) { summaryRow.hidden = true; return; }
+    let text = 'Steroid Therapy';
+    if (descInput.value.trim()) text += ': ' + descInput.value.trim();
+    summaryText.textContent = text;
+    summaryRow.hidden = false;
+  }
+
+  function updateDescVisibility() {
+    descField.hidden = !steroidCheckbox.checked;
+    if (!steroidCheckbox.checked) descInput.value = '';
+  }
+
+  adrenalCheckbox.addEventListener('change', () => {
+    if (adrenalCheckbox.checked) {
+      modal.hidden = false;
+    } else {
+      steroidCheckbox.checked = false;
+      updateDescVisibility();
+      modal.hidden = true;
+    }
+    updateSummary();
+  });
+
+  steroidCheckbox.addEventListener('change', () => {
+    updateDescVisibility();
+    updateSummary();
+  });
+
+  descInput.addEventListener('input', updateSummary);
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => { modal.hidden = false; });
+  }
+
+  updateSummary();
+})();
+
+/* ---------- Heme/Onco: Cancer checkbox -> description/type reveal ---------- */
+(function () {
+  const cancerCheckbox = document.getElementById('heme_onc_4');
+  const descField = document.getElementById('heme-cancer-description-field');
+  const descInput = document.getElementById('heme_cancer');
+  if (!cancerCheckbox || !descField) return;
+  cancerCheckbox.addEventListener('change', () => {
+    descField.hidden = !cancerCheckbox.checked;
+    if (!cancerCheckbox.checked && descInput) descInput.value = '';
+  });
+})();
+
+/* ---------- Generic: condition details modal + anticoagulant/antiplatelet drug chain ---------- */
+/* Reused for DVT (Heme/Onco) and CVA/TIA (Neuro): trigger checkbox opens a details modal;
+   an "On Anticoagulants/Antiplatelets" checkbox inside reveals a drug checklist; checking a
+   drug reveals an inline "Last taken" date field for that drug; a summary row + Edit button
+   reflects the collected state once the modal is closed. */
+function initConditionAnticoagModal(config) {
+  const trigger = document.getElementById(config.triggerId);
+  const modal = document.getElementById(config.modalId);
+  if (!trigger || !modal) return;
+  const onAnticoag = document.getElementById(config.onAnticoagId);
+  const drugList = document.getElementById(config.anticoagListId);
+  const drugInputs = drugList ? drugList.querySelectorAll('[data-drug-input]') : [];
+  const summaryRow = document.querySelector(config.summaryRowSelector);
+  const summaryText = document.querySelector(config.summaryTextSelector);
+  const editBtn = document.querySelector(config.editSelector);
+  const extraFields = (config.extraFieldIds || []).map((id) => document.getElementById(id)).filter(Boolean);
+
+  function drugRowDateField(drugInput) {
+    const row = drugInput.closest('.drug-row');
+    return row ? row.querySelector('[data-drug-date-field]') : null;
+  }
+
+  function updateDrugDateVisibility(drugInput) {
+    const dateField = drugRowDateField(drugInput);
+    if (!dateField) return;
+    dateField.hidden = !drugInput.checked;
+    if (!drugInput.checked) {
+      const dateInput = dateField.querySelector('[data-drug-date-input]');
+      if (dateInput) dateInput.value = '';
+    }
+  }
+
+  function updateAnticoagListVisibility() {
+    if (!drugList) return;
+    drugList.hidden = !(onAnticoag && onAnticoag.checked);
+    if (!(onAnticoag && onAnticoag.checked)) {
+      drugInputs.forEach((d) => { d.checked = false; updateDrugDateVisibility(d); });
+    }
+  }
+
+  function updateSummary() {
+    if (!trigger.checked) { if (summaryRow) summaryRow.hidden = true; return; }
+    const parts = [];
+    const extra = typeof config.buildExtraSummary === 'function' ? config.buildExtraSummary() : null;
+    if (extra) parts.push(extra);
+    if (onAnticoag && onAnticoag.checked) {
+      const checkedDrugs = Array.from(drugInputs).filter((d) => d.checked);
+      if (checkedDrugs.length) {
+        const drugText = checkedDrugs.map((d) => {
+          const dateField = drugRowDateField(d);
+          const dateInput = dateField ? dateField.querySelector('[data-drug-date-input]') : null;
+          const dateVal = dateInput && dateInput.value ? ' (last taken ' + dateInput.value + ')' : '';
+          return d.value + dateVal;
+        }).join(', ');
+        parts.push('On anticoagulants/antiplatelets: ' + drugText);
+      } else {
+        parts.push('On anticoagulants/antiplatelets: yes');
+      }
+    }
+    if (summaryText) summaryText.textContent = parts.length ? parts.join(' | ') : 'Details recorded';
+    if (summaryRow) summaryRow.hidden = false;
+  }
+
+  trigger.addEventListener('change', () => {
+    if (trigger.checked) {
+      modal.hidden = false;
+    } else {
+      extraFields.forEach((f) => { f.value = ''; });
+      if (onAnticoag) onAnticoag.checked = false;
+      updateAnticoagListVisibility();
+      modal.hidden = true;
+    }
+    updateSummary();
+  });
+
+  if (onAnticoag) {
+    onAnticoag.addEventListener('change', () => {
+      updateAnticoagListVisibility();
+      updateSummary();
+    });
+  }
+
+  drugInputs.forEach((d) => {
+    d.addEventListener('change', () => {
+      updateDrugDateVisibility(d);
+      updateSummary();
+    });
+  });
+
+  drugList && drugList.querySelectorAll('[data-drug-date-input]').forEach((dateInput) => {
+    dateInput.addEventListener('input', updateSummary);
+  });
+
+  extraFields.forEach((f) => f.addEventListener('input', updateSummary));
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => { modal.hidden = false; });
+  }
+
+  updateAnticoagListVisibility();
+  updateSummary();
+}
+
+initConditionAnticoagModal({
+  triggerId: 'heme_onc_3',
+  modalId: 'dvt-details-modal',
+  onAnticoagId: 'dvt-on-anticoag',
+  anticoagListId: 'dvt-anticoag-list',
+  summaryRowSelector: '[data-dvt-summary-row]',
+  summaryTextSelector: '[data-dvt-summary]',
+  editSelector: '[data-dvt-edit]',
+  extraFieldIds: ['heme_dvt_description'],
+  buildExtraSummary: function () {
+    const desc = document.getElementById('heme_dvt_description');
+    return desc && desc.value.trim() ? desc.value.trim() : null;
+  },
+});
+
+initConditionAnticoagModal({
+  triggerId: 'neuro_3',
+  modalId: 'cva-details-modal',
+  onAnticoagId: 'cva-on-anticoag',
+  anticoagListId: 'cva-anticoag-list',
+  summaryRowSelector: '[data-cva-summary-row]',
+  summaryTextSelector: '[data-cva-summary]',
+  editSelector: '[data-cva-edit]',
+  extraFieldIds: ['neuro_cva_last_stroke_date', 'neuro_cva_deficits'],
+  buildExtraSummary: function () {
+    const dateInput = document.getElementById('neuro_cva_last_stroke_date');
+    const deficits = document.getElementById('neuro_cva_deficits');
+    const parts = [];
+    if (dateInput && dateInput.value) parts.push('Last stroke ' + dateInput.value);
+    if (deficits && deficits.value.trim()) parts.push('Deficits: ' + deficits.value.trim());
+    return parts.length ? parts.join('; ') : null;
+  },
+});

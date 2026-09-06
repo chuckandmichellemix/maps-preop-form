@@ -349,6 +349,71 @@
 .cardiac-test__detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 @media (max-width: 560px) { .cardiac-test__detail-row { grid-template-columns: 1fr; } }
 
+/* ---------- Popup modals (e.g. DM Type, Insulin Dependent, breath-sound location) ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(0.2 0.02 190 / 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+.modal-overlay[hidden] { display: none; }
+.modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-5);
+  max-width: 360px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal--wide { max-width: 520px; }
+.modal__title { font-size: var(--text-base); font-weight: 700; margin: 0 0 var(--space-3); color: var(--color-text); }
+.modal__body { display: flex; flex-direction: column; gap: var(--space-3); }
+.modal__footer { display: flex; justify-content: flex-end; margin-top: var(--space-4); }
+
+/* ---------- Anticoagulant / antiplatelet drug chain (DVT, CVA/TIA) ---------- */
+.drug-checklist { display: flex; flex-direction: column; gap: var(--space-4); }
+.drug-checklist[hidden] { display: none; }
+.drug-checklist__group-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.drug-checklist__rows { display: flex; flex-direction: column; gap: var(--space-2); }
+.drug-row { display: flex; flex-direction: column; gap: var(--space-2); }
+.drug-row__date { max-width: 220px; }
+.drug-row__date[hidden] { display: none; }
+.drug-row__date .field__label { font-size: var(--text-xs); }
+
+.assessment-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.assessment-summary[hidden] { display: none; }
+.assessment-summary__edit {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* ---------- Print polish for the point-of-care layout ---------- */
 @media print {
   .system-card { background: #fff; break-inside: avoid; }
@@ -359,4 +424,14 @@
   .code-repeater__add, .code-row__remove { display: none !important; }
   .cardiac-test__detail[hidden] { display: flex !important; }
   .cardiac-test__toggle { cursor: default; }
+  .modal-overlay[hidden] { display: block !important; }
+  .modal-overlay {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    margin-top: var(--space-2);
+    justify-content: flex-start;
+  }
+  .modal { box-shadow: none !important; border: 1px solid var(--color-border); max-width: none; padding: var(--space-3); }
+  .modal__footer, .assessment-summary__edit { display: none !important; }
 }

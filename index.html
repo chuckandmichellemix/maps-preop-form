@@ -742,6 +742,27 @@
       </label>
     </div>
         <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Heart Tones — select all that apply</span>
+          <div class="checklist" data-checklist>
+            <label class="checklist-item" for="cardiac_heart_tones_0">
+              <input type="checkbox" id="cardiac_heart_tones_0" name="cardiac_heart_tones[]" value="RRR">
+              <span>RRR</span>
+            </label>
+            <label class="checklist-item" for="cardiac_heart_tones_1">
+              <input type="checkbox" id="cardiac_heart_tones_1" name="cardiac_heart_tones[]" value="Irregular">
+              <span>Irregular</span>
+            </label>
+            <label class="checklist-item" for="cardiac_heart_tones_2">
+              <input type="checkbox" id="cardiac_heart_tones_2" name="cardiac_heart_tones[]" value="Gallop">
+              <span>Gallop</span>
+            </label>
+            <label class="checklist-item" for="cardiac_heart_tones_3">
+              <input type="checkbox" id="cardiac_heart_tones_3" name="cardiac_heart_tones[]" value="Murmur">
+              <span>Murmur</span>
+            </label>
+          </div>
+        </div>
+        <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Cardiac Workup — click a test to add details</span>
           <div class="cardiac-tests" data-cardiac-tests>
 
@@ -914,6 +935,69 @@
           </select>
         </div>
         <div class="system-card__subgroup">
+          <span class="system-card__subgroup-label">Breath Sounds — select all that apply</span>
+          <div class="checklist" data-checklist>
+            <label class="checklist-item" for="pulmonary_breath_0">
+              <input type="checkbox" id="pulmonary_breath_0" name="pulmonary_breath_sounds[]" value="Clear Bilateral">
+              <span>Clear Bilateral</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_1">
+              <input type="checkbox" id="pulmonary_breath_1" name="pulmonary_breath_sounds[]" value="Equal">
+              <span>Equal</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_2">
+              <input type="checkbox" id="pulmonary_breath_2" name="pulmonary_breath_sounds[]" value="Wheezing" data-breath-lateralized>
+              <span>Wheezing</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_3">
+              <input type="checkbox" id="pulmonary_breath_3" name="pulmonary_breath_sounds[]" value="Rhonchi" data-breath-lateralized>
+              <span>Rhonchi</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_4">
+              <input type="checkbox" id="pulmonary_breath_4" name="pulmonary_breath_sounds[]" value="Crackles" data-breath-lateralized>
+              <span>Crackles</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_5">
+              <input type="checkbox" id="pulmonary_breath_5" name="pulmonary_breath_sounds[]" value="Diminished" data-breath-lateralized>
+              <span>Diminished</span>
+            </label>
+            <label class="checklist-item" for="pulmonary_breath_6">
+              <input type="checkbox" id="pulmonary_breath_6" name="pulmonary_breath_sounds[]" value="Stridor" data-breath-lateralized>
+              <span>Stridor</span>
+            </label>
+          </div>
+          <div class="assessment-summary" data-breath-location-summary-row hidden>
+            <span data-breath-location-summary></span>
+            <button type="button" class="assessment-summary__edit" data-breath-location-edit>Edit location</button>
+          </div>
+          <div class="modal-overlay" id="breath-location-modal" hidden>
+            <div class="modal" role="dialog" aria-labelledby="breath-location-modal-title">
+              <h3 class="modal__title" id="breath-location-modal-title">Breath Sound Location</h3>
+              <p class="field__hint" style="margin: 0 0 var(--space-3);">Select all that apply.</p>
+              <div class="modal__body">
+                <div>
+                  <label class="field__label">Side</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Left" data-breath-location-input> Left</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Right" data-breath-location-input> Right</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_side[]" value="Bilateral" data-breath-location-input> Bilateral</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="field__label">Lung Field</label>
+                  <div class="option-group">
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field[]" value="Upper" data-breath-location-input> Upper</label>
+                    <label class="option"><input type="checkbox" name="pulmonary_breath_field[]" value="Lower" data-breath-location-input> Lower</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer">
+                <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="system-card__subgroup">
           <span class="system-card__subgroup-label">Chest X-Ray — click to add details</span>
           <div class="cardiac-tests" data-cardiac-tests>
             <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="cxr">
@@ -1024,6 +1108,182 @@
         <span>MS / MG / ALS</span>
       </label>
     </div>
+        <div class="assessment-summary" data-cva-summary-row hidden>
+          <span data-cva-summary></span>
+          <button type="button" class="assessment-summary__edit" data-cva-edit>Edit</button>
+        </div>
+        <div class="modal-overlay" id="cva-details-modal" hidden>
+          <div class="modal modal--wide" role="dialog" aria-labelledby="cva-details-modal-title">
+            <h3 class="modal__title" id="cva-details-modal-title">CVA / TIA Details</h3>
+            <div class="modal__body">
+              <div class="field">
+                <label class="field__label" for="neuro_cva_last_stroke_date">Date of last stroke</label>
+                <input class="input" type="date" id="neuro_cva_last_stroke_date" name="neuro_cva_last_stroke_date">
+              </div>
+              <div class="field">
+                <label class="field__label" for="neuro_cva_deficits">Deficits</label>
+                <textarea class="textarea" id="neuro_cva_deficits" name="neuro_cva_deficits" placeholder="e.g., Residual left-sided weakness"></textarea>
+              </div>
+              <label class="option"><input type="checkbox" id="cva-on-anticoag" name="neuro_cva_on_anticoagulants" value="Yes"> On Anticoagulants/Antiplatelets</label>
+          <div class="drug-checklist" id="cva-anticoag-list" data-anticoag-list="cva" hidden>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Anticoagulants</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-warfarin">
+                <input type="checkbox" id="cva-drug-warfarin" name="cva_drug[]" value="Warfarin (Coumadin)" data-drug-input="cva">
+                <span>Warfarin (Coumadin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-warfarin">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-warfarin" name="cva_drug_date_warfarin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-heparin">
+                <input type="checkbox" id="cva-drug-heparin" name="cva_drug[]" value="Heparin (unfractionated)" data-drug-input="cva">
+                <span>Heparin (unfractionated)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-heparin">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-heparin" name="cva_drug_date_heparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-enoxaparin">
+                <input type="checkbox" id="cva-drug-enoxaparin" name="cva_drug[]" value="Enoxaparin (Lovenox)" data-drug-input="cva">
+                <span>Enoxaparin (Lovenox)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-enoxaparin">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-enoxaparin" name="cva_drug_date_enoxaparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-dalteparin">
+                <input type="checkbox" id="cva-drug-dalteparin" name="cva_drug[]" value="Dalteparin (Fragmin)" data-drug-input="cva">
+                <span>Dalteparin (Fragmin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-dalteparin">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-dalteparin" name="cva_drug_date_dalteparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-fondaparinux">
+                <input type="checkbox" id="cva-drug-fondaparinux" name="cva_drug[]" value="Fondaparinux (Arixtra)" data-drug-input="cva">
+                <span>Fondaparinux (Arixtra)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-fondaparinux">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-fondaparinux" name="cva_drug_date_fondaparinux" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-apixaban">
+                <input type="checkbox" id="cva-drug-apixaban" name="cva_drug[]" value="Apixaban (Eliquis)" data-drug-input="cva">
+                <span>Apixaban (Eliquis)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-apixaban">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-apixaban" name="cva_drug_date_apixaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-rivaroxaban">
+                <input type="checkbox" id="cva-drug-rivaroxaban" name="cva_drug[]" value="Rivaroxaban (Xarelto)" data-drug-input="cva">
+                <span>Rivaroxaban (Xarelto)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-rivaroxaban">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-rivaroxaban" name="cva_drug_date_rivaroxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-edoxaban">
+                <input type="checkbox" id="cva-drug-edoxaban" name="cva_drug[]" value="Edoxaban (Savaysa)" data-drug-input="cva">
+                <span>Edoxaban (Savaysa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-edoxaban">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-edoxaban" name="cva_drug_date_edoxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-dabigatran">
+                <input type="checkbox" id="cva-drug-dabigatran" name="cva_drug[]" value="Dabigatran (Pradaxa)" data-drug-input="cva">
+                <span>Dabigatran (Pradaxa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-dabigatran">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-dabigatran" name="cva_drug_date_dabigatran" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Antiplatelets</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-aspirin">
+                <input type="checkbox" id="cva-drug-aspirin" name="cva_drug[]" value="Aspirin" data-drug-input="cva">
+                <span>Aspirin</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-aspirin">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-aspirin" name="cva_drug_date_aspirin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-clopidogrel">
+                <input type="checkbox" id="cva-drug-clopidogrel" name="cva_drug[]" value="Clopidogrel (Plavix)" data-drug-input="cva">
+                <span>Clopidogrel (Plavix)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-clopidogrel">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-clopidogrel" name="cva_drug_date_clopidogrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-ticagrelor">
+                <input type="checkbox" id="cva-drug-ticagrelor" name="cva_drug[]" value="Ticagrelor (Brilinta)" data-drug-input="cva">
+                <span>Ticagrelor (Brilinta)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-ticagrelor">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-ticagrelor" name="cva_drug_date_ticagrelor" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-prasugrel">
+                <input type="checkbox" id="cva-drug-prasugrel" name="cva_drug[]" value="Prasugrel (Effient)" data-drug-input="cva">
+                <span>Prasugrel (Effient)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-prasugrel">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-prasugrel" name="cva_drug_date_prasugrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="cva-drug-dipyridamole">
+                <input type="checkbox" id="cva-drug-dipyridamole" name="cva_drug[]" value="Dipyridamole (Persantine)" data-drug-input="cva">
+                <span>Dipyridamole (Persantine)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="cva-drug-date-dipyridamole">Last taken</label>
+                <input class="input" type="date" id="cva-drug-date-dipyridamole" name="cva_drug_date_dipyridamole" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+
+            </div>
+            <div class="modal__footer">
+              <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+            </div>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="neuro_notes">Additional notes</label>
           <textarea class="textarea" id="neuro_notes" name="neuro_notes"></textarea>
@@ -1089,7 +1349,56 @@
         <input type="checkbox" id="endocrine_1" name="endocrine[]" value="Thyroid disease">
         <span>Thyroid disease</span>
       </label>
+      <label class="checklist-item" for="endocrine_2">
+        <input type="checkbox" id="endocrine_2" name="endocrine[]" value="Adrenal Gland Dysfunction">
+        <span>Adrenal Gland Dysfunction</span>
+      </label>
     </div>
+        <div class="assessment-summary" data-adrenal-summary-row hidden>
+          <span data-adrenal-summary></span>
+          <button type="button" class="assessment-summary__edit" data-adrenal-edit>Edit</button>
+        </div>
+        <div class="modal-overlay" id="adrenal-modal" hidden>
+          <div class="modal" role="dialog" aria-labelledby="adrenal-modal-title">
+            <h3 class="modal__title" id="adrenal-modal-title">Adrenal Gland Dysfunction</h3>
+            <div class="modal__body">
+              <label class="option"><input type="checkbox" name="endocrine_adrenal_steroid_therapy" value="Yes" id="adrenal-steroid-therapy"> Steroid Therapy</label>
+              <div class="field" id="adrenal-steroid-description-field" hidden>
+                <label class="field__label" for="adrenal-steroid-description">Description</label>
+                <textarea class="textarea" id="adrenal-steroid-description" name="endocrine_adrenal_steroid_description" placeholder="e.g., Prednisone 5mg daily, chronic use"></textarea>
+              </div>
+            </div>
+            <div class="modal__footer">
+              <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+            </div>
+          </div>
+        </div>
+        <div class="assessment-summary" data-dm-type-summary-row hidden>
+          <span data-dm-type-summary></span>
+          <button type="button" class="assessment-summary__edit" data-dm-type-edit>Edit</button>
+        </div>
+        <div class="modal-overlay" id="dm-type-modal" hidden>
+          <div class="modal" role="dialog" aria-labelledby="dm-type-modal-title">
+            <h3 class="modal__title" id="dm-type-modal-title">Diabetes Type</h3>
+            <div class="modal__body">
+              <div class="option-group">
+                <label class="option"><input type="radio" name="endocrine_dm_type" value="Type I" data-dm-type-input> Type I</label>
+                <label class="option"><input type="radio" name="endocrine_dm_type" value="Type II" data-dm-type-input> Type II</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-overlay" id="dm-insulin-modal" hidden>
+          <div class="modal" role="dialog" aria-labelledby="dm-insulin-modal-title">
+            <h3 class="modal__title" id="dm-insulin-modal-title">Insulin Dependent?</h3>
+            <div class="modal__body">
+              <div class="option-group">
+                <label class="option"><input type="radio" name="endocrine_dm_insulin_dependent" value="Yes" data-dm-insulin-input> Yes</label>
+                <label class="option"><input type="radio" name="endocrine_dm_insulin_dependent" value="No" data-dm-insulin-input> No</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="field" style="margin-top: var(--space-3); max-width: 220px;">
           <label class="field__label" for="endocrine_glucose">Glucose (if DM)</label>
           <input class="input" type="text" id="endocrine_glucose" name="endocrine_glucose" placeholder="e.g., 110 mg/dL">
@@ -1130,10 +1439,186 @@
         <input type="checkbox" id="heme_onc_3" name="heme_onc[]" value="DVT">
         <span>DVT</span>
       </label>
+      <label class="checklist-item" for="heme_onc_4">
+        <input type="checkbox" id="heme_onc_4" name="heme_onc[]" value="Cancer">
+        <span>Cancer</span>
+      </label>
     </div>
-        <div class="field" style="margin-top: var(--space-3);">
-          <label class="field__label" for="heme_cancer">Cancer (type, if applicable)</label>
-          <input class="input" type="text" id="heme_cancer" name="heme_cancer" placeholder="e.g., ALL, in remission">
+        <div class="field" id="heme-cancer-description-field" style="margin-top: var(--space-3);" hidden>
+          <label class="field__label" for="heme_cancer">Description / type</label>
+          <textarea class="textarea" id="heme_cancer" name="heme_cancer" placeholder="e.g., ALL, in remission"></textarea>
+        </div>
+        <div class="assessment-summary" data-dvt-summary-row hidden>
+          <span data-dvt-summary></span>
+          <button type="button" class="assessment-summary__edit" data-dvt-edit>Edit</button>
+        </div>
+        <div class="modal-overlay" id="dvt-details-modal" hidden>
+          <div class="modal modal--wide" role="dialog" aria-labelledby="dvt-details-modal-title">
+            <h3 class="modal__title" id="dvt-details-modal-title">DVT Details</h3>
+            <div class="modal__body">
+              <div class="field">
+                <label class="field__label" for="heme_dvt_description">Description</label>
+                <textarea class="textarea" id="heme_dvt_description" name="heme_dvt_description" placeholder="e.g., LE DVT 2023, resolved"></textarea>
+              </div>
+              <label class="option"><input type="checkbox" id="dvt-on-anticoag" name="heme_dvt_on_anticoagulants" value="Yes"> On Anticoagulants/Antiplatelets</label>
+          <div class="drug-checklist" id="dvt-anticoag-list" data-anticoag-list="dvt" hidden>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Anticoagulants</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-warfarin">
+                <input type="checkbox" id="dvt-drug-warfarin" name="dvt_drug[]" value="Warfarin (Coumadin)" data-drug-input="dvt">
+                <span>Warfarin (Coumadin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-warfarin">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-warfarin" name="dvt_drug_date_warfarin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-heparin">
+                <input type="checkbox" id="dvt-drug-heparin" name="dvt_drug[]" value="Heparin (unfractionated)" data-drug-input="dvt">
+                <span>Heparin (unfractionated)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-heparin">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-heparin" name="dvt_drug_date_heparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-enoxaparin">
+                <input type="checkbox" id="dvt-drug-enoxaparin" name="dvt_drug[]" value="Enoxaparin (Lovenox)" data-drug-input="dvt">
+                <span>Enoxaparin (Lovenox)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-enoxaparin">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-enoxaparin" name="dvt_drug_date_enoxaparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-dalteparin">
+                <input type="checkbox" id="dvt-drug-dalteparin" name="dvt_drug[]" value="Dalteparin (Fragmin)" data-drug-input="dvt">
+                <span>Dalteparin (Fragmin)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-dalteparin">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-dalteparin" name="dvt_drug_date_dalteparin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-fondaparinux">
+                <input type="checkbox" id="dvt-drug-fondaparinux" name="dvt_drug[]" value="Fondaparinux (Arixtra)" data-drug-input="dvt">
+                <span>Fondaparinux (Arixtra)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-fondaparinux">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-fondaparinux" name="dvt_drug_date_fondaparinux" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-apixaban">
+                <input type="checkbox" id="dvt-drug-apixaban" name="dvt_drug[]" value="Apixaban (Eliquis)" data-drug-input="dvt">
+                <span>Apixaban (Eliquis)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-apixaban">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-apixaban" name="dvt_drug_date_apixaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-rivaroxaban">
+                <input type="checkbox" id="dvt-drug-rivaroxaban" name="dvt_drug[]" value="Rivaroxaban (Xarelto)" data-drug-input="dvt">
+                <span>Rivaroxaban (Xarelto)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-rivaroxaban">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-rivaroxaban" name="dvt_drug_date_rivaroxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-edoxaban">
+                <input type="checkbox" id="dvt-drug-edoxaban" name="dvt_drug[]" value="Edoxaban (Savaysa)" data-drug-input="dvt">
+                <span>Edoxaban (Savaysa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-edoxaban">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-edoxaban" name="dvt_drug_date_edoxaban" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-dabigatran">
+                <input type="checkbox" id="dvt-drug-dabigatran" name="dvt_drug[]" value="Dabigatran (Pradaxa)" data-drug-input="dvt">
+                <span>Dabigatran (Pradaxa)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-dabigatran">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-dabigatran" name="dvt_drug_date_dabigatran" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="drug-checklist__group">
+              <div class="drug-checklist__group-label">Antiplatelets</div>
+              <div class="drug-checklist__rows">
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-aspirin">
+                <input type="checkbox" id="dvt-drug-aspirin" name="dvt_drug[]" value="Aspirin" data-drug-input="dvt">
+                <span>Aspirin</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-aspirin">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-aspirin" name="dvt_drug_date_aspirin" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-clopidogrel">
+                <input type="checkbox" id="dvt-drug-clopidogrel" name="dvt_drug[]" value="Clopidogrel (Plavix)" data-drug-input="dvt">
+                <span>Clopidogrel (Plavix)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-clopidogrel">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-clopidogrel" name="dvt_drug_date_clopidogrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-ticagrelor">
+                <input type="checkbox" id="dvt-drug-ticagrelor" name="dvt_drug[]" value="Ticagrelor (Brilinta)" data-drug-input="dvt">
+                <span>Ticagrelor (Brilinta)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-ticagrelor">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-ticagrelor" name="dvt_drug_date_ticagrelor" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-prasugrel">
+                <input type="checkbox" id="dvt-drug-prasugrel" name="dvt_drug[]" value="Prasugrel (Effient)" data-drug-input="dvt">
+                <span>Prasugrel (Effient)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-prasugrel">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-prasugrel" name="dvt_drug_date_prasugrel" data-drug-date-input>
+              </div>
+            </div>
+            <div class="drug-row">
+              <label class="checklist-item" for="dvt-drug-dipyridamole">
+                <input type="checkbox" id="dvt-drug-dipyridamole" name="dvt_drug[]" value="Dipyridamole (Persantine)" data-drug-input="dvt">
+                <span>Dipyridamole (Persantine)</span>
+              </label>
+              <div class="field drug-row__date" data-drug-date-field hidden>
+                <label class="field__label" for="dvt-drug-date-dipyridamole">Last taken</label>
+                <input class="input" type="date" id="dvt-drug-date-dipyridamole" name="dvt_drug_date_dipyridamole" data-drug-date-input>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+
+            </div>
+            <div class="modal__footer">
+              <button type="button" class="btn btn--primary" data-modal-close>Done</button>
+            </div>
+          </div>
         </div>
         <div class="field" style="margin-top: var(--space-3);">
           <label class="field__label" for="heme_onc_notes">Additional notes</label>
