@@ -635,6 +635,10 @@
             <span>History of difficult airway</span>
           </label>
         </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="airway_notes">Additional notes</label>
+          <textarea class="textarea" id="airway_notes" name="airway_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -668,6 +672,10 @@
         <span>Glaucoma</span>
       </label>
     </div>
+        <div class="field" style="margin-top: var(--space-3);">
+          <label class="field__label" for="ent_notes">Additional notes</label>
+          <textarea class="textarea" id="ent_notes" name="ent_notes"></textarea>
+        </div>
       </div>
     </div>
 
@@ -693,7 +701,7 @@
         <span>HTN</span>
       </label>
       <label class="checklist-item" for="cardiac_4">
-        <input type="checkbox" id="cardiac_4" name="cardiac[]" value="Abnormal EKG">
+        <input type="checkbox" id="cardiac_4" name="cardiac[]" value="Abnormal EKG" data-test-link="ekg">
         <span>Abnormal EKG</span>
       </label>
       <label class="checklist-item" for="cardiac_5">
@@ -705,7 +713,7 @@
         <span>Stress test</span>
       </label>
       <label class="checklist-item" for="cardiac_7">
-        <input type="checkbox" id="cardiac_7" name="cardiac[]" value="CAD">
+        <input type="checkbox" id="cardiac_7" name="cardiac[]" value="CAD" data-test-link="echo">
         <span>CAD</span>
       </label>
       <label class="checklist-item" for="cardiac_8">
@@ -725,11 +733,11 @@
         <span>Hyperlipidemia</span>
       </label>
       <label class="checklist-item" for="cardiac_14">
-        <input type="checkbox" id="cardiac_14" name="cardiac[]" value="MI">
+        <input type="checkbox" id="cardiac_14" name="cardiac[]" value="MI" data-test-link="cath">
         <span>MI</span>
       </label>
       <label class="checklist-item" for="cardiac_15">
-        <input type="checkbox" id="cardiac_15" name="cardiac[]" value="CHF">
+        <input type="checkbox" id="cardiac_15" name="cardiac[]" value="CHF" data-test-link="echo">
         <span>CHF</span>
       </label>
     </div>
@@ -763,7 +771,7 @@
               </div>
             </div>
 
-            <div class="cardiac-test" data-cardiac-test>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="echo">
               <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
                 <span class="cardiac-test__name">Echo</span>
                 <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
@@ -773,10 +781,14 @@
                   <div class="field"><label class="field__label" for="cardiac_echo_date">Date</label><input class="input" type="date" id="cardiac_echo_date" name="cardiac_echo_date"></div>
                   <div class="field"><label class="field__label" for="cardiac_echo_findings">Findings (EF, etc.)</label><input class="input" type="text" id="cardiac_echo_findings" name="cardiac_echo_findings"></div>
                 </div>
+                <div class="field" style="margin-top: var(--space-3);">
+                  <label class="field__label" for="cardiac_echo_desc">Description / note (e.g., if no formal echo on file — document reasoning here)</label>
+                  <textarea class="textarea" id="cardiac_echo_desc" name="cardiac_echo_desc" placeholder="e.g., No echo on file; patient reports no cardiac symptoms, will proceed without further workup"></textarea>
+                </div>
               </div>
             </div>
 
-            <div class="cardiac-test" data-cardiac-test>
+            <div class="cardiac-test" data-cardiac-test data-cardiac-test-key="cath">
               <button type="button" class="cardiac-test__toggle" data-cardiac-test-toggle aria-expanded="false">
                 <span class="cardiac-test__name">Cardiac Cath</span>
                 <span class="cardiac-test__status" data-cardiac-test-status>N/A</span>
